@@ -104,13 +104,18 @@ async function extract(u) {
     })
     // 기자 프로필·관련기사·추천 영역의 사진은 뺀다
     .on('[class*="author"],[class*="byline"],[class*="avatar"],[class*="profile"],[class*="related"],[class*="recirc"],[class*="promo"],[class*="newsletter"],[class*="comment"]', { element(e) { inSkip++; e.onEndTag(() => { inSkip--; }); } })
-    .on("img", { element(e) { if (inSkip > 0) return; const src = pick(e); if (src) (inArticle ? art : all).push({ img: src, alt: (e.getAttribute("alt") || "").slice(0, 200) }); } })
+    .on("img", { element(e) {
+      if (inSkip > 0) return;
+      const alt = (e.getAttribute("alt") || "").trim().slice(0, 200);
+      if (/^[A-Z][a-z]+(?: [A-Z][a-z'-]+){1,2}$/.test(alt)) return;   // 사람 이름만 있는 alt = 기자 프로필 사진
+      const src = pick(e); if (src) (inArticle ? art : all).push({ img: src, alt });
+    } })
     .on("script,style,nav,footer,aside,header", { element(e) { e.remove(); } });
   await rw.transform(r).text();
   const artText = art.filter(b => b.t).length;
   let blocks = artText >= 3 ? art : all;
   // 반복 안내문·중복 문단 제거(예: 버지의 "Posts from this topic will be added to your daily email digest")
-  const seen = new Set(), BOILER = /daily email digest|sign up for|subscribe to|newsletter|cookie|all rights reserved|follow us on|read more:|advertisement/i;
+  const seen = new Set(), BOILER = /daily (email )?digest|news that matters|sign up for|subscribe to|newsletter|cookie|all rights reserved|follow us on|read more:|advertisement/i;
   blocks = blocks.filter(b => { if (b.img) { if (seen.has(b.img)) return false; seen.add(b.img); return true; } const k = b.t.toLowerCase(); if (seen.has(k) || BOILER.test(b.t)) return false; seen.add(k); return true; });
   // 사진은 글 사이에 최대 12장, 연속 중복 없이
   let imgs = 0; blocks = blocks.filter(b => b.t || (++imgs <= 12));
