@@ -83,7 +83,7 @@ async function titles(req, env) {
 async function extract(u) {
   const r = await fetch(u, { headers: { "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128 Safari/537.36", "accept-language": "en" }, cf: { cacheTtl: 600 } });
   if (!r.ok) throw new Error("원문을 못 받았습니다 " + r.status);
-  let title = "", inArticle = false, cur = null;
+  let title = "", inArticle = false, inFigure = false, cur = null;
   const all = [], art = [];   // 블록: {t:문단} 또는 {img:주소}
   const pick = (e) => {
     let src = e.getAttribute("src") || e.getAttribute("data-src") || "";
@@ -102,7 +102,9 @@ async function extract(u) {
       element(e) { cur = { t: "", a: inArticle }; e.onEndTag(() => { const s = cur.t.replace(/\s+/g, " ").trim(); if (s.length > 40) (cur.a ? art : all).push({ t: s }); cur = null; }); },
       text(t) { if (cur) cur.t += t.text; },
     })
-    .on("img", { element(e) { const src = pick(e); if (src) (inArticle ? art : all).push({ img: src, alt: (e.getAttribute("alt") || "").slice(0, 200) }); } })
+    .on("figure,picture", { element(e) { inFigure = true; e.onEndTag(() => { inFigure = false; }); } })
+    // 사진은 figure/picture 안의 것만(기자 프로필·아이콘 제외)
+    .on("img", { element(e) { if (!inFigure) return; const src = pick(e); if (src) (inArticle ? art : all).push({ img: src, alt: (e.getAttribute("alt") || "").slice(0, 200) }); } })
     .on("script,style,nav,footer,aside,header", { element(e) { e.remove(); } });
   await rw.transform(r).text();
   const artText = art.filter(b => b.t).length;
