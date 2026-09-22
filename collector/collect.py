@@ -119,6 +119,16 @@ TECH = [
     ("Hacker News",  "https://hnrss.org/frontpage"),
 ]
 
+# ─────────────────────────── 해외 주요 뉴스 (RSS, 중립 성향 위주) ───────────────────────────
+WORLD = [
+    ("BBC",       "https://feeds.bbci.co.uk/news/world/rss.xml"),
+    ("NYT",       "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"),
+    ("NPR",       "https://feeds.npr.org/1004/rss.xml"),
+    ("DW",        "https://rss.dw.com/rdf/rss-en-world"),
+    ("France 24", "https://www.france24.com/en/rss"),
+    ("FT",        "https://www.ft.com/world?format=rss"),
+]
+
 
 def entry_time(e):
     for k in ("published_parsed", "updated_parsed"):
@@ -157,8 +167,11 @@ def run(only=None):
     for n, u in TECH:
         if not only or only in n:
             jobs.append(("tech", n, lambda n=n, u=u: fetch_rss(n, u)))
+    for n, u in WORLD:
+        if not only or only in n:
+            jobs.append(("world", n, lambda n=n, u=u: fetch_rss(n, u)))
 
-    results, errors = {"community": [], "realestate": [], "tech": []}, {}
+    results, errors = {"community": [], "realestate": [], "tech": [], "world": []}, {}
 
     def work(job):
         sec, name, fn = job
@@ -179,7 +192,7 @@ def run(only=None):
     now = datetime.now(KST)
     now_s = now.isoformat(timespec="minutes")
     cutoff = (now - timedelta(hours=KEEP_HOURS)).isoformat(timespec="minutes")
-    merged = {"community": {}, "realestate": {}, "tech": {}}
+    merged = {"community": {}, "realestate": {}, "tech": {}, "world": {}}
 
     # 이번에 못 받은 소스(오류)는 이전 항목을 그대로 살린다.
     for sec, items in state.get("items", {}).items():
@@ -221,11 +234,12 @@ def run(only=None):
         "community": [c[0] for c in COMMUNITY],
         "realestate": [n for n, _, _ in NEWS],
         "tech": [n for n, _ in TECH],
+        "world": [n for n, _ in WORLD],
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps({"generated": now_s, "sources": sources, "errors": errors, "items": final}, ensure_ascii=False, indent=0))
     STATE.write_text(json.dumps({"updated": now_s, "items": final}, ensure_ascii=False))
-    print(f"\n생성 {now_s}  커뮤니티 {len(final['community'])} · 부동산 {len(final['realestate'])} · 테크 {len(final['tech'])}  오류 {len(errors)}")
+    print(f"\n생성 {now_s}  커뮤니티 {len(final['community'])} · 부동산 {len(final['realestate'])} · 테크 {len(final['tech'])} · 해외 {len(final['world'])}  오류 {len(errors)}")
 
 
 if __name__ == "__main__":

@@ -25,6 +25,7 @@ h1{font-size:24px;line-height:1.35;margin:0 0 6px}
 .p .ko{margin:0}
 .p .en{margin:4px 0 0;font-size:14px;color:var(--muted);line-height:1.55}
 body.ko-only .p .en,body.ko-only .ot{display:none}
+.f{margin:0 0 18px}.f img{display:block;width:100%;height:auto;border-radius:8px;background:var(--line)}.f figcaption{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.4}
 .status{color:var(--muted);text-align:center;padding:60px 0}
 .status .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);animation:b 1s infinite alternate;margin-right:8px}
 @keyframes b{from{opacity:.2}to{opacity:1}}
@@ -56,7 +57,7 @@ tb.onclick=()=>{document.body.classList.toggle('ko-only');LS('koOnly',document.b
     if(d.error){m.innerHTML=`<div class="status">${esc(d.error)}<br><br><a href="${esc(u)}">원문으로 가기 →</a></div>`;return}
     document.title=d.ko_title+' — 커뮤베스트';
     m.innerHTML=`<h1>${esc(d.ko_title)}</h1><p class="ot">${esc(d.title)}</p>`+
-      d.paras.map(p=>`<div class="p"><p class="ko">${esc(p.ko)}</p><p class="en">${esc(p.en)}</p></div>`).join('')+
+      d.paras.map(p=>p.img?`<figure class="f"><img src="${esc(p.img)}" alt="${esc(p.alt)}" loading="lazy" referrerpolicy="no-referrer">${p.alt?`<figcaption>${esc(p.alt)}</figcaption>`:''}</figure>`:`<div class="p"><p class="ko">${esc(p.ko)}</p><p class="en">${esc(p.en)}</p></div>`).join('')+
       `<p class="ot" style="margin-top:30px">번역: Claude · <a href="${esc(u)}" style="color:var(--accent)">원문 보기</a></p>`;
   }catch(e){m.innerHTML='<div class="status">불러오지 못했습니다. 잠시 뒤 다시 열어 주세요.</div>'}
 })();

@@ -73,6 +73,7 @@ footer a{text-decoration:underline}
     <button data-sec="community">커뮤니티<span class="n"></span></button>
     <button data-sec="realestate">부동산<span class="n"></span></button>
     <button data-sec="tech">테크<span class="n"></span></button>
+    <button data-sec="world">해외<span class="n"></span></button>
   </div>
   <div class="tools">
     <input id="q" type="search" placeholder="제목 검색" autocomplete="off">
@@ -143,7 +144,7 @@ function render(){
     n++;
     const day=(it.time||it.first_seen||'').slice(0,10);
     if(sec!=='community'&&day&&day!==lastDay){lastDay=day;const dd=new Date(day);h+=`<div class="sep">${dd.getMonth()+1}월 ${dd.getDate()}일</div>`}
-    const href=sec==='tech'&&it.source!=='Hacker News'?'read.html?u='+encodeURIComponent(it.url):it.url;
+    const href=TR.includes(sec)&&it.source!=='Hacker News'?'read.html?u='+encodeURIComponent(it.url):it.url;
     h+=`<a class="item ${read.has(it.id)?'read':''} ${it.dropped?'dropped':''}" href="${esc(href)}" rel="noopener" data-id="${it.id}">
       <div class="t">${esc(it.ko_title||it.title)}</div>
       ${it.ko_title?`<div class="o">${esc(it.title)}</div>`:''}
@@ -155,19 +156,24 @@ function render(){
   adScript();adPush();
 }
 
-// 테크 제목·요약 번역: 아직 번역 안 된 새 글만 서버에 묻는다(서버가 저장해 두므로 한 번만 든다)
+// 영문 섹션(테크·해외) 제목·요약 번역: 아직 번역 안 된 새 글만 서버에 묻는다(서버가 저장해 두므로 한 번만 든다)
+const TR=['tech','world'];
 let translating=false;
 async function translateTitles(){
   if(!data||translating)return;
-  const todo=(data.items.tech||[]).filter(it=>!it.ko_title&&it.source!=='Hacker News').slice(0,60);
+  // 지금 보고 있는 탭을 먼저, 그다음 나머지
+  const secs=[sec,...TR.filter(s=>s!==sec)].filter(s=>TR.includes(s));
+  const todo=[];
+  for(const s of secs)for(const it of data.items[s]||[])if(!it.ko_title&&it.source!=='Hacker News'&&todo.length<60)todo.push(it);
   if(!todo.length)return;
   translating=true;
   try{
     const r=await fetch('/api/titles',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({items:todo.map(it=>({id:it.id,title:it.title,summary:it.summary||''}))})});
     const d=await r.json();
-    if(d.result){for(const it of data.items.tech){const v=d.result[it.id];if(v){it.ko_title=v.ko_title;it.ko_summary=v.ko_summary}}render()}
+    if(d.result){for(const s of TR)for(const it of data.items[s]||[]){const v=d.result[it.id];if(v){it.ko_title=v.ko_title;it.ko_summary=v.ko_summary}}render()}
   }catch(e){}
   translating=false;
+  if(todo.length>=60)translateTitles();
 }
 async function load(){
   try{
@@ -175,9 +181,9 @@ async function load(){
     let r=await fetch('https://raw.githubusercontent.com/ceo938/reader-site/main/public/data/items.json?'+Date.now(),{cache:'no-store'}).catch(()=>null);
     if(!r||!r.ok)r=await fetch('data/items.json?'+Date.now(),{cache:'no-store'});
     // 새로 받은 목록에 이전에 받아 둔 번역을 옮겨 붙인다
-    const prev={};if(data)for(const it of data.items.tech||[])if(it.ko_title)prev[it.id]=it;
+    const prev={};if(data)for(const s of TR)for(const it of data.items[s]||[])if(it.ko_title)prev[it.id]=it;
     data=await r.json();
-    for(const it of data.items.tech||[]){const p=prev[it.id];if(p){it.ko_title=p.ko_title;it.ko_summary=p.ko_summary}}
+    for(const s of TR)for(const it of data.items[s]||[]){const p=prev[it.id];if(p){it.ko_title=p.ko_title;it.ko_summary=p.ko_summary}}
     render();
     translateTitles();
   }catch(e){$('#when').textContent='불러오기 실패'}
