@@ -76,6 +76,7 @@ def scrape_community(name, url, enc, sel, base, skip):
     out, seen = [], set()
     for a in s.select(sel):
         title = TAIL.sub("", clean(a.get_text(" ", strip=True)))
+        title = re.sub(r"^\d{1,3}\s+(?=\S)", "", title)  # 루리웹 순위 숫자
         href = a.get("href") or ""
         if len(title) < 4 or not href or href.startswith("#") or href.startswith("javascript"):
             continue
@@ -200,8 +201,12 @@ def run(only=None):
                 it["time"] = it["first_seen"]
             merged[sec][it["url"]] = it
 
-    # 커뮤니티는 베스트에서 내려간 글도 48시간은 남긴다(읽던 글이 사라지지 않게)
+    # 커뮤니티는 베스트에서 내려간 글도 48시간은 남긴다(읽던 글이 사라지지 않게). 제외 패턴은 옛 글에도 적용.
+    SKIP = {c[0]: c[5] for c in COMMUNITY}
     for old in state.get("items", {}).get("community", []):
+        sk = SKIP.get(old["source"])
+        if sk and re.search(sk, old["title"]):
+            merged["community"].pop(old["url"], None); continue
         if old["url"] not in merged["community"] and old.get("first_seen", "") >= cutoff:
             old = dict(old); old["dropped"] = True
             merged["community"][old["url"]] = old
