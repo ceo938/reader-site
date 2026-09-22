@@ -1,11 +1,18 @@
-# Cloudflare Workers(정적 자산) 설정 — 커뮤베스트
+# Cloudflare Workers 설정 — 커뮤베스트
+# 배포:  npx wrangler deploy        (wrangler 로그인 상태에서)
+# 번역 키: npx wrangler secret put ANTHROPIC_API_KEY   (한 번만. 값은 프롬프트에 붙여넣기)
 # 자체 도메인을 사면 아래 줄의 #을 지우고 npx wrangler deploy:
 # routes = [{ pattern = "commubest.com", custom_domain = true }, { pattern = "www.commubest.com", custom_domain = true }]
-# 배포:  npx wrangler deploy        (wrangler 로그인 상태에서)
 name = "commubest"
+main = "src/worker.js"
 compatibility_date = "2026-09-01"
 
 [assets]
 directory = "./public"
+binding = "ASSETS"
 html_handling = "auto-trailing-slash"
 
+# 번역 결과 저장소 (제목 7일, 본문 30일)
+[[kv_namespaces]]
+binding = "READ_CACHE"
+id = "a4461d99ec91454bb6873d031a389764"

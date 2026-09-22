@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>읽기 — 커뮤베스트</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#1b1b1b">
+<style>
+:root{--bg:#f6f5f2;--fg:#1b1b1b;--muted:#6b6b6b;--line:#e4e2dd;--accent:#0f6fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#121212;--fg:#ececec;--muted:#9a9a9a;--line:#2a2a2a;--accent:#6ea8ff}}
+:root[data-theme=dark]{--bg:#121212;--fg:#ececec;--muted:#9a9a9a;--line:#2a2a2a;--accent:#6ea8ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.7 -apple-system,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",system-ui,sans-serif}
+header{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:env(safe-area-inset-top) 0 0}
+.bar{max-width:720px;margin:0 auto;padding:10px 16px;display:flex;gap:14px;align-items:center;font-size:14px}
+.bar a{color:var(--fg);text-decoration:none;font-weight:600}
+.bar .orig{margin-left:auto;color:var(--accent);font-weight:500}
+.bar button{border:1px solid var(--line);background:none;color:var(--fg);border-radius:8px;padding:4px 10px;font:inherit;font-size:13px;cursor:pointer}
+main{max-width:720px;margin:0 auto;padding:20px 16px 80px}
+h1{font-size:24px;line-height:1.35;margin:0 0 6px}
+.ot{font-size:15px;color:var(--muted);margin:0 0 22px;line-height:1.4}
+.p{margin:0 0 18px}
+.p .ko{margin:0}
+.p .en{margin:4px 0 0;font-size:14px;color:var(--muted);line-height:1.55}
+body.ko-only .p .en,body.ko-only .ot{display:none}
+.status{color:var(--muted);text-align:center;padding:60px 0}
+.status .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);animation:b 1s infinite alternate;margin-right:8px}
+@keyframes b{from{opacity:.2}to{opacity:1}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <a href="./">← 목록</a>
+  <button id="toggle">원문 숨기기</button>
+  <a class="orig" id="orig" href="#" rel="noopener">원문 사이트 →</a>
+</div></header>
+<main id="main"><div class="status"><span class="dot"></span>번역 중입니다. 처음 여는 글은 20~40초 걸립니다.</div></main>
+<script>
+const LS=(k,v)=>{try{if(v===undefined)return JSON.parse(localStorage.getItem(k));localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}};
+if(LS('theme'))document.documentElement.dataset.theme=LS('theme');
+const u=new URLSearchParams(location.search).get('u')||'';
+document.getElementById('orig').href=u;
+const esc=s=>(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+if(LS('koOnly'))document.body.classList.add('ko-only');
+const tb=document.getElementById('toggle');
+const lbl=()=>tb.textContent=document.body.classList.contains('ko-only')?'원문 같이 보기':'원문 숨기기';lbl();
+tb.onclick=()=>{document.body.classList.toggle('ko-only');LS('koOnly',document.body.classList.contains('ko-only'));lbl()};
+(async()=>{
+  const m=document.getElementById('main');
+  if(!u){m.innerHTML='<div class="status">주소가 없습니다.</div>';return}
+  try{
+    const r=await fetch('/api/read?u='+encodeURIComponent(u));
+    const d=await r.json();
+    if(d.error){m.innerHTML=`<div class="status">${esc(d.error)}<br><br><a href="${esc(u)}">원문으로 가기 →</a></div>`;return}
+    document.title=d.ko_title+' — 커뮤베스트';
+    m.innerHTML=`<h1>${esc(d.ko_title)}</h1><p class="ot">${esc(d.title)}</p>`+
+      d.paras.map(p=>`<div class="p"><p class="ko">${esc(p.ko)}</p><p class="en">${esc(p.en)}</p></div>`).join('')+
+      `<p class="ot" style="margin-top:30px">번역: Claude · <a href="${esc(u)}" style="color:var(--accent)">원문 보기</a></p>`;
+  }catch(e){m.innerHTML='<div class="status">불러오지 못했습니다. 잠시 뒤 다시 열어 주세요.</div>'}
+})();
+</script>
+</body>
+</html>

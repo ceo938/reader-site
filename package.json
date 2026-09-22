@@ -1,0 +1,24 @@
+{
+  "name": "reader-site",
+  "version": "1.0.0",
+  "description": "커뮤니티 베스트 · 일간지 부동산 뉴스 · 해외 테크 기사를 한 화면에서 읽는 사이트. 주소: https://commubest.ceo-2b7.workers.dev (자체 도메인은 wrangler.toml 주석 참고)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ceo938/reader-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ceo938/reader-site/issues"
+  },
+  "homepage": "https://github.com/ceo938/reader-site#readme",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.127.0"
+  }
+}
