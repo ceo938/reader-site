@@ -3,8 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex">
 <title>읽을거리</title>
+<meta name="description" content="커뮤니티 베스트 글, 일간지 부동산 뉴스, 해외 테크 기사를 20분마다 모아 한 화면에서 읽는다.">
+<script>
+// ── 애드센스: 승인 뒤 구글이 주는 값을 여기 붙여 넣는다. 비어 있으면 광고 칸이 아예 안 그려진다.
+//   client   : "ca-pub-0000000000000000"  (애드센스 → 계정 → 게시자 ID)
+//   slot_top : "0000000000"               (목록 위 광고 단위, 디스플레이 가로형)
+//   slot_feed: "0000000000"               (목록 사이 광고 단위, 인피드 또는 디스플레이)
+//   every    : 몇 글마다 목록 사이 광고를 끼울지
+var AD = { client: "", slot_top: "", slot_feed: "", every: 12 };
+</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
 <style>
 :root{
@@ -45,6 +53,10 @@ main{max-width:860px;margin:0 auto;padding:6px 16px 60px}
 .empty{color:var(--muted);text-align:center;padding:40px 0}
 .err{font-size:12px;color:var(--muted);padding:8px 0}
 .sep{font-size:12px;color:var(--muted);padding:14px 0 4px;text-transform:uppercase;letter-spacing:.04em}
+.ad{display:block;margin:14px 0;min-height:0}
+.ad ins.adsbygoogle{display:block;width:100%}
+footer{max-width:860px;margin:0 auto;padding:24px 16px 40px;font-size:12px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}
+footer a{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -62,7 +74,25 @@ main{max-width:860px;margin:0 auto;padding:6px 16px 60px}
   </div>
   <div class="chips" id="chips"></div>
 </header>
+<div class="ad" id="adtop"></div>
 <main id="list"></main>
+<footer>
+  <span>읽을거리 · 제목과 링크만 모으고 본문은 원문 사이트에서 읽습니다.</span>
+  <a href="privacy.html">개인정보처리방침</a>
+  <a href="https://www.salzip.co.kr/" target="_blank" rel="noopener">살집채널</a>
+</footer>
+<script>
+// ── 광고: AD.client 가 채워져 있을 때만 그린다 ──
+let adLoaded=false;
+function adUnit(slot){return `<ins class="adsbygoogle" data-ad-client="${AD.client}" data-ad-slot="${slot}" data-ad-format="auto" data-full-width-responsive="true"></ins>`}
+function adScript(){
+  if(adLoaded||!AD.client)return;adLoaded=true;
+  const s=document.createElement('script');s.async=true;s.crossOrigin='anonymous';
+  s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client='+AD.client;document.head.appendChild(s);
+}
+function adPush(){if(!AD.client)return;document.querySelectorAll('ins.adsbygoogle:not([data-adsbygoogle-status])').forEach(()=>{try{(adsbygoogle=window.adsbygoogle||[]).push({})}catch(e){}})}
+if(AD.client&&AD.slot_top){adScript();document.getElementById('adtop').innerHTML=adUnit(AD.slot_top)}
+</script>
 <script>
 const $=s=>document.querySelector(s);
 const LS=(k,v)=>{try{if(v===undefined)return JSON.parse(localStorage.getItem(k));localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}};
@@ -101,8 +131,10 @@ function render(){
   const errs=Object.entries(data.errors||{}).filter(([s])=>srcs.includes(s));
   let h=errs.length?`<div class="err">받지 못한 곳: ${errs.map(e=>esc(e[0])).join(', ')} (이전 목록 유지)</div>`:'';
   if(!items.length)h+='<div class="empty">없음</div>';
-  let lastDay='';
+  let lastDay='',n=0;
   for(const it of items){
+    if(AD.client&&AD.slot_feed&&n&&n%AD.every===0)h+=`<div class="ad">${adUnit(AD.slot_feed)}</div>`;
+    n++;
     const day=(it.time||it.first_seen||'').slice(0,10);
     if(sec!=='community'&&day&&day!==lastDay){lastDay=day;const dd=new Date(day);h+=`<div class="sep">${dd.getMonth()+1}월 ${dd.getDate()}일</div>`}
     h+=`<a class="item ${read.has(it.id)?'read':''} ${it.dropped?'dropped':''}" href="${esc(it.url)}" target="_blank" rel="noopener" data-id="${it.id}">
@@ -112,6 +144,7 @@ function render(){
   }
   $('#list').innerHTML=h;
   $('#when').textContent='갱신 '+rel(data.generated);
+  adScript();adPush();
 }
 
 async function load(){
