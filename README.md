@@ -1,4 +1,4 @@
-# reader-site — 읽을거리
+# reader-site — 커뮤베스트
 
 커뮤니티 베스트 · 일간지 부동산 뉴스 · 해외 테크 기사를 한 화면에서 읽는 개인용 사이트.
 
@@ -12,7 +12,7 @@
 2. Cloudflare → Workers & Pages → Create → Pages → Connect to Git → `reader-site` 선택.
    빌드 명령 비움, 출력 디렉터리 `public`.
 3. GitHub 저장소 Settings → Actions → General → Workflow permissions를 "Read and write"로.
-4. Actions 탭에서 "읽을거리 수집" 워크플로를 한 번 수동 실행(Run workflow).
+4. Actions 탭에서 "커뮤베스트 수집" 워크플로를 한 번 수동 실행(Run workflow).
 
 ## 로컬에서 돌리기
 ```bash

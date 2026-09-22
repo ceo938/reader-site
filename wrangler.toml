@@ -1,8 +1,11 @@
-# Cloudflare Workers(정적 자산) 설정 — 읽을거리
+# Cloudflare Workers(정적 자산) 설정 — 커뮤베스트
+# 자체 도메인을 사면 아래 줄의 #을 지우고 npx wrangler deploy:
+# routes = [{ pattern = "commubest.com", custom_domain = true }, { pattern = "www.commubest.com", custom_domain = true }]
 # 배포:  npx wrangler deploy        (wrangler 로그인 상태에서)
-name = "reader-site"
+name = "commubest"
 compatibility_date = "2026-09-01"
 
 [assets]
 directory = "./public"
 html_handling = "auto-trailing-slash"
+
