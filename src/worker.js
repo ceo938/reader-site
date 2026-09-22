@@ -4,12 +4,12 @@
 // 비밀값 ANTHROPIC_API_KEY 는 `npx wrangler secret put ANTHROPIC_API_KEY` 로 넣는다.
 import Anthropic from "@anthropic-ai/sdk";
 
-const MODEL = "claude-opus-5";          // 본문 번역
-const TITLE_MODEL = "claude-sonnet-5";  // 제목·요약 번역(양이 많아 저렴한 모델)
+const MODEL = "claude-sonnet-5";        // 본문 번역 (번역엔 쏘넷으로 충분, 비용 1/2.5)
+const TITLE_MODEL = "claude-sonnet-5";  // 제목·요약 번역
 const ALLOWED = ["bbc.com", "bbc.co.uk", "nytimes.com", "theguardian.com", "theverge.com", "arstechnica.com", "npr.org", "dw.com", "france24.com", "ft.com"];
 const ENT = { "&quot;": '"', "&amp;": "&", "&#39;": "'", "&apos;": "'", "&lt;": "<", "&gt;": ">", "&nbsp;": " ", "&#8217;": "’", "&#8216;": "‘", "&#8220;": "“", "&#8221;": "”" };
 const decode = s => s.replace(/&(?:#\d+|#x[0-9a-f]+|[a-z]+);/gi, m => ENT[m] ?? (m.startsWith("&#x") ? String.fromCodePoint(parseInt(m.slice(3, -1), 16)) : m.startsWith("&#") ? String.fromCodePoint(parseInt(m.slice(2, -1), 10)) : m));
-const DAY_CAP = { titles: 400, read: 150 };   // 하루 호출 상한(남용 방지)
+const DAY_CAP = { titles: 120, read: 60 };   // 하루 호출 상한(남용 방지)
 
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } });
 
@@ -55,12 +55,15 @@ async function titles(req, env) {
   const todo = [];
   for (const it of items) {
     const c = await env.READ_CACHE.get("t:" + it.id, "json");
-    if (c) out[it.id] = c; else todo.push(it);
+    if (c && c.ko_title) out[it.id] = c;
+    else if (c && c.pending) continue;            // 다른 요청이 번역 중 → 이번엔 건너뜀
+    else todo.push(it);
   }
   if (todo.length) {
+    for (const it of todo) await env.READ_CACHE.put("t:" + it.id, JSON.stringify({ pending: 1 }), { expirationTtl: 120 });
     if (!(await capOK(env, "titles"))) return json({ result: out, note: "오늘 한도 초과" });
     const resp = await client(env).messages.stream({
-      model: TITLE_MODEL, max_tokens: 16000,
+      model: TITLE_MODEL, max_tokens: 16000, thinking: { type: "disabled" },
       output_config: { effort: "low", format: { type: "json_schema", schema: TITLE_SCHEMA } },
       messages: [{ role: "user", content: TITLE_PROMPT + JSON.stringify(todo.map(i => ({ id: i.id, title: i.title, summary: (i.summary || "").slice(0, 200) }))) }],
     }).finalMessage();
@@ -128,14 +131,16 @@ async function read(url, env) {
   if (!ALLOWED.some(h => host === h || host.endsWith("." + h))) return json({ error: "지원하지 않는 사이트" }, 400);
   const key = "r:" + u;
   const cached = await env.READ_CACHE.get(key, "json");
-  if (cached) return json(cached);
+  if (cached && cached.paras) return json(cached);
+  if (cached && cached.pending) return json({ error: "지금 번역 중입니다. 잠시 뒤 다시 열어 주세요." }, 409);
+  await env.READ_CACHE.put(key, JSON.stringify({ pending: 1 }), { expirationTtl: 180 });
   if (!(await capOK(env, "read"))) return json({ error: "오늘 번역 한도를 넘었습니다" }, 429);
   const { title, blocks } = await extract(u);
   const paras = blocks.filter(b => b.t).map(b => b.t);
   if (!paras.length) return json({ error: "본문을 읽어오지 못했습니다(유료 기사일 수 있음)", title, paras: [] }, 422);
   // 긴 출력이라 스트리밍으로 받는다(SDK가 긴 요청에 요구)
   const resp = await client(env).messages.stream({
-    model: MODEL, max_tokens: 32000,
+    model: MODEL, max_tokens: 32000, thinking: { type: "disabled" },
     output_config: { effort: "low", format: { type: "json_schema", schema: READ_SCHEMA } },
     messages: [{ role: "user", content: READ_PROMPT + JSON.stringify({ title, paras }) }],
   }).finalMessage();

@@ -164,7 +164,7 @@ async function translateTitles(){
   translating=true;
   try{
     for(let round=0;round<12;round++){
-      const secs=[sec,...TR.filter(s=>s!==sec)].filter(s=>TR.includes(s));
+      const secs=TR.includes(sec)?[sec]:[];   // 보고 있는 탭만 번역한다
       const todo=[];
       for(const s of secs)for(const it of data.items[s]||[])if(!it.ko_title&&!it._tried&&it.source!=='Hacker News'&&todo.length<12)todo.push(it);
       if(!todo.length)break;
@@ -192,7 +192,7 @@ async function load(){
   }catch(e){$('#when').textContent='불러오기 실패'}
 }
 
-$('#tabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;sec=b.dataset.sec;LS('sec',sec);render();window.scrollTo(0,0)};
+$('#tabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;sec=b.dataset.sec;LS('sec',sec);render();window.scrollTo(0,0);translateTitles()};
 $('#chips').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;off[sec]=off[sec]||{};off[sec][b.dataset.s]=!off[sec][b.dataset.s];LS('off',off);render()};
 $('#list').addEventListener('click',e=>{const a=e.target.closest('.item');if(!a)return;read.add(a.dataset.id);LS('read',[...read].slice(-3000));a.classList.add('read');a.querySelector('.new')?.remove()});
 $('#q').oninput=e=>{q=e.target.value.trim().toLowerCase();render()};
