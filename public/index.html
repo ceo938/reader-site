@@ -13,7 +13,13 @@
 //   every    : 몇 글마다 목록 사이 광고를 끼울지
 var AD = { client: "", slot_top: "", slot_feed: "", every: 12 };
 </script>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="커뮤베스트">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#1b1b1b">
 <style>
 :root{
   --bg:#f6f5f2;--card:#fff;--fg:#1b1b1b;--muted:#6b6b6b;--line:#e4e2dd;--accent:#0f6fff;--new:#ff5a1f;--chip:#ecebe6;--chip-on:#1b1b1b;--chip-on-fg:#fff;--read:#9a9a9a;
@@ -136,7 +142,7 @@ function render(){
     n++;
     const day=(it.time||it.first_seen||'').slice(0,10);
     if(sec!=='community'&&day&&day!==lastDay){lastDay=day;const dd=new Date(day);h+=`<div class="sep">${dd.getMonth()+1}월 ${dd.getDate()}일</div>`}
-    h+=`<a class="item ${read.has(it.id)?'read':''} ${it.dropped?'dropped':''}" href="${esc(it.url)}" target="_blank" rel="noopener" data-id="${it.id}">
+    h+=`<a class="item ${read.has(it.id)?'read':''} ${it.dropped?'dropped':''}" href="${esc(it.url)}" rel="noopener" data-id="${it.id}">
       <div class="t">${esc(it.title)}</div>
       ${it.summary?`<div class="s">${esc(it.summary)}</div>`:''}
       <div class="m">${isNew(it)?'<span class="new"></span>':''}<span class="src">${esc(it.source)}</span><span>${rel(it.time||it.first_seen)}</span>${it.dropped?'<span>베스트에서 내려감</span>':''}</div></a>`;
