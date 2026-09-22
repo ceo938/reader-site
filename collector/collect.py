@@ -199,7 +199,20 @@ def run(only=None):
             it["first_seen"] = prev["first_seen"] if prev else now_s
             if not it.get("time"):
                 it["time"] = it["first_seen"]
+            if prev:  # 이미 번역된 건 유지
+                for k in ("ko_title", "ko_summary"):
+                    if prev.get(k):
+                        it[k] = prev[k]
             merged[sec][it["url"]] = it
+
+    # 테크 기사 번역(키가 없으면 건너뜀). 새 글만 보낸다.
+    try:
+        from translate import translate
+        n = translate(list(merged["tech"].values()))
+        if n:
+            print(f"번역 {n}건")
+    except Exception as ex:
+        print(f"번역 단계 오류: {ex.__class__.__name__}: {ex}")
 
     # 커뮤니티는 베스트에서 내려간 글도 48시간은 남긴다(읽던 글이 사라지지 않게). 제외 패턴은 옛 글에도 적용.
     SKIP = {c[0]: c[5] for c in COMMUNITY}
