@@ -149,7 +149,9 @@ function render(){
 
 async function load(){
   try{
-    const r=await fetch('data/items.json?'+Date.now(),{cache:'no-store'});
+    // 수집 결과는 깃허브에 20분마다 커밋된다. 거기서 바로 읽고, 안 되면 배포된 사본을 쓴다.
+    let r=await fetch('https://raw.githubusercontent.com/ceo938/reader-site/main/public/data/items.json?'+Date.now(),{cache:'no-store'}).catch(()=>null);
+    if(!r||!r.ok)r=await fetch('data/items.json?'+Date.now(),{cache:'no-store'});
     data=await r.json(); render();
   }catch(e){$('#when').textContent='불러오기 실패'}
 }
