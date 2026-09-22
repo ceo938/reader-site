@@ -7,6 +7,7 @@ import os, json
 
 MODEL = "claude-opus-5"
 BATCH = 25
+SUMMARY = os.environ.get("TRANSLATE_SUMMARY") == "1"   # 기본은 제목만. 요약까지 하려면 1
 
 PROMPT = """아래는 해외 테크 뉴스의 제목과 요약이다. 각 항목을 한국어로 옮겨라.
 
@@ -54,7 +55,7 @@ def translate(items):
     done = 0
     for i in range(0, len(todo), BATCH):
         chunk = todo[i:i + BATCH]
-        payload = [{"id": it["id"], "title": it["title"], "summary": it.get("summary", "")} for it in chunk]
+        payload = [{"id": it["id"], "title": it["title"], "summary": (it.get("summary", "") if SUMMARY else "")} for it in chunk]
         try:
             resp = client.messages.create(
                 model=MODEL,
