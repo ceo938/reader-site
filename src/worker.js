@@ -92,7 +92,7 @@ async function extract(u) {
     if (!src || src.startsWith("data:")) return null;
     if (/logo|icon|avatar|pixel|1x1|badge|sprite|\.svg/i.test(src)) return null;
     const w = parseInt(e.getAttribute("width") || "0", 10); if (w && w < 200) return null;
-    try { return new URL(src, u).href; } catch { return null; }
+    try { return new URL(decode(src), u).href; } catch { return null; }
   };
   const rw = new HTMLRewriter()
     .on("meta[property='og:title']", { element(e) { title = title || e.getAttribute("content") || ""; } })
