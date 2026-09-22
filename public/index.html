@@ -171,7 +171,7 @@ async function translateTitles(){
       const r=await fetch('/api/titles',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({items:todo.map(it=>({id:it.id,title:it.title,summary:(it.summary||'').slice(0,200)}))})});
       const d=await r.json();
       for(const it of todo)it._tried=true;
-      if(!d.result)break;
+      if(!d.result)continue;
       for(const s of TR)for(const it of data.items[s]||[]){const v=d.result[it.id];if(v){it.ko_title=v.ko_title;it.ko_summary=v.ko_summary}}
       render();
     }

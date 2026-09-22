@@ -7,7 +7,7 @@
   python3 collector/collect.py            # 전체
   python3 collector/collect.py --only 뽐뿌  # 소스 하나만 (디버그)
 """
-import json, re, sys, time, hashlib, html
+import json, re, sys, time, hashlib, html, calendar
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
@@ -133,7 +133,7 @@ WORLD = [
 def entry_time(e):
     for k in ("published_parsed", "updated_parsed"):
         if e.get(k):
-            return datetime.fromtimestamp(time.mktime(e[k]), tz=timezone.utc).astimezone(KST).isoformat(timespec="minutes")
+            return datetime.fromtimestamp(calendar.timegm(e[k]), tz=timezone.utc).astimezone(KST).isoformat(timespec="minutes")
     return None
 
 
