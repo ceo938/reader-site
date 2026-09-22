@@ -4,7 +4,8 @@
 // 비밀값 ANTHROPIC_API_KEY 는 `npx wrangler secret put ANTHROPIC_API_KEY` 로 넣는다.
 import Anthropic from "@anthropic-ai/sdk";
 
-const MODEL = "claude-opus-5";
+const MODEL = "claude-opus-5";          // 본문 번역
+const TITLE_MODEL = "claude-sonnet-5";  // 제목·요약 번역(양이 많아 저렴한 모델)
 const ALLOWED = ["bbc.com", "bbc.co.uk", "nytimes.com", "theguardian.com", "theverge.com", "arstechnica.com", "npr.org", "dw.com", "france24.com", "ft.com"];
 const ENT = { "&quot;": '"', "&amp;": "&", "&#39;": "'", "&apos;": "'", "&lt;": "<", "&gt;": ">", "&nbsp;": " ", "&#8217;": "’", "&#8216;": "‘", "&#8220;": "“", "&#8221;": "”" };
 const decode = s => s.replace(/&(?:#\d+|#x[0-9a-f]+|[a-z]+);/gi, m => ENT[m] ?? (m.startsWith("&#x") ? String.fromCodePoint(parseInt(m.slice(3, -1), 16)) : m.startsWith("&#") ? String.fromCodePoint(parseInt(m.slice(2, -1), 10)) : m));
@@ -59,7 +60,7 @@ async function titles(req, env) {
   if (todo.length) {
     if (!(await capOK(env, "titles"))) return json({ result: out, note: "오늘 한도 초과" });
     const resp = await client(env).messages.stream({
-      model: MODEL, max_tokens: 16000,
+      model: TITLE_MODEL, max_tokens: 16000,
       output_config: { effort: "low", format: { type: "json_schema", schema: TITLE_SCHEMA } },
       messages: [{ role: "user", content: TITLE_PROMPT + JSON.stringify(todo.map(i => ({ id: i.id, title: i.title, summary: (i.summary || "").slice(0, 200) }))) }],
     }).finalMessage();
