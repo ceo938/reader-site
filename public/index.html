@@ -156,24 +156,27 @@ function render(){
   adScript();adPush();
 }
 
-// 영문 섹션(테크·해외) 제목·요약 번역: 아직 번역 안 된 새 글만 서버에 묻는다(서버가 저장해 두므로 한 번만 든다)
+// 영문 섹션(테크·해외) 제목·요약 번역: 아직 번역 안 된 새 글만 12건씩 서버에 묻고, 올 때마다 바로 그린다
 const TR=['tech','world'];
 let translating=false;
 async function translateTitles(){
   if(!data||translating)return;
-  // 지금 보고 있는 탭을 먼저, 그다음 나머지
-  const secs=[sec,...TR.filter(s=>s!==sec)].filter(s=>TR.includes(s));
-  const todo=[];
-  for(const s of secs)for(const it of data.items[s]||[])if(!it.ko_title&&it.source!=='Hacker News'&&todo.length<60)todo.push(it);
-  if(!todo.length)return;
   translating=true;
   try{
-    const r=await fetch('/api/titles',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({items:todo.map(it=>({id:it.id,title:it.title,summary:it.summary||''}))})});
-    const d=await r.json();
-    if(d.result){for(const s of TR)for(const it of data.items[s]||[]){const v=d.result[it.id];if(v){it.ko_title=v.ko_title;it.ko_summary=v.ko_summary}}render()}
+    for(let round=0;round<12;round++){
+      const secs=[sec,...TR.filter(s=>s!==sec)].filter(s=>TR.includes(s));
+      const todo=[];
+      for(const s of secs)for(const it of data.items[s]||[])if(!it.ko_title&&!it._tried&&it.source!=='Hacker News'&&todo.length<12)todo.push(it);
+      if(!todo.length)break;
+      const r=await fetch('/api/titles',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({items:todo.map(it=>({id:it.id,title:it.title,summary:(it.summary||'').slice(0,200)}))})});
+      const d=await r.json();
+      for(const it of todo)it._tried=true;
+      if(!d.result)break;
+      for(const s of TR)for(const it of data.items[s]||[]){const v=d.result[it.id];if(v){it.ko_title=v.ko_title;it.ko_summary=v.ko_summary}}
+      render();
+    }
   }catch(e){}
   translating=false;
-  if(todo.length>=60)translateTitles();
 }
 async function load(){
   try{
@@ -197,7 +200,7 @@ $('#markall').onclick=()=>{document.querySelectorAll('#list .item').forEach(a=>r
 $('#theme').onclick=()=>{const cur=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');const nx=cur==='dark'?'light':'dark';document.documentElement.dataset.theme=nx;LS('theme',nx)};
 
 load();
-setInterval(load,5*60*1000);
+setInterval(load,2*60*1000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)load()});
 // 다음 방문 때 "새 글" 표시 기준은 이번 방문 시작 시각
 addEventListener('pagehide',()=>LS('lastVisit',visitStart));

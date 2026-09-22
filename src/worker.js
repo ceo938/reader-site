@@ -58,11 +58,11 @@ async function titles(req, env) {
   }
   if (todo.length) {
     if (!(await capOK(env, "titles"))) return json({ result: out, note: "오늘 한도 초과" });
-    const resp = await client(env).messages.create({
+    const resp = await client(env).messages.stream({
       model: MODEL, max_tokens: 16000,
       output_config: { effort: "low", format: { type: "json_schema", schema: TITLE_SCHEMA } },
-      messages: [{ role: "user", content: TITLE_PROMPT + JSON.stringify(todo.map(i => ({ id: i.id, title: i.title, summary: (i.summary || "").slice(0, 300) }))) }],
-    });
+      messages: [{ role: "user", content: TITLE_PROMPT + JSON.stringify(todo.map(i => ({ id: i.id, title: i.title, summary: (i.summary || "").slice(0, 200) }))) }],
+    }).finalMessage();
     if (resp.stop_reason === "refusal") return json({ result: out, note: "번역 거절" });
     const parsed = JSON.parse(resp.content[0].text);
     for (const r of parsed.items) {
