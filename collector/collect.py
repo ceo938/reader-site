@@ -55,7 +55,7 @@ def uid(url):
 # ─────────────────────────── 커뮤니티 (HTML 스크랩) ───────────────────────────
 # 각 항목: (이름, URL, 인코딩, 선택자, 링크 기준 URL, 제외 패턴)
 COMMUNITY = [
-    ("뽐뿌",   "https://www.ppomppu.co.kr/hot.php",                        "euc-kr", "a.baseList-title",  "https://www.ppomppu.co.kr", None),
+    ("뽐뿌",   "https://www.ppomppu.co.kr/hot.php",                        "euc-kr", "a.baseList-title",  "https://www.ppomppu.co.kr", r"^AD\b"),
     ("에펨코리아", "https://www.fmkorea.com/best",                          None,     "a.hotdeal_var8",    "https://www.fmkorea.com",   None),
     ("오늘의유머", "https://www.todayhumor.co.kr/board/list.php?table=bestofbest", "utf-8", "td.subject a", "https://www.todayhumor.co.kr", None),
     ("보배드림", "https://www.bobaedream.co.kr/list?code=best",              "euc-kr", "a.bsubject",        "https://www.bobaedream.co.kr", None),
