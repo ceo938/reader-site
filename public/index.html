@@ -72,6 +72,18 @@ if(LS('theme'))document.documentElement.dataset.theme=LS('theme');
 
 function rel(iso){if(!iso)return'';const d=(Date.now()-new Date(iso))/6e4;if(d<1)return'방금';if(d<60)return Math.floor(d)+'분 전';if(d<1440)return Math.floor(d/60)+'시간 전';return Math.floor(d/1440)+'일 전'}
 function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+// 같은 수집 시각에 들어온 글은 소스를 번갈아 섞는다(한 곳 글이 줄줄이 뭉치지 않게)
+function interleave(items){
+  const out=[];let i=0;
+  while(i<items.length){
+    const k=items[i].first_seen;const grp=[];
+    while(i<items.length&&items[i].first_seen===k)grp.push(items[i++]);
+    const by={};for(const it of grp)(by[it.source]=by[it.source]||[]).push(it);
+    const qs=Object.values(by);let more=true;
+    while(more){more=false;for(const qq of qs){if(qq.length){out.push(qq.shift());more=true}}}
+  }
+  return out;
+}
 function isNew(it){return lastVisit&&it.first_seen>lastVisit&&!read.has(it.id)}
 
 function render(){
@@ -85,6 +97,7 @@ function render(){
   $('#chips').innerHTML=srcs.map(s=>`<button class="chip ${o[s]?'':'on'}" data-s="${esc(s)}">${esc(s)}</button>`).join('');
   let items=(data.items[sec]||[]).filter(it=>!o[it.source]);
   if(q)items=items.filter(it=>(it.title+' '+(it.summary||'')).toLowerCase().includes(q));
+  if(sec==='community')items=interleave(items);
   const errs=Object.entries(data.errors||{}).filter(([s])=>srcs.includes(s));
   let h=errs.length?`<div class="err">받지 못한 곳: ${errs.map(e=>esc(e[0])).join(', ')} (이전 목록 유지)</div>`:'';
   if(!items.length)h+='<div class="empty">없음</div>';

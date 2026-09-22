@@ -27,9 +27,16 @@ KEEP_HOURS = 48          # 이 시간 지난 항목은 버린다
 PER_SOURCE = 40          # 소스당 최대 보관
 
 
-def get(url, enc=None, timeout=20):
-    r = requests.get(url, headers=UA, timeout=timeout)
-    r.raise_for_status()
+def get(url, enc=None, timeout=25):
+    for attempt in range(3):
+        try:
+            r = requests.get(url, headers=UA, timeout=timeout)
+            r.raise_for_status()
+            break
+        except Exception:
+            if attempt == 2:
+                raise
+            time.sleep(3)
     if enc:
         r.encoding = enc
     return r
@@ -56,7 +63,7 @@ COMMUNITY = [
     ("루리웹",  "https://bbs.ruliweb.com/best",                             None,     "a.subject_link",    "https://bbs.ruliweb.com",   None),
     ("엠엘비파크", "https://mlbpark.donga.com/mp/b.php?b=bullpen&m=hot",     None,     "a.txt",             "https://mlbpark.donga.com", None),
     ("디시인사이드", "https://gall.dcinside.com/board/lists/?id=dcbest",      None,     "td.gall_tit a",     "https://gall.dcinside.com", r"이용 안내|공지"),
-    ("82cook", "https://www.82cook.com/entiz/enti.php?bn=15&sort=hit",     "utf-8",  "td.title a",        "https://www.82cook.com/entiz/", None),
+    ("82cook", "https://www.82cook.com/entiz/enti.php?bn=15&sort=hit",     "utf-8",  "td.title a",        "https://www.82cook.com/entiz/", r"공지|당부의 말씀|비밀번호를 변경|무단 게재"),
 ]
 
 # 제목 뒤에 붙는 댓글 수 "(79)" "[83]" 정리
