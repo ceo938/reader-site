@@ -4,7 +4,7 @@
 // 비밀값 ANTHROPIC_API_KEY 는 `npx wrangler secret put ANTHROPIC_API_KEY` 로 넣는다.
 import Anthropic from "@anthropic-ai/sdk";
 
-const MODEL = "claude-sonnet-5";        // 본문 번역 (번역엔 쏘넷으로 충분, 비용 1/2.5)
+const MODEL = "claude-opus-5";          // 본문 번역 (사장님 지시로 오퍼스, 260923)
 const TITLE_MODEL = "claude-sonnet-5";  // 제목·요약 번역
 const ALLOWED = ["bbc.com", "bbc.co.uk", "nytimes.com", "theguardian.com", "theverge.com", "arstechnica.com", "npr.org", "dw.com", "france24.com", "ft.com"];
 const ENT = { "&quot;": '"', "&amp;": "&", "&#39;": "'", "&apos;": "'", "&lt;": "<", "&gt;": ">", "&nbsp;": " ", "&#8217;": "’", "&#8216;": "‘", "&#8220;": "“", "&#8221;": "”" };
