@@ -48,19 +48,36 @@ if(LS('koOnly'))document.body.classList.add('ko-only');
 const tb=document.getElementById('toggle');
 const lbl=()=>tb.textContent=document.body.classList.contains('ko-only')?'원문 같이 보기':'원문 숨기기';lbl();
 tb.onclick=()=>{document.body.classList.toggle('ko-only');LS('koOnly',document.body.classList.contains('ko-only'));lbl()};
-(async()=>{
+function show(d){
   const m=document.getElementById('main');
-  if(!u){m.innerHTML='<div class="status">주소가 없습니다.</div>';return}
+  document.title=d.ko_title+' — 커뮤베스트';
+  m.innerHTML=`<h1>${esc(d.ko_title)}</h1><p class="ot">${esc(d.title)}</p>`+
+    d.paras.map(p=>p.img?`<figure class="f"><img src="${esc(p.img)}" alt="${esc(p.alt)}" loading="lazy" referrerpolicy="no-referrer">${p.alt?`<figcaption>${esc(p.alt)}</figcaption>`:''}</figure>`:`<div class="p"><p class="ko">${esc(p.ko)}</p><p class="en">${esc(p.en)}</p></div>`).join('')+
+    `<p class="ot" style="margin-top:30px">번역: Claude · <a href="${esc(u)}" style="color:var(--accent)">원문 보기</a></p>`;
+}
+function fail(msg){
+  document.getElementById('main').innerHTML=`<div class="status">${esc(msg)}<br><br><button id="retry" style="font:inherit;padding:8px 14px;border:1px solid var(--line);border-radius:8px;background:none;color:var(--fg);cursor:pointer">다시 시도</button> &nbsp; <a href="${esc(u)}">원문으로 가기 →</a></div>`;
+  document.getElementById('retry').onclick=()=>start(true);
+}
+let timer=null, t0=0;
+async function poll(retry){
   try{
-    const r=await fetch('/api/read?u='+encodeURIComponent(u));
+    const r=await fetch('/api/read?u='+encodeURIComponent(u)+(retry?'&retry=1':''),{cache:'no-store'});
     const d=await r.json();
-    if(d.error){m.innerHTML=`<div class="status">${esc(d.error)}<br><br><a href="${esc(u)}">원문으로 가기 →</a></div>`;return}
-    document.title=d.ko_title+' — 커뮤베스트';
-    m.innerHTML=`<h1>${esc(d.ko_title)}</h1><p class="ot">${esc(d.title)}</p>`+
-      d.paras.map(p=>p.img?`<figure class="f"><img src="${esc(p.img)}" alt="${esc(p.alt)}" loading="lazy" referrerpolicy="no-referrer">${p.alt?`<figcaption>${esc(p.alt)}</figcaption>`:''}</figure>`:`<div class="p"><p class="ko">${esc(p.ko)}</p><p class="en">${esc(p.en)}</p></div>`).join('')+
-      `<p class="ot" style="margin-top:30px">번역: Claude · <a href="${esc(u)}" style="color:var(--accent)">원문 보기</a></p>`;
-  }catch(e){m.innerHTML='<div class="status">불러오지 못했습니다. 잠시 뒤 다시 열어 주세요.</div>'}
-})();
+    if(d.paras){clearInterval(timer);show(d);return}
+    if(d.error){clearInterval(timer);fail(d.error);return}
+    const sec=Math.round((Date.now()-t0)/1000);
+    document.getElementById("main").innerHTML=`<div class="status"><span class="dot"></span>번역 중입니다 (${sec}초${d.total?`, ${d.done}/${d.total} 묶음`:""}). 화면을 닫아도 서버가 이어서 번역하니 다시 열면 남은 것만 합니다.</div>`;
+    if(sec>240){clearInterval(timer);fail('시간이 너무 걸립니다. 잠시 뒤 다시 시도해 주세요.')}
+  }catch(e){ /* 잠깐 끊겨도 다음 확인에서 이어진다 */ }
+}
+function start(retry){
+  if(!u){document.getElementById('main').innerHTML='<div class="status">주소가 없습니다.</div>';return}
+  t0=Date.now(); clearInterval(timer);
+  poll(retry); timer=setInterval(()=>poll(false),3000);
+}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&timer)poll(false)});
+start(false);
 </script>
 </body>
 </html>

@@ -17,7 +17,7 @@ export default {
   async fetch(req, env, ctx) {
     const url = new URL(req.url);
     if (url.pathname === "/api/titles" && req.method === "POST") return titles(req, env).catch(e => json({ error: String(e) }, 500));
-    if (url.pathname === "/api/read") return read(url, env).catch(e => json({ error: String(e) }, 500));
+    if (url.pathname === "/api/read") return read(url, env, ctx).catch(e => json({ error: String(e) }, 500));
     if (url.pathname === "/api/pretranslate") return pretranslate(env).then(r => json(r)).catch(e => json({ error: String(e) }, 500));
     if (url.pathname === "/api/status") return status(env).then(r => json(r)).catch(e => json({ error: String(e) }, 500));
     return env.ASSETS.fetch(req);
@@ -27,24 +27,37 @@ export default {
 };
 
 const DATA_URL = "https://raw.githubusercontent.com/ceo938/reader-site/main/public/data/items.json";
+const TMAP = "titles:map";   // 제목 번역 전체 지도 {id:{ko_title,ko_summary,t}} — cron이 유일한 기록자
 
+async function loadTmap(env) { return (await env.READ_CACHE.get(TMAP, "json")) || {}; }
+
+// 20분마다: 새 글 제목 번역 → tmap 한 장에 합쳐 저장(쓰기 1회). 주문형으로 번역된 개별 키도 흡수한다.
 async function pretranslate(env) {
   const r = await fetch(DATA_URL + "?" + Date.now(), { cf: { cacheTtl: 0 } });
   const data = await r.json();
   const items = [];
   for (const sec of ["tech", "world"]) for (const it of data.items[sec] || []) if (it.source !== "Hacker News") items.push({ id: it.id, title: it.title, summary: it.summary || "" });
+  const tmap = await loadTmap(env);
   const todo = [];
+  let absorbed = 0;
   for (const it of items) {
+    if (tmap[it.id]) continue;
     const c = await env.READ_CACHE.get("t:" + it.id, "json");
-    if (!c || (!c.ko_title && !c.pending)) todo.push(it);
+    if (c && c.ko_title) { tmap[it.id] = { ...c, t: Date.now() }; absorbed++; } else todo.push(it);
   }
   let done = 0, batches = 0;
   for (let i = 0; i < todo.length && batches < 15; i += 12, batches++) {
     if (!(await capOK(env, "titles"))) break;
-    const res = await translateBatch(env, todo.slice(i, i + 12));
-    done += Object.keys(res).length;
+    try {
+      const res = await translateBatch(env, todo.slice(i, i + 12), false);
+      for (const [id, v] of Object.entries(res)) { tmap[id] = { ...v, t: Date.now() }; done++; }
+    } catch (e) { console.log("pretranslate batch error", String(e)); }
   }
-  const out = { total: items.length, untranslated: todo.length, translated: done, batches };
+  // 목록에서 사라진 지 7일 넘은 것은 지도에서 뺀다
+  const keep = new Set(items.map(i => i.id)), cutoff = Date.now() - 7 * 86400e3;
+  for (const id of Object.keys(tmap)) if (!keep.has(id) && (tmap[id].t || 0) < cutoff) delete tmap[id];
+  await env.READ_CACHE.put(TMAP, JSON.stringify(tmap));
+  const out = { total: items.length, untranslated: todo.length, translated: done, absorbed, batches, map_size: Object.keys(tmap).length };
   await env.READ_CACHE.put("status:pretranslate", JSON.stringify({ ...out, at: new Date().toISOString() }), { expirationTtl: 86400 });
   return out;
 }
@@ -84,27 +97,22 @@ const TITLE_PROMPT = `아래는 해외 테크 뉴스의 제목과 요약이다. 
 항목:
 `;
 
-// 한 묶음 번역. 실패하면 진행중 표시를 지워 다음 요청이 다시 시도할 수 있게 한다.
-async function translateBatch(env, todo) {
+// 한 묶음 번역 → {id:{ko_title,ko_summary}}. store=true면 개별 키에도 저장(주문형).
+async function translateBatch(env, todo, store) {
   const out = {};
   if (!todo.length) return out;
-  for (const it of todo) await env.READ_CACHE.put("t:" + it.id, JSON.stringify({ pending: 1 }), { expirationTtl: 120 });
-  try {
-    const resp = await client(env).messages.stream({
-      model: TITLE_MODEL, max_tokens: 16000, thinking: { type: "disabled" },
-      output_config: { effort: "low", format: { type: "json_schema", schema: TITLE_SCHEMA } },
-      messages: [{ role: "user", content: TITLE_PROMPT + JSON.stringify(todo.map(i => ({ id: i.id, title: i.title, summary: (i.summary || "").slice(0, 200) }))) }],
-    }).finalMessage();
-    if (resp.stop_reason === "refusal") throw new Error("번역 거절");
-    const parsed = JSON.parse(resp.content[0].text);
-    for (const r of parsed.items) {
-      if (!r.ko_title) continue;
-      const v = { ko_title: r.ko_title, ko_summary: r.ko_summary || "" };
-      out[r.id] = v;
-      await env.READ_CACHE.put("t:" + r.id, JSON.stringify(v), { expirationTtl: 7 * 86400 });
-    }
-  } finally {
-    for (const it of todo) if (!out[it.id]) await env.READ_CACHE.delete("t:" + it.id);
+  const resp = await client(env).messages.stream({
+    model: TITLE_MODEL, max_tokens: 16000, thinking: { type: "disabled" },
+    output_config: { effort: "low", format: { type: "json_schema", schema: TITLE_SCHEMA } },
+    messages: [{ role: "user", content: TITLE_PROMPT + JSON.stringify(todo.map(i => ({ id: i.id, title: i.title, summary: (i.summary || "").slice(0, 200) }))) }],
+  }).finalMessage();
+  if (resp.stop_reason === "refusal") throw new Error("번역 거절");
+  const parsed = JSON.parse(resp.content[0].text);
+  for (const r of parsed.items) {
+    if (!r.ko_title) continue;
+    const v = { ko_title: r.ko_title, ko_summary: r.ko_summary || "" };
+    out[r.id] = v;
+    if (store) await env.READ_CACHE.put("t:" + r.id, JSON.stringify(v), { expirationTtl: 7 * 86400 });
   }
   return out;
 }
@@ -112,19 +120,17 @@ async function translateBatch(env, todo) {
 async function titles(req, env) {
   const body = await req.json();
   const items = (body.items || []).slice(0, 60).filter(i => i.id && i.title);
-  const out = {};
-  const todo = [];
+  const tmap = await loadTmap(env);
+  const out = {}, todo = [];
   for (const it of items) {
+    if (tmap[it.id]) { out[it.id] = tmap[it.id]; continue; }
     const c = await env.READ_CACHE.get("t:" + it.id, "json");
-    if (c && c.ko_title) out[it.id] = c;
-    else if (c && c.pending) continue;            // 다른 요청이 번역 중 → 이번엔 건너뜀(화면이 잠시 뒤 다시 묻는다)
-    else todo.push(it);
+    if (c && c.ko_title) out[it.id] = c; else todo.push(it);
   }
   if (todo.length) {
     if (!(await capOK(env, "titles"))) return json({ result: out, note: "오늘 한도 초과" });
-    // 8건씩 나눠 동시에 보내 기다리는 시간을 줄인다
     const chunks = []; for (let i = 0; i < todo.length; i += 8) chunks.push(todo.slice(i, i + 8));
-    const results = await Promise.allSettled(chunks.map(c => translateBatch(env, c)));
+    const results = await Promise.allSettled(chunks.map(c => translateBatch(env, c, true)));
     let err = null;
     for (const r of results) { if (r.status === "fulfilled") Object.assign(out, r.value); else err = String(r.reason); }
     return json({ result: out, ...(err ? { note: err } : {}) });
@@ -176,48 +182,93 @@ async function extract(u) {
   return { title: decode(title.trim()), blocks: blocks.map(b => b.t ? { t: decode(b.t) } : b) };
 }
 
-const READ_SCHEMA = { type: "object", properties: { ko_title: { type: "string" }, paras: { type: "array", items: { type: "string" } } }, required: ["ko_title", "paras"], additionalProperties: false };
-const READ_PROMPT = `아래 영문 기사를 한국어로 번역하라.
-- 문단 수와 순서를 그대로 유지한다(입력 문단 하나 = 출력 문단 하나). 합치거나 빼지 않는다.
+const READ_SCHEMA = { type: "object", properties: { ko_title: { type: "string" }, paras: { type: "array", items: { type: "object", properties: { i: { type: "integer" }, ko: { type: "string" } }, required: ["i", "ko"], additionalProperties: false } } }, required: ["ko_title", "paras"], additionalProperties: false };
+const READ_PROMPT = `아래 영문 기사의 일부 문단을 한국어로 번역하라.
+- 입력 문단마다 번호 i 가 있다. 출력은 같은 번호 i 와 그 문단의 번역 ko 를 하나씩, 빠짐없이 돌려준다. 문단을 합치거나 빼지 않는다.
 - 자연스러운 한국어 기사체('~다'). 고유명사는 통용 표기, 낯설면 원어 병기.
-- 구독 안내·쿠키 안내·사진 설명 같은 문단은 그대로 짧게 옮기되 지어내지 않는다.
-- ko_title 은 한국 신문 제목 투 20~40자.
+- 구독 안내·사진 설명 같은 문단도 짧게 그대로 옮기되 지어내지 않는다.
+- ko_title 은 기사 제목을 한국 신문 제목 투 20~40자로.
 `;
+const CHUNK = 8;            // 묶음 크기(문단). 묶음 하나가 30초 안에 끝나야 한다.
+const PER_POLL = 4;         // 확인 요청 한 번에 동시에 처리할 묶음 수
 
-async function read(url, env) {
+async function translateChunk(env, title, numbered) {
+  const resp = await client(env).messages.stream({
+    model: MODEL, max_tokens: 16000, thinking: { type: "disabled" },
+    output_config: { effort: "low", format: { type: "json_schema", schema: READ_SCHEMA } },
+    messages: [{ role: "user", content: READ_PROMPT + JSON.stringify({ title, paras: numbered }) }],
+  }).finalMessage();
+  if (resp.stop_reason === "refusal") throw new Error("번역이 거절되었습니다");
+  const p = JSON.parse(resp.content[0].text);
+  const map = {};
+  for (const x of p.paras) if (x && typeof x.i === "number" && x.ko) map[x.i] = x.ko;
+  return { ko_title: p.ko_title, map };
+}
+
+// 묶음 하나 처리(30초 안). 결과는 j:<u>:c<idx> 에 저장.
+async function runChunk(env, u, job, idx) {
+  const key = `j:${u}:c${idx}`;
+  try {
+    const numbered = job.texts.slice(idx * CHUNK, (idx + 1) * CHUNK).map((t, k) => ({ i: idx * CHUNK + k, t }));
+    const r = await translateChunk(env, job.title, numbered);
+    const v = { ok: 1, map: r.map, ko_title: idx === 0 ? r.ko_title : undefined };
+    await env.READ_CACHE.put(key, JSON.stringify(v), { expirationTtl: 3600 });
+    return v;
+  } catch (e) {
+    const v = { err: String(e.message || e), at: Date.now() };
+    await env.READ_CACHE.put(key, JSON.stringify(v), { expirationTtl: 120 });
+    return v;
+  }
+}
+
+async function read(url, env, ctx) {
   const u = url.searchParams.get("u") || "";
   let host;
   try { host = new URL(u).hostname; } catch { return json({ error: "주소가 이상합니다" }, 400); }
   if (!ALLOWED.some(h => host === h || host.endsWith("." + h))) return json({ error: "지원하지 않는 사이트" }, 400);
-  const key = "r:" + u;
-  const cached = await env.READ_CACHE.get(key, "json");
+  const rkey = "r:" + u, jkey = "j:" + u;
+  const retry = url.searchParams.get("retry") === "1";
+  const cached = await env.READ_CACHE.get(rkey, "json");
   if (cached && cached.paras) return json(cached);
-  if (cached && cached.pending) return json({ error: "지금 번역 중입니다. 잠시 뒤 다시 열어 주세요." }, 409);
-  await env.READ_CACHE.put(key, JSON.stringify({ pending: 1 }), { expirationTtl: 180 });
-  try {
-    return await readInner(u, key, env);
-  } catch (e) {
-    await env.READ_CACHE.delete(key);
-    throw e;
-  }
-}
+  if (cached && cached.error && !retry) return json({ error: cached.error }, 422);
 
-async function readInner(u, key, env) {
-  if (!(await capOK(env, "read"))) { await env.READ_CACHE.delete(key); return json({ error: "오늘 번역 한도를 넘었습니다" }, 429); }
-  const { title, blocks } = await extract(u);
-  const paras = blocks.filter(b => b.t).map(b => b.t);
-  if (!paras.length) { await env.READ_CACHE.delete(key); return json({ error: "본문을 읽어오지 못했습니다(유료 기사일 수 있음)", title, paras: [] }, 422); }
-  // 긴 출력이라 스트리밍으로 받는다(SDK가 긴 요청에 요구)
-  const resp = await client(env).messages.stream({
-    model: MODEL, max_tokens: 32000, thinking: { type: "disabled" },
-    output_config: { effort: "low", format: { type: "json_schema", schema: READ_SCHEMA } },
-    messages: [{ role: "user", content: READ_PROMPT + JSON.stringify({ title, paras }) }],
-  }).finalMessage();
-  if (resp.stop_reason === "refusal") { await env.READ_CACHE.delete(key); return json({ error: "번역이 거절되었습니다" }, 422); }
-  const p = JSON.parse(resp.content[0].text);
-  let i = 0;
-  const out = blocks.map(b => b.t ? { en: b.t, ko: p.paras[i++] || "" } : { img: b.img, alt: b.alt });
-  const result = { title, ko_title: p.ko_title, paras: out, url: u };
-  await env.READ_CACHE.put(key, JSON.stringify(result), { expirationTtl: 30 * 86400 });
-  return json(result);
+  // 작업 정의(본문 추출)는 첫 요청 때 한 번만
+  let job = retry ? null : await env.READ_CACHE.get(jkey, "json");
+  if (!job) {
+    if (!(await capOK(env, "read"))) return json({ error: "오늘 번역 한도를 넘었습니다" }, 429);
+    let ex;
+    try { ex = await extract(u); } catch (e) { return json({ error: String(e.message || e) }, 422); }
+    const texts = ex.blocks.filter(b => b.t).map(b => b.t);
+    if (!texts.length) { await env.READ_CACHE.put(rkey, JSON.stringify({ error: "본문을 읽어오지 못했습니다(유료 기사일 수 있음)" }), { expirationTtl: 300 }); return json({ error: "본문을 읽어오지 못했습니다(유료 기사일 수 있음)" }, 422); }
+    job = { title: ex.title, blocks: ex.blocks, texts, n: Math.ceil(texts.length / CHUNK), at: Date.now() };
+    await env.READ_CACHE.put(jkey, JSON.stringify(job), { expirationTtl: 3600 });
+  }
+
+  // 묶음 상태 읽기 → 남은 묶음을 이 요청 안에서(연결을 붙든 채) 처리 → 다시 상태 읽기
+  // waitUntil(응답 뒤 30초 제한)에 의존하지 않는다. 화면은 3초마다 다시 부르므로 끊겨도 완료된 묶음은 남는다.
+  const readStates = () => Promise.all(Array.from({ length: job.n }, (_, i) => env.READ_CACHE.get(`j:${u}:c${i}`, "json")));
+  let states = await readStates();
+  const pick = () => { const t = []; for (let i = 0; i < job.n && t.length < PER_POLL; i++) { const st = states[i]; if (st && st.ok) continue; if (st && st.claim && Date.now() - st.claim < 60000) continue; t.push(i); } return t; };
+  const todo = pick();
+  let took = 0;
+  if (todo.length) {
+    for (const i of todo) await env.READ_CACHE.put(`j:${u}:c${i}`, JSON.stringify({ claim: Date.now() }), { expirationTtl: 120 });
+    const t0 = Date.now();
+    const results = await Promise.all(todo.map(i => runChunk(env, u, job, i)));
+    took = Date.now() - t0;
+    // KV는 방금 쓴 값을 바로 못 돌려줄 수 있으니 이번 결과는 직접 반영
+    for (let k = 0; k < todo.length; k++) states[todo[k]] = results[k];
+  }
+  const done = states.filter(x => x && x.ok).length;
+  if (done === job.n) {
+    const map = Object.assign({}, ...states.map(x => x.map));
+    const ko_title = (states[0] && states[0].ko_title) || job.title;
+    let i = 0;
+    const paras = job.blocks.map(b => b.t ? { en: b.t, ko: map[i++] || "" } : { img: b.img, alt: b.alt });
+    const result = { title: job.title, ko_title, paras, url: u, at: new Date().toISOString() };
+    await env.READ_CACHE.put(rkey, JSON.stringify(result), { expirationTtl: 30 * 86400 });
+    return json(result);
+  }
+  const errs = states.filter(x => x && x.err).map(x => x.err);
+  return json({ pending: true, done, total: job.n, took, ...(errs.length ? { note: errs[0] } : {}) });
 }
