@@ -36,7 +36,7 @@ async function pretranslate(env) {
   const r = await fetch(DATA_URL + "?" + Date.now(), { cf: { cacheTtl: 0 } });
   const data = await r.json();
   const items = [];
-  for (const sec of ["tech", "world"]) for (const it of data.items[sec] || []) if (it.source !== "Hacker News") items.push({ id: it.id, title: it.title, summary: it.summary || "" });
+  for (const sec of ["tech", "world"]) for (const it of data.items[sec] || []) items.push({ id: it.id, title: it.title, summary: it.summary || "" });
   const tmap = await loadTmap(env);
   const todo = [];
   let absorbed = 0;

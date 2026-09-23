@@ -168,7 +168,7 @@ async function translateTitles(){
       const secs=[sec,...TR.filter(s=>s!==sec)].filter(s=>TR.includes(s));
       const now=Date.now(), todo=[];
       for(const s of secs)for(const it of data.items[s]||[]){
-        if(it.ko_title||it.source==='Hacker News')continue;
+        if(it.ko_title)continue;
         if((it._tries||0)>=4||(it._next&&it._next>now))continue;
         if(todo.length<12)todo.push(it);
       }
