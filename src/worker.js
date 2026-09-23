@@ -248,7 +248,7 @@ async function read(url, env, ctx) {
   // waitUntil(응답 뒤 30초 제한)에 의존하지 않는다. 화면은 3초마다 다시 부르므로 끊겨도 완료된 묶음은 남는다.
   const readStates = () => Promise.all(Array.from({ length: job.n }, (_, i) => env.READ_CACHE.get(`j:${u}:c${i}`, "json")));
   let states = await readStates();
-  const pick = () => { const t = []; for (let i = 0; i < job.n && t.length < PER_POLL; i++) { const st = states[i]; if (st && st.ok) continue; if (st && st.claim && Date.now() - st.claim < 60000) continue; t.push(i); } return t; };
+  const pick = () => { const t = []; for (let i = 0; i < job.n && t.length < PER_POLL; i++) { const st = states[i]; if (st && st.ok) continue; if (st && st.claim && Date.now() - st.claim < 35000) continue; t.push(i); } return t; };
   const todo = pick();
   let took = 0;
   if (todo.length) {
