@@ -14,13 +14,49 @@ const DAY_CAP = { titles: 120, read: 60 };   // 하루 호출 상한(남용 방�
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" } });
 
 export default {
-  async fetch(req, env) {
+  async fetch(req, env, ctx) {
     const url = new URL(req.url);
     if (url.pathname === "/api/titles" && req.method === "POST") return titles(req, env).catch(e => json({ error: String(e) }, 500));
     if (url.pathname === "/api/read") return read(url, env).catch(e => json({ error: String(e) }, 500));
+    if (url.pathname === "/api/pretranslate") return pretranslate(env).then(r => json(r)).catch(e => json({ error: String(e) }, 500));
+    if (url.pathname === "/api/status") return status(env).then(r => json(r)).catch(e => json({ error: String(e) }, 500));
     return env.ASSETS.fetch(req);
   },
+  // 20분마다(수집 직후) 테크·해외 새 글 제목을 미리 번역해 둔다 → 화면을 열면 바로 한국어
+  async scheduled(event, env, ctx) { ctx.waitUntil(pretranslate(env)); },
 };
+
+const DATA_URL = "https://raw.githubusercontent.com/ceo938/reader-site/main/public/data/items.json";
+
+async function pretranslate(env) {
+  const r = await fetch(DATA_URL + "?" + Date.now(), { cf: { cacheTtl: 0 } });
+  const data = await r.json();
+  const items = [];
+  for (const sec of ["tech", "world"]) for (const it of data.items[sec] || []) if (it.source !== "Hacker News") items.push({ id: it.id, title: it.title, summary: it.summary || "" });
+  const todo = [];
+  for (const it of items) {
+    const c = await env.READ_CACHE.get("t:" + it.id, "json");
+    if (!c || (!c.ko_title && !c.pending)) todo.push(it);
+  }
+  let done = 0, batches = 0;
+  for (let i = 0; i < todo.length && batches < 15; i += 12, batches++) {
+    if (!(await capOK(env, "titles"))) break;
+    const res = await translateBatch(env, todo.slice(i, i + 12));
+    done += Object.keys(res).length;
+  }
+  const out = { total: items.length, untranslated: todo.length, translated: done, batches };
+  await env.READ_CACHE.put("status:pretranslate", JSON.stringify({ ...out, at: new Date().toISOString() }), { expirationTtl: 86400 });
+  return out;
+}
+
+async function status(env) {
+  const day = new Date().toISOString().slice(0, 10);
+  return {
+    last_pretranslate: await env.READ_CACHE.get("status:pretranslate", "json"),
+    today: { titles: parseInt((await env.READ_CACHE.get(`cap:titles:${day}`)) || "0", 10), read: parseInt((await env.READ_CACHE.get(`cap:read:${day}`)) || "0", 10) },
+    caps: DAY_CAP, has_key: !!env.ANTHROPIC_API_KEY,
+  };
+}
 
 async function capOK(env, kind) {
   const k = `cap:${kind}:${new Date().toISOString().slice(0, 10)}`;
@@ -48,6 +84,31 @@ const TITLE_PROMPT = `아래는 해외 테크 뉴스의 제목과 요약이다. 
 항목:
 `;
 
+// 한 묶음 번역. 실패하면 진행중 표시를 지워 다음 요청이 다시 시도할 수 있게 한다.
+async function translateBatch(env, todo) {
+  const out = {};
+  if (!todo.length) return out;
+  for (const it of todo) await env.READ_CACHE.put("t:" + it.id, JSON.stringify({ pending: 1 }), { expirationTtl: 120 });
+  try {
+    const resp = await client(env).messages.stream({
+      model: TITLE_MODEL, max_tokens: 16000, thinking: { type: "disabled" },
+      output_config: { effort: "low", format: { type: "json_schema", schema: TITLE_SCHEMA } },
+      messages: [{ role: "user", content: TITLE_PROMPT + JSON.stringify(todo.map(i => ({ id: i.id, title: i.title, summary: (i.summary || "").slice(0, 200) }))) }],
+    }).finalMessage();
+    if (resp.stop_reason === "refusal") throw new Error("번역 거절");
+    const parsed = JSON.parse(resp.content[0].text);
+    for (const r of parsed.items) {
+      if (!r.ko_title) continue;
+      const v = { ko_title: r.ko_title, ko_summary: r.ko_summary || "" };
+      out[r.id] = v;
+      await env.READ_CACHE.put("t:" + r.id, JSON.stringify(v), { expirationTtl: 7 * 86400 });
+    }
+  } finally {
+    for (const it of todo) if (!out[it.id]) await env.READ_CACHE.delete("t:" + it.id);
+  }
+  return out;
+}
+
 async function titles(req, env) {
   const body = await req.json();
   const items = (body.items || []).slice(0, 60).filter(i => i.id && i.title);
@@ -56,25 +117,17 @@ async function titles(req, env) {
   for (const it of items) {
     const c = await env.READ_CACHE.get("t:" + it.id, "json");
     if (c && c.ko_title) out[it.id] = c;
-    else if (c && c.pending) continue;            // 다른 요청이 번역 중 → 이번엔 건너뜀
+    else if (c && c.pending) continue;            // 다른 요청이 번역 중 → 이번엔 건너뜀(화면이 잠시 뒤 다시 묻는다)
     else todo.push(it);
   }
   if (todo.length) {
-    for (const it of todo) await env.READ_CACHE.put("t:" + it.id, JSON.stringify({ pending: 1 }), { expirationTtl: 120 });
     if (!(await capOK(env, "titles"))) return json({ result: out, note: "오늘 한도 초과" });
-    const resp = await client(env).messages.stream({
-      model: TITLE_MODEL, max_tokens: 16000, thinking: { type: "disabled" },
-      output_config: { effort: "low", format: { type: "json_schema", schema: TITLE_SCHEMA } },
-      messages: [{ role: "user", content: TITLE_PROMPT + JSON.stringify(todo.map(i => ({ id: i.id, title: i.title, summary: (i.summary || "").slice(0, 200) }))) }],
-    }).finalMessage();
-    if (resp.stop_reason === "refusal") return json({ result: out, note: "번역 거절" });
-    const parsed = JSON.parse(resp.content[0].text);
-    for (const r of parsed.items) {
-      if (!r.ko_title) continue;
-      const v = { ko_title: r.ko_title, ko_summary: r.ko_summary || "" };
-      out[r.id] = v;
-      await env.READ_CACHE.put("t:" + r.id, JSON.stringify(v), { expirationTtl: 7 * 86400 });
-    }
+    // 8건씩 나눠 동시에 보내 기다리는 시간을 줄인다
+    const chunks = []; for (let i = 0; i < todo.length; i += 8) chunks.push(todo.slice(i, i + 8));
+    const results = await Promise.allSettled(chunks.map(c => translateBatch(env, c)));
+    let err = null;
+    for (const r of results) { if (r.status === "fulfilled") Object.assign(out, r.value); else err = String(r.reason); }
+    return json({ result: out, ...(err ? { note: err } : {}) });
   }
   return json({ result: out });
 }
@@ -90,7 +143,7 @@ async function extract(u) {
     const ss = e.getAttribute("srcset") || e.getAttribute("data-srcset");
     if (ss) { const c = ss.split(",").map(x => x.trim().split(/\s+/)); const big = c.filter(x => x[1] && /w$/.test(x[1])).sort((a, b) => parseInt(b[1]) - parseInt(a[1]))[0]; src = (big ? big[0] : c[0][0]) || src; }
     if (!src || src.startsWith("data:")) return null;
-    if (/logo|icon|avatar|pixel|1x1|badge|sprite|\.svg/i.test(src)) return null;
+    if (/logo|icon|avatar|pixel|1x1|badge|sprite|placeholder|spacer|blank|\.svg/i.test(src)) return null;
     const w = parseInt(e.getAttribute("width") || "0", 10); if (w && w < 200) return null;
     try { return new URL(decode(src), u).href; } catch { return null; }
   };
@@ -141,17 +194,26 @@ async function read(url, env) {
   if (cached && cached.paras) return json(cached);
   if (cached && cached.pending) return json({ error: "지금 번역 중입니다. 잠시 뒤 다시 열어 주세요." }, 409);
   await env.READ_CACHE.put(key, JSON.stringify({ pending: 1 }), { expirationTtl: 180 });
-  if (!(await capOK(env, "read"))) return json({ error: "오늘 번역 한도를 넘었습니다" }, 429);
+  try {
+    return await readInner(u, key, env);
+  } catch (e) {
+    await env.READ_CACHE.delete(key);
+    throw e;
+  }
+}
+
+async function readInner(u, key, env) {
+  if (!(await capOK(env, "read"))) { await env.READ_CACHE.delete(key); return json({ error: "오늘 번역 한도를 넘었습니다" }, 429); }
   const { title, blocks } = await extract(u);
   const paras = blocks.filter(b => b.t).map(b => b.t);
-  if (!paras.length) return json({ error: "본문을 읽어오지 못했습니다(유료 기사일 수 있음)", title, paras: [] }, 422);
+  if (!paras.length) { await env.READ_CACHE.delete(key); return json({ error: "본문을 읽어오지 못했습니다(유료 기사일 수 있음)", title, paras: [] }, 422); }
   // 긴 출력이라 스트리밍으로 받는다(SDK가 긴 요청에 요구)
   const resp = await client(env).messages.stream({
     model: MODEL, max_tokens: 32000, thinking: { type: "disabled" },
     output_config: { effort: "low", format: { type: "json_schema", schema: READ_SCHEMA } },
     messages: [{ role: "user", content: READ_PROMPT + JSON.stringify({ title, paras }) }],
   }).finalMessage();
-  if (resp.stop_reason === "refusal") return json({ error: "번역이 거절되었습니다" }, 422);
+  if (resp.stop_reason === "refusal") { await env.READ_CACHE.delete(key); return json({ error: "번역이 거절되었습니다" }, 422); }
   const p = JSON.parse(resp.content[0].text);
   let i = 0;
   const out = blocks.map(b => b.t ? { en: b.t, ko: p.paras[i++] || "" } : { img: b.img, alt: b.alt });

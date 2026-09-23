@@ -156,27 +156,35 @@ function render(){
   adScript();adPush();
 }
 
-// 영문 섹션(테크·해외) 제목·요약 번역: 아직 번역 안 된 새 글만 12건씩 서버에 묻고, 올 때마다 바로 그린다
+// 영문 섹션(테크·해외) 제목·요약: 서버가 20분마다 미리 번역해 두므로 대개 저장된 것을 받아오기만 한다.
+// 아직 없는 글은 12건씩 묻고, 오는 대로 그린다. 안 온 글은 30초 뒤 다시 묻는다(최대 4번).
 const TR=['tech','world'];
 let translating=false;
 async function translateTitles(){
   if(!data||translating)return;
   translating=true;
   try{
-    for(let round=0;round<12;round++){
-      const secs=TR.includes(sec)?[sec]:[];   // 보고 있는 탭만 번역한다
-      const todo=[];
-      for(const s of secs)for(const it of data.items[s]||[])if(!it.ko_title&&!it._tried&&it.source!=='Hacker News'&&todo.length<12)todo.push(it);
+    for(let round=0;round<20;round++){
+      const secs=[sec,...TR.filter(s=>s!==sec)].filter(s=>TR.includes(s));
+      const now=Date.now(), todo=[];
+      for(const s of secs)for(const it of data.items[s]||[]){
+        if(it.ko_title||it.source==='Hacker News')continue;
+        if((it._tries||0)>=4||(it._next&&it._next>now))continue;
+        if(todo.length<12)todo.push(it);
+      }
       if(!todo.length)break;
+      $('#when').textContent='번역 중 '+todo.length+'건';
       const r=await fetch('/api/titles',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({items:todo.map(it=>({id:it.id,title:it.title,summary:(it.summary||'').slice(0,200)}))})});
       const d=await r.json();
-      for(const it of todo)it._tried=true;
-      if(!d.result)continue;
-      for(const s of TR)for(const it of data.items[s]||[]){const v=d.result[it.id];if(v){it.ko_title=v.ko_title;it.ko_summary=v.ko_summary}}
+      const got=d.result||{};
+      for(const it of todo){if(!got[it.id]){it._tries=(it._tries||0)+1;it._next=Date.now()+30000}}
+      for(const s of TR)for(const it of data.items[s]||[]){const v=got[it.id];if(v){it.ko_title=v.ko_title;it.ko_summary=v.ko_summary}}
       render();
+      if(!Object.keys(got).length)await new Promise(r=>setTimeout(r,30000));
     }
   }catch(e){}
   translating=false;
+  if(data)$('#when').textContent='갱신 '+rel(data.generated);
 }
 async function load(){
   try{

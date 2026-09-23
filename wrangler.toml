@@ -16,3 +16,7 @@ html_handling = "auto-trailing-slash"
 [[kv_namespaces]]
 binding = "READ_CACHE"
 id = "a4461d99ec91454bb6873d031a389764"
+
+# 20분마다 새 글 제목을 미리 번역(수집 직후에 맞춤)
+[triggers]
+crons = ["7,27,47 * * * *"]
