@@ -41,16 +41,19 @@ async function pretranslate(env) {
   const todo = [];
   let absorbed = 0;
   for (const it of items) {
-    if (tmap[it.id]) continue;
+    const cur = tmap[it.id];
+    if (cur && (!cur.src || cur.src === it.title)) continue;   // 있고 원제목도 같음
     const c = await env.READ_CACHE.get("t:" + it.id, "json");
-    if (c && c.ko_title) { tmap[it.id] = { ...c, t: Date.now() }; absorbed++; } else todo.push(it);
+    if (c && c.ko_title && (!c.src || c.src === it.title)) { tmap[it.id] = { ...c, t: Date.now() }; absorbed++; } else todo.push(it);
   }
   let done = 0, batches = 0;
-  for (let i = 0; i < todo.length && batches < 15; i += 12, batches++) {
+  for (let i = 0; i < todo.length && batches < 6; i += 12, batches++) {
     if (!(await capOK(env, "titles"))) break;
     try {
-      const res = await translateBatch(env, todo.slice(i, i + 12), false);
-      for (const [id, v] of Object.entries(res)) { tmap[id] = { ...v, t: Date.now() }; done++; }
+      const chunk = todo.slice(i, i + 12);
+      const res = await translateBatch(env, chunk, false);
+      const srcOf = Object.fromEntries(chunk.map(c => [c.id, c.title]));
+      for (const [id, v] of Object.entries(res)) { tmap[id] = { ...v, src: srcOf[id], t: Date.now() }; done++; }
     } catch (e) { console.log("pretranslate batch error", String(e)); }
   }
   // 목록에서 사라진 지 7일 넘은 것은 지도에서 뺀다
@@ -110,7 +113,8 @@ async function translateBatch(env, todo, store) {
   const parsed = JSON.parse(resp.content[0].text);
   for (const r of parsed.items) {
     if (!r.ko_title) continue;
-    const v = { ko_title: r.ko_title, ko_summary: r.ko_summary || "" };
+    const src = (todo.find(i => i.id === r.id) || {}).title;
+    const v = { ko_title: r.ko_title, ko_summary: r.ko_summary || "", src };
     out[r.id] = v;
     if (store) await env.READ_CACHE.put("t:" + r.id, JSON.stringify(v), { expirationTtl: 7 * 86400 });
   }
@@ -122,10 +126,11 @@ async function titles(req, env) {
   const items = (body.items || []).slice(0, 60).filter(i => i.id && i.title);
   const tmap = await loadTmap(env);
   const out = {}, todo = [];
+  const fresh = (v, it) => v && v.ko_title && (!v.src || v.src === it.title);
   for (const it of items) {
-    if (tmap[it.id]) { out[it.id] = tmap[it.id]; continue; }
+    if (fresh(tmap[it.id], it)) { out[it.id] = tmap[it.id]; continue; }
     const c = await env.READ_CACHE.get("t:" + it.id, "json");
-    if (c && c.ko_title) out[it.id] = c; else todo.push(it);
+    if (fresh(c, it)) out[it.id] = c; else todo.push(it);
   }
   if (todo.length) {
     if (!(await capOK(env, "titles"))) return json({ result: out, note: "오늘 한도 초과" });
@@ -140,7 +145,12 @@ async function titles(req, env) {
 
 // ── 본문 ────────────────────────────────────────────────────────────────
 async function extract(u) {
-  const r = await fetch(u, { headers: { "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128 Safari/537.36", "accept-language": "en" }, cf: { cacheTtl: 600 } });
+  const r = await fetch(u, { headers: {
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128 Safari/537.36",
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-fetch-mode": "navigate", "sec-fetch-dest": "document", "sec-fetch-site": "none", "upgrade-insecure-requests": "1",
+  }, cf: { cacheTtl: 600 } });
   if (!r.ok) throw new Error("원문을 못 받았습니다 " + r.status);
   let title = "", inArticle = false, inSkip = 0, cur = null;
   const all = [], art = [];   // 블록: {t:문단} 또는 {img:주소}
@@ -153,16 +163,17 @@ async function extract(u) {
     const w = parseInt(e.getAttribute("width") || "0", 10); if (w && w < 200) return null;
     try { return new URL(decode(src), u).href; } catch { return null; }
   };
+  const endTag = (e, fn) => { try { e.onEndTag(fn); } catch { } };
   const rw = new HTMLRewriter()
     .on("meta[property='og:title']", { element(e) { title = title || e.getAttribute("content") || ""; } })
     .on("title", { text(t) { if (!title) title += t.text; } })
-    .on("article", { element(e) { inArticle = true; e.onEndTag(() => { inArticle = false; }); } })
+    .on("article", { element(e) { inArticle = true; endTag(e, () => { inArticle = false; }); } })
     .on("p", {
-      element(e) { cur = { t: "", a: inArticle }; e.onEndTag(() => { const s = cur.t.replace(/\s+/g, " ").trim(); if (s.length > 40) (cur.a ? art : all).push({ t: s }); cur = null; }); },
+      element(e) { cur = { t: "", a: inArticle }; endTag(e, () => { const s = cur.t.replace(/\s+/g, " ").trim(); if (s.length > 40) (cur.a ? art : all).push({ t: s }); cur = null; }); },
       text(t) { if (cur) cur.t += t.text; },
     })
     // 기자 프로필·관련기사·추천 영역의 사진은 뺀다
-    .on('[class*="author"],[class*="byline"],[class*="avatar"],[class*="profile"],[class*="related"],[class*="recirc"],[class*="promo"],[class*="newsletter"],[class*="comment"]', { element(e) { inSkip++; e.onEndTag(() => { inSkip--; }); } })
+    .on('[class*="author"],[class*="byline"],[class*="avatar"],[class*="profile"],[class*="related"],[class*="recirc"],[class*="promo"],[class*="newsletter"],[class*="comment"]', { element(e) { inSkip++; endTag(e, () => { inSkip--; }); } })
     .on("img", { element(e) {
       if (inSkip > 0) return;
       const alt = (e.getAttribute("alt") || "").trim().slice(0, 200);

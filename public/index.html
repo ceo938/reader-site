@@ -144,7 +144,9 @@ function render(){
     n++;
     const day=(it.time||it.first_seen||'').slice(0,10);
     if(sec!=='community'&&day&&day!==lastDay){lastDay=day;const dd=new Date(day);h+=`<div class="sep">${dd.getMonth()+1}월 ${dd.getDate()}일</div>`}
-    const href=TR.includes(sec)&&it.source!=='Hacker News'?'read.html?u='+encodeURIComponent(it.url):it.url;
+    // 본문을 막는 곳(유료 벽·봇 차단)은 읽기 화면 대신 원문으로 바로 보낸다. 제목·요약은 번역돼 있다.
+    const NOBODY=['Hacker News','NYT','FT','France 24'];
+    const href=TR.includes(sec)&&!NOBODY.includes(it.source)?'read.html?u='+encodeURIComponent(it.url):it.url;
     h+=`<a class="item ${read.has(it.id)?'read':''} ${it.dropped?'dropped':''}" href="${esc(href)}" rel="noopener" data-id="${it.id}">
       <div class="t">${esc(it.ko_title||it.title)}</div>
       ${it.ko_title?`<div class="o">${esc(it.title)}</div>`:''}
@@ -170,10 +172,10 @@ async function translateTitles(){
       for(const s of secs)for(const it of data.items[s]||[]){
         if(it.ko_title)continue;
         if((it._tries||0)>=4||(it._next&&it._next>now))continue;
-        if(todo.length<12)todo.push(it);
+        if(todo.length<60)todo.push(it);
       }
       if(!todo.length)break;
-      $('#when').textContent='번역 중 '+todo.length+'건';
+      $('#when').textContent='번역 확인 중 '+todo.length+'건';
       const r=await fetch('/api/titles',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({items:todo.map(it=>({id:it.id,title:it.title,summary:(it.summary||'').slice(0,200)}))})});
       const d=await r.json();
       const got=d.result||{};
