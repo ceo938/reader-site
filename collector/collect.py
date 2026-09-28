@@ -23,7 +23,9 @@ UA = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128 Safari/537.36",
     "Accept-Language": "ko,en;q=0.8",
 }
-KEEP_HOURS = 48          # 이 시간 지난 항목은 버린다
+KEEP_HOURS = 48          # 이 시간 지난 항목은 버린다(뉴스)
+COMM_DROP_HOURS = 6      # 커뮤니티: 베스트에서 내려간 글은 이만큼만 남긴다
+COMM_PER_SOURCE = 60     # 커뮤니티: 출처당 최대 보관
 PER_SOURCE = 40          # 소스당 최대 보관
 
 
@@ -69,6 +71,17 @@ COMMUNITY = [
 # 제목 뒤에 붙는 댓글 수 "(79)" "[83]" 정리
 TAIL = re.compile(r"\s*[\[\(]\s*\d+\s*[\]\)]\s*$")
 
+# 글 주소 정규화: 페이지·정렬 같은 꼬리표를 떼고 글 번호만 남긴다(같은 글이 여러 번 세어지지 않게)
+KEEP_PARAMS = {"id", "no", "num", "bn", "table", "code", "No", "document_srl", "b"}
+def canon(link):
+    from urllib.parse import urlsplit, urlunsplit, parse_qsl, urlencode
+    p = urlsplit(link)
+    host = p.netloc.lower()
+    if "ruliweb" in host or "theqoo" in host or "fmkorea" in host:
+        return urlunsplit((p.scheme, p.netloc, p.path, "", ""))
+    q = [(k, v) for k, v in parse_qsl(p.query) if k in KEEP_PARAMS]
+    return urlunsplit((p.scheme, p.netloc, p.path, urlencode(q), ""))
+
 
 def scrape_community(name, url, enc, sel, base, skip):
     r = get(url, enc)
@@ -82,7 +95,7 @@ def scrape_community(name, url, enc, sel, base, skip):
             continue
         if skip and re.search(skip, title + " " + href):
             continue
-        link = requests.compat.urljoin(base, href)
+        link = canon(requests.compat.urljoin(base, href))
         if link in seen:
             continue
         seen.add(link)
@@ -214,15 +227,23 @@ def run(only=None):
                 it["time"] = it["first_seen"]
             merged[sec][it["url"]] = it
 
-    # 커뮤니티는 베스트에서 내려간 글도 48시간은 남긴다(읽던 글이 사라지지 않게). 제외 패턴은 옛 글에도 적용.
+    # 커뮤니티는 베스트에서 내려간 글도 잠깐(6시간) 남긴다(읽던 글이 사라지지 않게). 제외 패턴은 옛 글에도 적용.
     SKIP = {c[0]: c[5] for c in COMMUNITY}
+    drop_cutoff = (now - timedelta(hours=COMM_DROP_HOURS)).isoformat(timespec="minutes")
     for old in state.get("items", {}).get("community", []):
         sk = SKIP.get(old["source"])
         if sk and re.search(sk, old["title"]):
             merged["community"].pop(old["url"], None); continue
-        if old["url"] not in merged["community"] and old.get("first_seen", "") >= cutoff:
+        if old["url"] not in merged["community"] and old.get("first_seen", "") >= drop_cutoff:
             old = dict(old); old["dropped"] = True
             merged["community"][old["url"]] = old
+    # 출처당 최대 보관(최근 것 우선)
+    per = {}
+    for u_, it in sorted(merged["community"].items(), key=lambda kv: kv[1].get("first_seen", ""), reverse=True):
+        per.setdefault(it["source"], []).append(u_)
+    for src, urls in per.items():
+        for u_ in urls[COMM_PER_SOURCE:]:
+            merged["community"].pop(u_, None)
 
     final = {}
     for sec, d in merged.items():
