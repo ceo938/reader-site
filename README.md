@@ -28,7 +28,8 @@ wrangler 로그인은 ~/Library/Preferences/.wrangler/config/default.toml 에 �
 ## 소스
 - 커뮤니티: 뽐뿌·에펨코리아·오늘의유머·보배드림·더쿠·루리웹·엠엘비파크·디시인사이드·82cook (베스트/인기글 페이지 스크랩). 에펨·오유는 깃허브 서버 접속을 막아 새 글이 안 들어온다.
 - 부동산: 매일경제·한국경제(부동산 전용 RSS), 조선·동아·연합·한겨레·경향·뉴시스(경제 RSS를 부동산 낱말로 거름)
-- 테크: BBC·NYT·Guardian·The Verge·Ars Technica·Hacker News (RSS)
+- 테크: BBC·Guardian·The Verge·Ars Technica·Hacker News (RSS)
+- 해외: BBC·Guardian·NPR·DW·Al Jazeera·CBC (RSS). NYT·FT는 유료 벽, France 24는 봇 차단이라 뺐다(260928).
 - 클리앙은 봇 차단(410), 네이버 카페(부동산스터디 등)는 로그인이 필요해 뺐다.
 
 제목·링크·짧은 요약만 싣고 본문은 원문으로 보낸다. 광고(애드센스)는 index.html 맨 위 `AD` 값이 비어 있으면 안 그려진다.

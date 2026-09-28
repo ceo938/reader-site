@@ -112,7 +112,6 @@ NEWS = [
 # ─────────────────────────── 해외 테크 (RSS) ───────────────────────────
 TECH = [
     ("BBC",          "http://feeds.bbci.co.uk/news/technology/rss.xml"),
-    ("NYT",          "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml"),
     ("The Guardian", "https://www.theguardian.com/technology/rss"),
     ("The Verge",    "https://www.theverge.com/rss/index.xml"),
     ("Ars Technica", "https://feeds.arstechnica.com/arstechnica/technology-lab"),
@@ -120,13 +119,14 @@ TECH = [
 ]
 
 # ─────────────────────────── 해외 주요 뉴스 (RSS, 중립 성향 위주) ───────────────────────────
+# 유료 벽(NYT·FT)과 봇 차단(France 24)은 본문을 못 읽어 뺐다(260928). 무료·본문 열리는 곳만.
 WORLD = [
-    ("BBC",       "https://feeds.bbci.co.uk/news/world/rss.xml"),
-    ("NYT",       "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"),
-    ("NPR",       "https://feeds.npr.org/1004/rss.xml"),
-    ("DW",        "https://rss.dw.com/rdf/rss-en-world"),
-    ("France 24", "https://www.france24.com/en/rss"),
-    ("FT",        "https://www.ft.com/world?format=rss"),
+    ("BBC",          "https://feeds.bbci.co.uk/news/world/rss.xml"),
+    ("The Guardian", "https://www.theguardian.com/world/rss"),
+    ("NPR",          "https://feeds.npr.org/1004/rss.xml"),
+    ("DW",           "https://rss.dw.com/rdf/rss-en-world"),
+    ("Al Jazeera",   "https://www.aljazeera.com/xml/rss/all.xml"),
+    ("CBC",          "https://www.cbc.ca/webfeed/rss/rss-world"),
 ]
 
 

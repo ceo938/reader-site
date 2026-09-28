@@ -138,7 +138,7 @@ function interleave(items){
 }
 function isNew(it){return lastVisit&&it.first_seen>lastVisit&&!read.has(it.id)}
 
-const NOBODY=['Hacker News','NYT','FT','France 24'];
+const NOBODY=['Hacker News'];   // 본문을 못 읽는 곳(해커뉴스는 외부 링크)
 function itemHTML(it){
   // 본문을 막는 곳(유료 벽·봇 차단)은 읽기 화면 대신 원문으로 바로 보낸다. 제목·요약은 번역돼 있다.
   const href=TR.includes(sec)&&!NOBODY.includes(it.source)?'read.html?u='+encodeURIComponent(it.url):it.url;

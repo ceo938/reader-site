@@ -6,7 +6,7 @@ import Anthropic from "@anthropic-ai/sdk";
 
 const MODEL = "claude-opus-5";          // 본문 번역 (사장님 지시로 오퍼스, 260923)
 const TITLE_MODEL = "claude-sonnet-5";  // 제목·요약 번역
-const ALLOWED = ["bbc.com", "bbc.co.uk", "nytimes.com", "theguardian.com", "theverge.com", "arstechnica.com", "npr.org", "dw.com", "france24.com", "ft.com"];
+const ALLOWED = ["bbc.com", "bbc.co.uk", "theguardian.com", "theverge.com", "arstechnica.com", "npr.org", "dw.com", "aljazeera.com", "cbc.ca"];
 const ENT = { "&quot;": '"', "&amp;": "&", "&#39;": "'", "&apos;": "'", "&lt;": "<", "&gt;": ">", "&nbsp;": " ", "&#8217;": "’", "&#8216;": "‘", "&#8220;": "“", "&#8221;": "”" };
 const decode = s => s.replace(/&(?:#\d+|#x[0-9a-f]+|[a-z]+);/gi, m => ENT[m] ?? (m.startsWith("&#x") ? String.fromCodePoint(parseInt(m.slice(3, -1), 16)) : m.startsWith("&#") ? String.fromCodePoint(parseInt(m.slice(2, -1), 10)) : m));
 const DAY_CAP = { titles: 120, read: 60 };   // 하루 호출 상한(남용 방지)
