@@ -95,7 +95,7 @@ for src, (sec_, j) in results.items():
         nonko = [p for p in ps if p["ko"] and not has_korean(p["ko"])]
         ok(len(ps) >= 3 and not empty and not nonko, f"{src}: {sec_:.0f}초, 문단 {len(ps)}, 빈 {len(empty)}, 비한국어 {len(nonko)}, 사진 {len(j['paras'])-len(ps)} | {j.get('ko_title','')[:40]}")
     else:
-        paywall = src in ("NYT", "FT")
+        paywall = src in ("NYT", "FT", "France 24")
         msg = (j or {}).get("error", "응답 없음")
         ok(paywall, f"{src}: 실패 '{msg[:50]}' ({'유료 벽이라 예상된 실패' if paywall else '예상 밖'})")
 

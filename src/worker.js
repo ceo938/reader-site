@@ -19,11 +19,16 @@ export default {
     if (url.pathname === "/api/titles" && req.method === "POST") return titles(req, env).catch(e => json({ error: String(e) }, 500));
     if (url.pathname === "/api/read") return read(url, env, ctx).catch(e => json({ error: String(e) }, 500));
     if (url.pathname === "/api/pretranslate") return pretranslate(env).then(r => json(r)).catch(e => json({ error: String(e) }, 500));
-    if (url.pathname === "/api/status") return status(env).then(r => json(r)).catch(e => json({ error: String(e) }, 500));
+    if (url.pathname === "/api/issues") return env.READ_CACHE.get(ISSUES, "json").then(r => json(r || {}));
+    if (url.pathname === "/api/cluster") return clusterIssues(env, url.searchParams.get("rebuild") === "1").then(r => json(r)).catch(e => json({ error: String(e) }, 500));
+    if (url.pathname === "/api/status") return status(env, req).then(r => json(r)).catch(e => json({ error: String(e) }, 500));
     return env.ASSETS.fetch(req);
   },
   // 20분마다(수집 직후) 테크·해외 새 글 제목을 미리 번역해 둔다 → 화면을 열면 바로 한국어
-  async scheduled(event, env, ctx) { ctx.waitUntil(pretranslate(env)); },
+  async scheduled(event, env, ctx) {
+    // 7·27·47분: 제목 번역 / 15분: 이슈 묶기
+    if (event.cron.startsWith("15")) ctx.waitUntil(clusterIssues(env)); else ctx.waitUntil(pretranslate(env));
+  },
 };
 
 const DATA_URL = "https://raw.githubusercontent.com/ceo938/reader-site/main/public/data/items.json";
@@ -65,12 +70,113 @@ async function pretranslate(env) {
   return out;
 }
 
-async function status(env) {
+// ─────────────────────────── 이슈 묶기 ───────────────────────────
+// 부동산·테크·해외 기사를 "같은 사건"끼리 묶는다. 매시간 새 기사만 기존 이슈에 붙이고(비용 절약),
+// 여러 곳이 보도한 이슈가 위로 오도록 점수를 매긴다. 결과는 issues:map 한 키.
+const ISSUES = "issues:map";
+const CLUSTER_SECS = ["realestate", "tech", "world"];
+const SKIP_TITLE = /\blive\b|– live|- live|podcast|\bvideo\b|in pictures|crossword|quiz|newsletter|^opinion|^letters|\[속보\]|포토\]|\[포토|사진\]|\[영상|영상\]|\[인사\]|\[부고\]|부고\]|만평/i;
+const CLUSTER_SCHEMA = {
+  type: "object",
+  properties: {
+    assign: { type: "array", items: { type: "object", properties: {
+      item: { type: "string" },
+      issue: { type: "string" },
+      off: { type: "boolean" },
+    }, required: ["item", "issue", "off"], additionalProperties: false } },
+  },
+  required: ["assign"], additionalProperties: false,
+};
+const CLUSTER_PROMPT = {
+  realestate: "한국 부동산 뉴스다. 같은 정책·같은 사건·같은 단지/지역 이슈를 다룬 기사를 하나의 이슈로 묶어라. 부동산(주택·청약·분양·전월세·재건축·대출규제·집값·건설사 주택사업)과 무관한 기사(금리 일반, 증시, 기업 실적, 해외 경제 등)는 off=true.",
+  tech: "해외 테크 뉴스다. 같은 회사의 같은 발표, 같은 사건, 같은 제품을 다룬 기사를 하나의 이슈로 묶어라. 테크와 무관한 정치·일반 기사는 off=true.",
+  world: "해외 주요 뉴스다. 같은 사건·같은 정상회담·같은 분쟁을 다룬 기사를 하나의 이슈로 묶어라. 연예·스포츠·생활 기사는 off=true.",
+};
+
+async function clusterSection(env, sec, items, tmap, prev, rebuild) {
+  // prev: {issues:{id:{h,ids:[],t}}, seen:{itemId:issueId}}
+  const issues = rebuild ? {} : (prev.issues || {});
+  const seen = rebuild ? {} : (prev.seen || {});
+  const cutoff = Date.now() - 48 * 3600e3;
+  const alive = items.filter(it => Date.parse(it.time || it.first_seen) > cutoff && !SKIP_TITLE.test(it.title));
+  const todo = alive.filter(it => !seen[it.id]);
+  if (todo.length) {
+    const existing = Object.entries(issues).map(([id, v]) => ({ id, h: v.h })).slice(-120);
+    const list = todo.slice(0, 80).map(it => ({ id: it.id, src: it.source, title: (tmap[it.id] && tmap[it.id].ko_title) || it.title }));
+    const resp = await client(env).messages.stream({
+      model: TITLE_MODEL, max_tokens: 16000, thinking: { type: "disabled" },
+      output_config: { effort: "low", format: { type: "json_schema", schema: CLUSTER_SCHEMA } },
+      messages: [{ role: "user", content: `${CLUSTER_PROMPT[sec]}
+규칙: 기존 이슈 목록에 맞는 게 있으면 그 id를 쓰고, 없으면 "새:" 뒤에 이슈 제목(한국어 한 줄, 20자 안팎, 신문 제목 투)을 붙여라. 새 기사 여러 건이 같은 새 이슈면 같은 "새:제목"을 반복해 써라. 모든 새 기사를 빠짐없이 배정하라.
+
+기존 이슈:
+${JSON.stringify(existing)}
+
+새 기사:
+${JSON.stringify(list)}` }],
+    }).finalMessage();
+    if (resp.stop_reason === "refusal") throw new Error("묶기 거절");
+    const out = JSON.parse(resp.content[0].text);
+    const newIds = {};
+    for (const a of out.assign) {
+      const it = todo.find(x => x.id === a.item); if (!it) continue;
+      if (a.off) { seen[it.id] = "off"; continue; }
+      let iid = a.issue;
+      if (iid.startsWith("새:")) {
+        const h = iid.slice(2).trim();
+        iid = newIds[h] || (newIds[h] = "i" + it.id.slice(0, 8));
+        if (!issues[iid]) issues[iid] = { h, ids: [], t: 0 };
+      } else if (!issues[iid]) { issues[iid] = { h: it.title.slice(0, 60), ids: [], t: 0 }; }
+      issues[iid].ids.push(it.id); seen[it.id] = iid;
+    }
+    for (const it of todo) if (!seen[it.id]) { const iid = "i" + it.id.slice(0, 8); issues[iid] = { h: (tmap[it.id] && tmap[it.id].ko_title) || it.title, ids: [it.id], t: 0 }; seen[it.id] = iid; }
+  }
+  // 정리: 현재 목록에 없는 기사 제거, 빈 이슈 제거, 최신 시각·출처 수·점수 계산
+  const byId = Object.fromEntries(items.map(it => [it.id, it]));
+  const result = [];
+  for (const [iid, v] of Object.entries(issues)) {
+    v.ids = v.ids.filter(id => byId[id]);
+    if (!v.ids.length) { delete issues[iid]; continue; }
+    const srcs = new Set(v.ids.map(id => byId[id].source));
+    v.t = Math.max(...v.ids.map(id => Date.parse(byId[id].time || byId[id].first_seen) || 0));
+    const ageH = (Date.now() - v.t) / 3600e3;
+    v.n = v.ids.length; v.s = srcs.size;
+    v.score = srcs.size * 3 + Math.min(v.ids.length, 6) + (ageH < 6 ? 4 : ageH < 12 ? 2 : ageH < 24 ? 1 : 0) - (ageH > 36 ? 3 : 0);
+    result.push({ id: iid, ...v });
+  }
+  for (const id of Object.keys(seen)) if (!byId[id]) delete seen[id];
+  result.sort((a, b) => b.score - a.score || b.t - a.t);
+  return { issues, seen, list: result, translated: todo.length };
+}
+
+async function clusterIssues(env, rebuild = false) {
+  const r = await fetch(DATA_URL + "?" + Date.now(), { cf: { cacheTtl: 0 } });
+  const data = await r.json();
+  const tmap = await loadTmap(env);
+  const prev = (await env.READ_CACHE.get(ISSUES, "json")) || {};
+  const out = { at: new Date().toISOString(), secs: {} };
+  const summary = {};
+  for (const sec of CLUSTER_SECS) {
+    try {
+      const res = await clusterSection(env, sec, data.items[sec] || [], tmap, (prev.secs || {})[sec] || {}, rebuild);
+      out.secs[sec] = { issues: res.issues, seen: res.seen, list: res.list.map(x => ({ id: x.id, h: x.h, ids: x.ids, n: x.n, s: x.s, t: x.t, score: x.score })) };
+      summary[sec] = { issues: res.list.length, new_items: res.translated };
+    } catch (e) {
+      out.secs[sec] = (prev.secs || {})[sec] || { issues: {}, seen: {}, list: [] };
+      summary[sec] = { error: String(e.message || e) };
+    }
+  }
+  await env.READ_CACHE.put(ISSUES, JSON.stringify(out));
+  return summary;
+}
+
+async function status(env, req) {
   const day = new Date().toISOString().slice(0, 10);
   return {
     last_pretranslate: await env.READ_CACHE.get("status:pretranslate", "json"),
+    last_cluster: ((await env.READ_CACHE.get(ISSUES, "json")) || {}).at || null,
     today: { titles: parseInt((await env.READ_CACHE.get(`cap:titles:${day}`)) || "0", 10), read: parseInt((await env.READ_CACHE.get(`cap:read:${day}`)) || "0", 10) },
-    caps: DAY_CAP, has_key: !!env.ANTHROPIC_API_KEY,
+    caps: DAY_CAP, has_key: !!env.ANTHROPIC_API_KEY, colo: req && req.cf ? req.cf.colo : null,
   };
 }
 
@@ -81,9 +187,23 @@ async function capOK(env, kind) {
   return n <= DAY_CAP[kind];
 }
 
-function client(env) {
+// ── API 중계: 미국(wnam)에 고정된 Durable Object가 대신 api.anthropic.com 을 부른다 ──
+export class ApiProxy {
+  constructor(state, env) { this.env = env; }
+  async fetch(req) {
+    const u = new URL(req.url);
+    const target = "https://api.anthropic.com" + u.pathname + u.search;
+    const headers = new Headers(req.headers); headers.delete("host");
+    return fetch(target, { method: req.method, headers, body: req.body });
+  }
+}
+function viaProxy(env, hint) {
+  const stub = env.API.get(env.API.idFromName("anthropic-" + hint), { locationHint: hint });
+  return (url, init) => stub.fetch(url, init);
+}
+function client(env, hint = "wnam") {
   if (!env.ANTHROPIC_API_KEY) throw new Error("번역 키가 아직 없습니다 (ANTHROPIC_API_KEY)");
-  return new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
+  return new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, fetch: viaProxy(env, hint), maxRetries: 2 });
 }
 
 // ── 제목·요약 ────────────────────────────────────────────────────────────
@@ -145,12 +265,15 @@ async function titles(req, env) {
 
 // ── 본문 ────────────────────────────────────────────────────────────────
 async function extract(u) {
-  const r = await fetch(u, { headers: {
+  let r = await fetch(u, { headers: {
     "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128 Safari/537.36",
     "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "accept-language": "en-US,en;q=0.9",
     "sec-fetch-mode": "navigate", "sec-fetch-dest": "document", "sec-fetch-site": "none", "upgrade-insecure-requests": "1",
   }, cf: { cacheTtl: 600 } });
+  if (!r.ok) {   // 일부 사이트는 sec-fetch 헤더를 싫어한다 → 단순 헤더로 한 번 더
+    r = await fetch(u, { headers: { "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128 Safari/537.36", "accept": "text/html,*/*;q=0.8", "accept-language": "en" }, cf: { cacheTtl: 0 } });
+  }
   if (!r.ok) throw new Error("원문을 못 받았습니다 " + r.status);
   let title = "", inArticle = false, inSkip = 0, cur = null;
   const all = [], art = [];   // 블록: {t:문단} 또는 {img:주소}
@@ -169,7 +292,7 @@ async function extract(u) {
     .on("title", { text(t) { if (!title) title += t.text; } })
     .on("article", { element(e) { inArticle = true; endTag(e, () => { inArticle = false; }); } })
     .on("p", {
-      element(e) { cur = { t: "", a: inArticle }; endTag(e, () => { const s = cur.t.replace(/\s+/g, " ").trim(); if (s.length > 40) (cur.a ? art : all).push({ t: s }); cur = null; }); },
+      element(e) { const mine = { t: "", a: inArticle }; cur = mine; endTag(e, () => { const s = mine.t.replace(/\s+/g, " ").trim(); if (s.length > 40) (mine.a ? art : all).push({ t: s }); if (cur === mine) cur = null; }); },
       text(t) { if (cur) cur.t += t.text; },
     })
     // 기자 프로필·관련기사·추천 영역의 사진은 뺀다

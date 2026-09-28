@@ -19,4 +19,14 @@ id = "a4461d99ec91454bb6873d031a389764"
 
 # 20분마다 새 글 제목을 미리 번역(수집 직후에 맞춤)
 [triggers]
-crons = ["7,27,47 * * * *"]
+crons = ["7,27,47 * * * *", "15 * * * *"]
+
+# Anthropic API는 홍콩 등 일부 지역에서 403으로 막힌다. 한국 사용자는 워커가 홍콩에서 돌 때가 있어
+# API 호출만 미국에 고정된 Durable Object(ApiProxy)를 거쳐 나가게 한다.
+[[durable_objects.bindings]]
+name = "API"
+class_name = "ApiProxy"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["ApiProxy"]

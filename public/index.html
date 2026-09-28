@@ -60,6 +60,20 @@ main{max-width:860px;margin:0 auto;padding:6px 16px 60px}
 .empty{color:var(--muted);text-align:center;padding:40px 0}
 .err{font-size:12px;color:var(--muted);padding:8px 0}
 .sep{font-size:12px;color:var(--muted);padding:14px 0 4px;text-transform:uppercase;letter-spacing:.04em}
+.views{max-width:860px;margin:0 auto;padding:6px 16px 0;display:flex;gap:6px;font-size:13px}
+.views button{border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:8px;padding:5px 10px;font:inherit;font-size:13px;cursor:pointer}
+.views button.on{color:var(--fg);border-color:var(--fg);font-weight:600}
+.issue{border-bottom:1px solid var(--line);padding:12px 0}
+.issue .ih{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.issue .ih .h{font-size:17px;font-weight:700;line-height:1.35;flex:1}
+.issue .ih .b{flex:none;font-size:12px;color:var(--muted);white-space:nowrap;padding-top:3px}
+.issue .ih .b b{color:var(--new);font-weight:700}
+.issue .im{font-size:12px;color:var(--muted);margin-top:4px}
+.issue .body{display:none;margin-top:6px;padding-left:10px;border-left:2px solid var(--line)}
+.issue.open .body{display:block}
+.issue .body .item{padding:9px 0}
+.issue .body .item:last-child{border-bottom:0}
+.more{display:block;width:100%;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:8px;padding:9px;font:inherit;font-size:14px;cursor:pointer;margin:12px 0}
 .ad{display:block;margin:14px 0;min-height:0}
 .ad ins.adsbygoogle{display:block;width:100%}
 footer{max-width:860px;margin:0 auto;padding:24px 16px 40px;font-size:12px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}
@@ -81,6 +95,7 @@ footer a{text-decoration:underline}
     <button id="theme" title="밝게/어둡게">◐</button>
   </div>
   <div class="chips" id="chips"></div>
+  <div class="views" id="views"></div>
 </header>
 <div class="ad" id="adtop"></div>
 <main id="list"></main>
@@ -103,7 +118,7 @@ if(AD.client&&AD.slot_top){adScript();document.getElementById('adtop').innerHTML
 <script>
 const $=s=>document.querySelector(s);
 const LS=(k,v)=>{try{if(v===undefined)return JSON.parse(localStorage.getItem(k));localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}};
-let data=null, sec=LS('sec')||'community', off=LS('off')||{}, read=new Set(LS('read')||[]), lastVisit=LS('lastVisit')||'', q='';
+let data=null, issues=null, view=LS('view')||{}, openIssues={}, showAll={}, sec=LS('sec')||'community', off=LS('off')||{}, read=new Set(LS('read')||[]), lastVisit=LS('lastVisit')||'', q='';
 const visitStart=new Date().toISOString();
 if(LS('theme'))document.documentElement.dataset.theme=LS('theme');
 
@@ -123,6 +138,50 @@ function interleave(items){
 }
 function isNew(it){return lastVisit&&it.first_seen>lastVisit&&!read.has(it.id)}
 
+const NOBODY=['Hacker News','NYT','FT','France 24'];
+function itemHTML(it){
+  // 본문을 막는 곳(유료 벽·봇 차단)은 읽기 화면 대신 원문으로 바로 보낸다. 제목·요약은 번역돼 있다.
+  const href=TR.includes(sec)&&!NOBODY.includes(it.source)?'read.html?u='+encodeURIComponent(it.url):it.url;
+  return `<a class="item ${read.has(it.id)?'read':''} ${it.dropped?'dropped':''}" href="${esc(href)}" rel="noopener" data-id="${it.id}">
+      <div class="t">${esc(it.ko_title||it.title)}</div>
+      ${it.ko_title?`<div class="o">${esc(it.title)}</div>`:''}
+      ${(it.ko_summary||it.summary)?`<div class="s">${esc(it.ko_summary||it.summary)}</div>`:''}
+      <div class="m">${isNew(it)?'<span class="new"></span>':''}<span class="src">${esc(it.source)}</span><span>${rel(it.time||it.first_seen)}</span>${it.dropped?'<span>베스트에서 내려감</span>':''}</div></a>`;
+}
+const ISSUE_SECS=['realestate','tech','world'];
+const SKIP_TITLE=/\blive\b|– live|- live|podcast|\bvideo\b|in pictures|crossword|quiz|newsletter|^opinion|^letters|\[속보\]|포토\]|\[포토|사진\]|\[영상|영상\]|\[인사\]|\[부고\]|부고\]|만평/i;
+function renderIssues(items){
+  const sc=issues&&issues.secs&&issues.secs[sec];
+  if(!sc||!sc.list||!sc.list.length)return null;
+  const byId={};for(const it of items)byId[it.id]=it;       // 출처 칩·검색이 적용된 것만
+  const inIssue=new Set();
+  const list=[];
+  for(const is of sc.list){
+    const mem=is.ids.map(id=>byId[id]).filter(Boolean);
+    if(!mem.length)continue;
+    for(const it of mem)inIssue.add(it.id);
+    if(q&&!(is.h.toLowerCase().includes(q)||mem.some(it=>(it.ko_title||it.title).toLowerCase().includes(q))))continue;
+    list.push({...is,mem});
+  }
+  const fresh=items.filter(it=>!inIssue.has(it.id)&&sc.seen[it.id]!=='off'&&!SKIP_TITLE.test(it.title)&&(Date.now()-Date.parse(it.time||it.first_seen))<3*3600e3).slice(0,6);   // 아직 묶이지 않은 새 글(3시간 안)
+  const limit=showAll[sec]?list.length:15;
+  let h='';
+  if(fresh.length){h+=`<div class="sep">새로 들어온 글 (다음 정리 때 묶임)</div>`+fresh.map(itemHTML).join('')}
+  h+=`<div class="sep">주요 이슈 · 여러 곳이 다룬 순</div>`;
+  for(const is of list.slice(0,limit)){
+    const single=is.mem.length===1;
+    const unread=is.mem.filter(it=>!read.has(it.id)).length;
+    const newest=Math.max(...is.mem.map(it=>Date.parse(it.time||it.first_seen)||0));
+    if(single){h+=itemHTML(is.mem[0]);continue}
+    h+=`<div class="issue ${openIssues[is.id]?'open':''}" data-i="${esc(is.id)}">
+      <div class="ih"><div class="h">${esc(is.h)}</div><div class="b">${is.s}곳 · ${is.n}건${unread?` · <b>${unread}</b>`:''}</div></div>
+      <div class="im">${[...new Set(is.mem.map(it=>it.source))].join(' · ')} · ${rel(new Date(newest).toISOString())}</div>
+      <div class="body">${is.mem.map(itemHTML).join('')}</div></div>`;
+  }
+  if(list.length>limit)h+=`<button class="more" id="moreIssues">이슈 ${list.length-limit}개 더 보기</button>`;
+  else if(showAll[sec]&&list.length>15)h+=`<button class="more" id="lessIssues">접기</button>`;
+  return h;
+}
 function render(){
   if(!data)return;
   document.querySelectorAll('#tabs button').forEach(b=>{
@@ -137,6 +196,13 @@ function render(){
   if(sec==='community')items=interleave(items);
   const errs=Object.entries(data.errors||{}).filter(([s])=>srcs.includes(s));
   let h=errs.length?`<div class="err">받지 못한 곳: ${errs.map(e=>esc(e[0])).join(', ')} (이전 목록 유지)</div>`:'';
+  const canIssue=ISSUE_SECS.includes(sec)&&issues&&issues.secs&&issues.secs[sec]&&issues.secs[sec].list&&issues.secs[sec].list.length;
+  const mode=canIssue?(view[sec]||'issues'):'all';
+  $('#views').innerHTML=canIssue?`<button data-v="issues" class="${mode==='issues'?'on':''}">주요 이슈</button><button data-v="all" class="${mode==='all'?'on':''}">전체 ${items.length}건</button>`:'';
+  if(mode==='issues'){
+    const ih=renderIssues(items);
+    if(ih!==null){$('#list').innerHTML=h+ih;$('#when').textContent='갱신 '+rel(data.generated);adScript();adPush();return}
+  }
   if(!items.length)h+='<div class="empty">없음</div>';
   let lastDay='',n=0;
   for(const it of items){
@@ -144,14 +210,7 @@ function render(){
     n++;
     const day=(it.time||it.first_seen||'').slice(0,10);
     if(sec!=='community'&&day&&day!==lastDay){lastDay=day;const dd=new Date(day);h+=`<div class="sep">${dd.getMonth()+1}월 ${dd.getDate()}일</div>`}
-    // 본문을 막는 곳(유료 벽·봇 차단)은 읽기 화면 대신 원문으로 바로 보낸다. 제목·요약은 번역돼 있다.
-    const NOBODY=['Hacker News','NYT','FT','France 24'];
-    const href=TR.includes(sec)&&!NOBODY.includes(it.source)?'read.html?u='+encodeURIComponent(it.url):it.url;
-    h+=`<a class="item ${read.has(it.id)?'read':''} ${it.dropped?'dropped':''}" href="${esc(href)}" rel="noopener" data-id="${it.id}">
-      <div class="t">${esc(it.ko_title||it.title)}</div>
-      ${it.ko_title?`<div class="o">${esc(it.title)}</div>`:''}
-      ${(it.ko_summary||it.summary)?`<div class="s">${esc(it.ko_summary||it.summary)}</div>`:''}
-      <div class="m">${isNew(it)?'<span class="new"></span>':''}<span class="src">${esc(it.source)}</span><span>${rel(it.time||it.first_seen)}</span>${it.dropped?'<span>베스트에서 내려감</span>':''}</div></a>`;
+    h+=itemHTML(it);
   }
   $('#list').innerHTML=h;
   $('#when').textContent='갱신 '+rel(data.generated);
@@ -197,12 +256,15 @@ async function load(){
     const prev={};if(data)for(const s of TR)for(const it of data.items[s]||[])if(it.ko_title)prev[it.id]=it;
     data=await r.json();
     for(const s of TR)for(const it of data.items[s]||[]){const p=prev[it.id];if(p){it.ko_title=p.ko_title;it.ko_summary=p.ko_summary}}
+    try{const ri=await fetch('/api/issues',{cache:'no-store'});issues=await ri.json()}catch(e){}
     render();
     translateTitles();
   }catch(e){$('#when').textContent='불러오기 실패'}
 }
 
 $('#tabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;sec=b.dataset.sec;LS('sec',sec);render();window.scrollTo(0,0);translateTitles()};
+$('#views').onclick=e=>{const b=e.target.closest('button');if(!b)return;view[sec]=b.dataset.v;LS('view',view);render()};
+$('#list').addEventListener('click',e=>{const m=e.target.closest('#moreIssues,#lessIssues');if(m){showAll[sec]=m.id==='moreIssues';render();return}const ih=e.target.closest('.ih');if(!ih)return;const el=ih.parentElement;openIssues[el.dataset.i]=!openIssues[el.dataset.i];el.classList.toggle('open')});
 $('#chips').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;off[sec]=off[sec]||{};off[sec][b.dataset.s]=!off[sec][b.dataset.s];LS('off',off);render()};
 $('#list').addEventListener('click',e=>{const a=e.target.closest('.item');if(!a)return;read.add(a.dataset.id);LS('read',[...read].slice(-3000));a.classList.add('read');a.querySelector('.new')?.remove()});
 $('#q').oninput=e=>{q=e.target.value.trim().toLowerCase();render()};
