@@ -162,6 +162,8 @@ def fetch_rss(name, url, filt=False):
         summary = clean(e.get("summary") or e.get("description") or "")[:200]
         if filt and not RE_WORDS.search(title + " " + summary):
             continue
+        if re.search(r"/video/|/videos/|/podcast|/live/|/gallery/|/pictures/", link):   # 영상·라이브·사진 페이지는 본문이 없다
+            continue
         out.append({"source": name, "title": title, "url": link, "summary": summary, "time": entry_time(e)})
         if len(out) >= PER_SOURCE:
             break
