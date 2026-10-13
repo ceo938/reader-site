@@ -1,5 +1,5 @@
 {
-"generated": "2026-10-13T12:18+09:00",
+"generated": "2026-10-13T12:42+09:00",
 "sources": {
 "community": [
 "뽐뿌",
@@ -41,313 +41,553 @@
 "errors": {
 "에펨코리아": "HTTPError: 430 Client Error: Unknown for url: https://www.fmkorea.com/best",
 "오늘의유머": "HTTPError: 403 Client Error: Forbidden for url: https://www.todayhumor.co.kr/board/list.php",
-"보배드림": "ConnectTimeout: HTTPSConnectionPool(host='www.bobaedream.co.kr', port=443): Max retries exceeded"
+"엠엘비파크": "ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without"
 },
 "items": {
 "community": [
 {
 "source": "뽐뿌",
-"title": "[네이버] 토너세이브 프린터 & 복합기 특가 최대 31% 할인",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=pmarket&no=304121",
-"id": "0b46cc89878e",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "이대통령 속보 떳네요.jpg",
+"url": "https://www.ppomppu.co.kr/zboard/zboard.php?id=freeboard&no=10150438",
+"id": "116c19f1c2dd",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "뽐뿌",
-"title": "기아 모기업 보고있죠??",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=baseball&no=699583",
-"id": "c76dce8558ef",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "중국산 와이파이 공유기에서 '원격조작 기능' 다량 발견",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=youtube_info&no=23090",
+"id": "36b98f5a4610",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "뽐뿌",
-"title": "결정사 대표, \"연봉 1억은 인생 갈아 넣은 가격표, 우습게 보지마라\"",
-"url": "https://www.ppomppu.co.kr/zboard/zboard.php?id=freeboard&no=10150375",
-"id": "89607054fcfb",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "신한플레이 쏠야구 퀴즈 10월 13일 정답",
+"url": "https://www.ppomppu.co.kr/zboard/zboard.php?id=freeboard&no=10150147",
+"id": "97f8f4c94ffb",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "뽐뿌",
-"title": "리센느 미니 4집 'PULSE' 스케줄",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=rescene&no=2455",
-"id": "5dc39a65c49e",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "부활했다는 트와이스 정연 미모 근황",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=humor&no=786073",
+"id": "0d66e88b372f",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "뽐뿌",
-"title": "40세 가족이 있는데 직장 상황이 참 엿같네요",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=problem&no=237219",
-"id": "d4d5283fe3e6",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "20대에 교회에서 사역한거 후회된다.jpg",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=humor&no=786077",
+"id": "9c10bf22eec0",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "뽐뿌",
-"title": "40년만에 최저수준을 찍었다는 우유 소비",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=youtube_info&no=23080",
-"id": "497077a67cba",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "신한슈퍼SOL 밸런스게임",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=money&no=548693",
+"id": "041e9fa3f06b",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "뽐뿌",
+"title": "40년 전통의 코리안 바버샵 수준",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=humor&no=786018",
+"id": "f51240f8b9f3",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "보배드림",
+"title": "울산 마라톤 근황",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039495",
+"id": "89c5618d17bb",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "보배드림",
+"title": "빈 주차칸 앞 '인간 알박기'...\"차가 먼저\" 말하자 \"이..",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039476",
+"id": "33fb230b730e",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "보배드림",
+"title": "스레드에 올라온 결혼해서 40살 넘어가면...",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039489",
+"id": "f4d5630d55bf",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "보배드림",
+"title": "고기집에서 600g 배달주문 했는데 300g 왔으면 사기 아..",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039474",
+"id": "a506ecc3842c",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "보배드림",
+"title": "일본여자가 한국남자 좋다고 말하자 벌어진 일",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039477",
+"id": "b286d6ebd53e",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "보배드림",
+"title": "출근길에 무지개 입니다",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039492",
+"id": "cf9015aa636b",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "보배드림",
+"title": "헬스장 레깅스녀",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039496",
+"id": "31c49c1e9e28",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "보배드림",
+"title": "벨라스톤CC 방문 예정이신 분들, 안전관리와 사고 대응에 대..",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039494",
+"id": "276190cc4e7a",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "보배드림",
+"title": "아파트 지하주차장에 텐트를 쳤습니다.....",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039473",
+"id": "b35ef890d67e",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "보배드림",
+"title": "고속버스기사는 힘든직업입니다..",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039479",
+"id": "11fcb40cb1da",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "보배드림",
+"title": "회사대표 지인이 국회의원이 됐는데 직원들 명의로 후원금을 낸..",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039487",
+"id": "0543dc02facd",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "보배드림",
+"title": "얼굴로 먹고사는 직장인",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039475",
+"id": "08b4ee5f72f4",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "보배드림",
+"title": "싹 바뀐다는 무궁화호 근황",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039488",
+"id": "e752e08c13f9",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "보배드림",
+"title": "코스피 6000 붕 to the 괴",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039490",
+"id": "e64deae4d4c9",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "보배드림",
+"title": "중국 아리랑, 판소리까지 자국 문화유산으로 지정",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039493",
+"id": "973b3ee7c9aa",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "보배드림",
+"title": "요즘 마라톤 없애야 한다는 의견이 많은 이유",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039472",
+"id": "98dcedb81f5e",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "보배드림",
+"title": "이건 참지 않습니다",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039485",
+"id": "c598f298e6f8",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "보배드림",
+"title": "우리나라 정말 좋음!!!!!",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039480",
+"id": "be846646b58a",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "더쿠",
-"title": "[KBO] 한화이글스, 제15대 신임 사령탑으로 류지현 감독 선임",
-"url": "https://theqoo.net/hot/4374048128",
-"id": "54a2e56a088c",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "시혁아….(이수만) 경업금지 왜 했냐…?",
+"url": "https://theqoo.net/hot/4374088519",
+"id": "4e482925f380",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "더쿠",
+"title": "이정도면 이성애자 수준인거야 아님 남미새여?",
+"url": "https://theqoo.net/hot/4374087344",
+"id": "39fe6de223b2",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "더쿠",
+"title": "덬들 집은 아직도 선풍기를..",
+"url": "https://theqoo.net/hot/4374009839",
+"id": "119011fa84b9",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "더쿠",
+"title": "그건 그렇긴 한데, 반일 소재를 굳이 반복해서 나쁜 감정을 다시 끄집어내지 않아도 되지 않을까.",
+"url": "https://theqoo.net/hot/4373986149",
+"id": "465fdc8b9d08",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "6살 큰딸이 \"엄마가 집에서 하는 게 뭐가 있어?\"라고 했다.",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77006120",
-"id": "d246d5a9ee6d",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "오늘자 HDA 사고",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007082",
+"id": "b1bac800ac7b",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "여자도 정수기 물통 교체할 수 있다?.jpg",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77006602",
-"id": "846ee18c7153",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "납배출 주사 기업 이거 ㅁㅊㄴ들이었네",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77006453",
+"id": "2e9a73d1f6f8",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "핫딜 [소프라노몰] 하늘의궤적 1st PS5버전 재판 69800원",
-"url": "https://bbs.ruliweb.com/market/board/1020/read/107981",
-"id": "4d78ef40ce38",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "핫딜 [스팀] 슬리핑독스 : 결정판 할인 (3,690원)",
+"url": "https://bbs.ruliweb.com/market/board/1020/read/107976",
+"id": "85472b62b383",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "의외로 동양사학과에서 안 가르치는 전쟁",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007770",
-"id": "aa9b881db18b",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "히트 친 단발 말포이짤 작가 근황 .jpg",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77008091",
+"id": "77e4483bd79c",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "사람 4명 죽인 여자 연쇄살인범이랑 결혼한 만화.manga",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007790",
-"id": "b95eaf08d5be",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "같이 영화 찍은지 20년 넘었구나 ㄷㄷ",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007973",
+"id": "695ff7d3825b",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "K 마라톤 근황",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007742",
-"id": "a22cb1774832",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "ㄹㅇ이가만 쓰지말고 말을 하세요!",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77006034",
+"id": "5b491c83616d",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "한국사회가 미친이유",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007792",
-"id": "96917282096e",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "신입사원 에어팟 참견 사건.jpg",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77008086",
+"id": "d05afde81da1",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "해리포터) 사실 농담이 아닌 팬덤 추측",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007721",
-"id": "0b0194dd9d71",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "두 번이나 접촉사고를 경험한 운전자",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007952",
+"id": "d1534abfef84",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "어느 신혼부부를 2년동안 괴롭힌 가해자의 정체.jpg",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007810",
-"id": "ef5e3c882fff",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "이누야샤), 암살교실 미국 금서 지정",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77008064",
+"id": "c144ab509570",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "트릭컬) 세삼 후열 참 처참하네",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007632",
-"id": "9f2de75e4fb3",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "ㄹㅇ이가만 쓰지 말고 말을 하세요!",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77008058",
+"id": "c5feb4e50657",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "새치기에 밀려서 싸인 못 받은 꼬마팬 우니깐 사인하러 와주는 손흥민",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007788",
-"id": "283fa92a09c5",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "메이플랜드가 갑자기 패치 한번에 동접 3배로 떡상한 이유....JPG",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77008034",
+"id": "b5a0e6329ae8",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "김수현) 카톡내용 소름이네..",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007794",
-"id": "c0ed8e5c92de",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "지금 유게에서 실수하고있는거",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007972",
+"id": "f118dee50a4a",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "(혐)각오 하고 누르셈",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007777",
-"id": "a40db603b686",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "난 가톨릭 신자인데 무교, 무신론자를 싫어하진 않음",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007955",
+"id": "4d97764a62b5",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "실시간 한의사들 대량으로 긁어버린 웹툰.jpg",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77003418",
-"id": "c54a68b29f09",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "크보) 의외로 10년만에 나온 기록이라는거",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007959",
+"id": "33f9f1e7d1fc",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "한국인들 꼴받게 하는 일본인 트윗들.jpg",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007726",
-"id": "b60623d2f57a",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "엔드필드) 딱히 의도한건 아니지만",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77004336",
+"id": "2fe8c40b18aa",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "부캉이) 이건 또 뭐 개좃간무빙이냐",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007743",
-"id": "ef490fe28346",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "고양이가 4일 내내 먹지를 않아서 병원 다녀옴",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007961",
+"id": "29090cf4ac46",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "동영상 명암조절 하는법",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007672",
-"id": "09f3c66fc378",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "교수님한테 책 pdf로 가져가도 괜찮음?",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007923",
+"id": "8226100cb025",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "해리포터)위즐리 자매의 위대하고 위험한 장난감",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007658",
-"id": "e20a847abdf3",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "명조)방랑자가 스트레스 ㅈㄴ 받을만 했던이유",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77006190",
+"id": "fca4972a9b79",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "말포이짤 따라하는 사람",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007687",
-"id": "0dd7be664129",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "생활의 달인 -격투게임의 달인-",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007884",
+"id": "ee730e53f686",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "길에서 여자 헌팅하는 금발 패션남.jpg",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007589",
-"id": "3dbc8985f084",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "지휘관을 사랑하는 니케들",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/76996432",
+"id": "ba05e4d9decf",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "아아앗 분홍소세지 존나 맛있다 아아아아",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007673",
-"id": "6d51bbe2484a",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "마작가게 사장 멘탈이 털린 이유",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007960",
+"id": "a80e1e53aeda",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "페이커 반응속도",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007609",
-"id": "4be04d7210e8",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "대학원)베글에 전업주부 디스하는 글 보고 떠오른건데",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77006212",
+"id": "27865fe36025",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "우주세기 건담에서 가장 유명한 명장면 중 하나",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007650",
-"id": "cae318228028",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "못생긴 남자 정액이 더 우수",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007851",
+"id": "5d106cf99598",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "히딩크의 유일한 오점",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007657",
-"id": "7f0c581d5d90",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "일본 경찰들은 보통 반말하는게 일반적인가?",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007847",
+"id": "1636fae36f04",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "고기 광인 세종대왕님도 못드셔본 한국 전통 고기요리",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007666",
-"id": "39e2b4fbdfd2",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "의외론 근본있는 기독교 국가",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007936",
+"id": "7929729d0a35",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "콜롬버스 교환",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007359",
-"id": "e756f33268c6",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "차라리 AI 번역 쌀먹하는게 나은 지경",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007934",
+"id": "ff985ac7da38",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "본인 청년미래적금 가입 조건 되는데 안한 이유",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007648",
-"id": "a3bb092dcfcd",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "게임 너무 심하게 하는 아들 치료한 썰.jpg",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007920",
+"id": "a0b810cb2e1b",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "AI의 발전이 기쁘고 놀라우면서도 무서운 이유",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007647",
-"id": "e7ddddbea767",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "이상한 가게 이름.jpg",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007872",
+"id": "de87649fae02",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "되팔렘 껴서 예매가 힘들었던 치이카와 CGV 팝콘통 근황",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007662",
-"id": "a48d78d96916",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "트럼프 \"우크라랑 러시아는 휴전에 동의했다\"",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007879",
+"id": "bb4ea72ac346",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "혐) 각오하고 누르셈",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007637",
-"id": "bf27d0dab621",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "해방의!!!!!!! 드럼을 울려라아아악!!!!!!!!!!",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007863",
+"id": "367f8e2a7f33",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "루리웹",
-"title": "이름 모르는 사람은 많아도 캐릭터 하나는 존나 잘 알린 배우.jpg",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007598",
-"id": "995b14241aff",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
+"title": "갑자기 제4의 벽을 돌파하는 AV배우",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007886",
+"id": "e2a2b8cc9548",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "디시인사이드",
+"title": "[이갤] 인권위, 윤석열 방어권 권고 논란에 대국민 사과",
+"url": "https://gall.dcinside.com/board/view/?id=dcbest&no=469927",
+"id": "f20071e76920",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "디시인사이드",
+"title": "[디갤] 출사는 개같이 꼬였어도 올릴 건 올려야지",
+"url": "https://gall.dcinside.com/board/view/?id=dcbest&no=469925",
+"id": "f468f391f061",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "82cook",
+"title": "中창신메모리 신기술",
+"url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248825",
+"id": "fc2905f71346",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "82cook",
+"title": "사내 고충처리위원회 조사시에 누가 하나오",
+"url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248824",
+"id": "1d54757c7946",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "82cook",
+"title": "나르 엄마 죽겠다고 그래서",
+"url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248823",
+"id": "a568dddf4658",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "82cook",
+"title": "[사설] 한 달 새 국민연금 181조 '증발', 섣부른 주가 정..",
+"url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248822",
+"id": "7669e68e5621",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "82cook",
+"title": "ㄷㄷ한동훈 딸 논문주제 책저술 제목",
+"url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248821",
+"id": "c37ad27b540e",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
+},
+{
+"source": "82cook",
+"title": "지잡대를 나오면",
+"url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248820",
+"id": "d924391761a8",
+"first_seen": "2026-10-13T12:42+09:00",
+"time": "2026-10-13T12:42+09:00"
 },
 {
 "source": "엠엘비파크",
@@ -590,6 +830,70 @@
 "time": "2026-10-13T12:18+09:00"
 },
 {
+"source": "뽐뿌",
+"title": "[네이버] 토너세이브 프린터 & 복합기 특가 최대 31% 할인",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=pmarket&no=304121",
+"id": "0b46cc89878e",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00"
+},
+{
+"source": "뽐뿌",
+"title": "기아 모기업 보고있죠??",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=baseball&no=699583",
+"id": "c76dce8558ef",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00"
+},
+{
+"source": "뽐뿌",
+"title": "결정사 대표, \"연봉 1억은 인생 갈아 넣은 가격표, 우습게 보지마라\"",
+"url": "https://www.ppomppu.co.kr/zboard/zboard.php?id=freeboard&no=10150375",
+"id": "89607054fcfb",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00"
+},
+{
+"source": "뽐뿌",
+"title": "리센느 미니 4집 'PULSE' 스케줄",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=rescene&no=2455",
+"id": "5dc39a65c49e",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00"
+},
+{
+"source": "뽐뿌",
+"title": "40세 가족이 있는데 직장 상황이 참 엿같네요",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=problem&no=237219",
+"id": "d4d5283fe3e6",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00"
+},
+{
+"source": "뽐뿌",
+"title": "40년만에 최저수준을 찍었다는 우유 소비",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=youtube_info&no=23080",
+"id": "497077a67cba",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00"
+},
+{
+"source": "더쿠",
+"title": "[KBO] 한화이글스, 제15대 신임 사령탑으로 류지현 감독 선임",
+"url": "https://theqoo.net/hot/4374048128",
+"id": "54a2e56a088c",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00"
+},
+{
+"source": "루리웹",
+"title": "6살 큰딸이 \"엄마가 집에서 하는 게 뭐가 있어?\"라고 했다.",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77006120",
+"id": "d246d5a9ee6d",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00"
+},
+{
 "source": "디시인사이드",
 "title": "[중갤] [단독]야구·빙상 등 ‘군 면제’ 16명, 허가 없이 수익 활동",
 "url": "https://gall.dcinside.com/board/view/?id=dcbest&no=469923",
@@ -634,14 +938,6 @@
 "title": "막스마라 패딩 질렀어요.",
 "url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248817",
 "id": "b3b3e48fe536",
-"first_seen": "2026-10-13T12:18+09:00",
-"time": "2026-10-13T12:18+09:00"
-},
-{
-"source": "82cook",
-"title": "나르성향은 상대가 아픈데 모른척 하는 이유가 뭘까요?",
-"url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248816",
-"id": "2245f56e6f8c",
 "first_seen": "2026-10-13T12:18+09:00",
 "time": "2026-10-13T12:18+09:00"
 },
@@ -726,6 +1022,275 @@
 "time": "2026-10-13T12:18+09:00"
 },
 {
+"source": "루리웹",
+"title": "여자도 정수기 물통 교체할 수 있다?.jpg",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77006602",
+"id": "846ee18c7153",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "핫딜 [소프라노몰] 하늘의궤적 1st PS5버전 재판 69800원",
+"url": "https://bbs.ruliweb.com/market/board/1020/read/107981",
+"id": "4d78ef40ce38",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "의외로 동양사학과에서 안 가르치는 전쟁",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007770",
+"id": "aa9b881db18b",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "사람 4명 죽인 여자 연쇄살인범이랑 결혼한 만화.manga",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007790",
+"id": "b95eaf08d5be",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "K 마라톤 근황",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007742",
+"id": "a22cb1774832",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "한국사회가 미친이유",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007792",
+"id": "96917282096e",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "해리포터) 사실 농담이 아닌 팬덤 추측",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007721",
+"id": "0b0194dd9d71",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "어느 신혼부부를 2년동안 괴롭힌 가해자의 정체.jpg",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007810",
+"id": "ef5e3c882fff",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "트릭컬) 세삼 후열 참 처참하네",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007632",
+"id": "9f2de75e4fb3",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "새치기에 밀려서 싸인 못 받은 꼬마팬 우니깐 사인하러 와주는 손흥민",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007788",
+"id": "283fa92a09c5",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "김수현) 카톡내용 소름이네..",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007794",
+"id": "c0ed8e5c92de",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "(혐)각오 하고 누르셈",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007777",
+"id": "a40db603b686",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "실시간 한의사들 대량으로 긁어버린 웹툰.jpg",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77003418",
+"id": "c54a68b29f09",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "한국인들 꼴받게 하는 일본인 트윗들.jpg",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007726",
+"id": "b60623d2f57a",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "부캉이) 이건 또 뭐 개좃간무빙이냐",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007743",
+"id": "ef490fe28346",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "동영상 명암조절 하는법",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007672",
+"id": "09f3c66fc378",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "해리포터)위즐리 자매의 위대하고 위험한 장난감",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007658",
+"id": "e20a847abdf3",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "말포이짤 따라하는 사람",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007687",
+"id": "0dd7be664129",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "길에서 여자 헌팅하는 금발 패션남.jpg",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007589",
+"id": "3dbc8985f084",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "아아앗 분홍소세지 존나 맛있다 아아아아",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007673",
+"id": "6d51bbe2484a",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "페이커 반응속도",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007609",
+"id": "4be04d7210e8",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "우주세기 건담에서 가장 유명한 명장면 중 하나",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007650",
+"id": "cae318228028",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "히딩크의 유일한 오점",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007657",
+"id": "7f0c581d5d90",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "고기 광인 세종대왕님도 못드셔본 한국 전통 고기요리",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007666",
+"id": "39e2b4fbdfd2",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "콜롬버스 교환",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007359",
+"id": "e756f33268c6",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "본인 청년미래적금 가입 조건 되는데 안한 이유",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007648",
+"id": "a3bb092dcfcd",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "AI의 발전이 기쁘고 놀라우면서도 무서운 이유",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007647",
+"id": "e7ddddbea767",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "루리웹",
+"title": "되팔렘 껴서 예매가 힘들었던 치이카와 CGV 팝콘통 근황",
+"url": "https://bbs.ruliweb.com/best/board/300143/read/77007662",
+"id": "a48d78d96916",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "82cook",
+"title": "나르성향은 상대가 아픈데 모른척 하는 이유가 뭘까요?",
+"url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248816",
+"id": "2245f56e6f8c",
+"first_seen": "2026-10-13T12:18+09:00",
+"time": "2026-10-13T12:18+09:00",
+"dropped": true
+},
+{
+"source": "뽐뿌",
+"title": "말하면 타자가 쳐집니다. 700타 가능^^ 리딤 코드 10개있습니다.",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=ppomapp&no=10978",
+"id": "69ee9a3f9538",
+"first_seen": "2026-10-13T11:41+09:00",
+"time": "2026-10-13T11:41+09:00"
+},
+{
 "source": "보배드림",
 "title": "놀러 나왔다 길거리 쓰레기 치운 어린이 남매 '훈훈'",
 "url": "https://www.bobaedream.co.kr/view?code=best&No=1039468",
@@ -754,22 +1319,6 @@
 "title": "세련된 오피스룩",
 "url": "https://www.bobaedream.co.kr/view?code=best&No=1039470",
 "id": "c9e9448071e0",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00"
-},
-{
-"source": "보배드림",
-"title": "워터슬라이드 타다가 만난 카피바라",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039469",
-"id": "d9b8f6db82e1",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00"
-},
-{
-"source": "뽐뿌",
-"title": "말하면 타자가 쳐집니다. 700타 가능^^ 리딤 코드 10개있습니다.",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=ppomapp&no=10978",
-"id": "69ee9a3f9538",
 "first_seen": "2026-10-13T11:41+09:00",
 "time": "2026-10-13T11:41+09:00"
 },
@@ -854,12 +1403,22 @@
 "time": "2026-10-13T11:41+09:00"
 },
 {
+"source": "보배드림",
+"title": "워터슬라이드 타다가 만난 카피바라",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039469",
+"id": "d9b8f6db82e1",
+"first_seen": "2026-10-13T11:41+09:00",
+"time": "2026-10-13T11:41+09:00",
+"dropped": true
+},
+{
 "source": "82cook",
 "title": "버건디 컬러 어떻게 매치 할까요?",
 "url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248799",
 "id": "643e647ba93e",
 "first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00"
+"time": "2026-10-13T11:41+09:00",
+"dropped": true
 },
 {
 "source": "82cook",
@@ -867,7 +1426,8 @@
 "url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248798",
 "id": "898b28e2bf3b",
 "first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00"
+"time": "2026-10-13T11:41+09:00",
+"dropped": true
 },
 {
 "source": "82cook",
@@ -875,428 +1435,8 @@
 "url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248797",
 "id": "5cb182448c5c",
 "first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00"
-},
-{
-"source": "루리웹",
-"title": "43세 아재가 28세 처자를 거절한 이유",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77006848",
-"id": "914de5283b97",
-"first_seen": "2026-10-13T11:41+09:00",
 "time": "2026-10-13T11:41+09:00",
 "dropped": true
-},
-{
-"source": "루리웹",
-"title": "간호사 태움 사연 1등한 댓글",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007382",
-"id": "c2091b7dda50",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "일본이 저지른 난징대학살로 30만명이 죽었다.jpg",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77002927",
-"id": "fdfeae31f6a1",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "해리포터)말포이의 임신사실이 알려젔을 때",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007383",
-"id": "d33ca068926b",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "주식을 뭔가 잘못 이해하고 있는 사람.jpg",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007337",
-"id": "6782f2831e6d",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "치이카와식 사고방식을 알아보자.jpg",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007352",
-"id": "9ccaa8af693b",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "GS에서 씹덕겜 콜라보 당장 그만해야하는 이유.jpg",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007374",
-"id": "568a09a76111",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "주식) 은행은 원금 보장 된대매!",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007360",
-"id": "51ce102979fe",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "\"뫄대리는 젊으니까 컴퓨터 잘 알지?\"",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007356",
-"id": "8afd891173a0",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "요즘 코스어 팬서비스",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77006918",
-"id": "5b1ecbd24b5c",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "현재 이스라엘 상태 한짤 요약",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/76963613",
-"id": "87a99cfebcb0",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "유게가 이제 슬슬 주식AI깡계등등 불타는걸로 개판이군",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007319",
-"id": "9d6ffc955534",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "유게 무지개딱들이 의심스러운 이유..",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007347",
-"id": "e00357ac51aa",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "요양병원 10년차 직원이 느낀 현실...",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007313",
-"id": "d4d0d7f830e7",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "스타워즈를 이제 보는 사람의 의문점",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/76982783",
-"id": "3e3f5ded5419",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "쉬었음 청년의 한탄",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007303",
-"id": "a9b8263c529d",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "퇴사나 이직 마렵다 진짜",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007316",
-"id": "0dd1c499f652",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "빡대가리 여사친과 내기하는 만화",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007232",
-"id": "e3c753e939b7",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "주식) 뭐야 주식 인증 타임이야?",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007290",
-"id": "479e62167129",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "개인이 딸깍으로 만드는 죽은 인터넷 이론",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007247",
-"id": "3f23492241b8",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "도쿄 긴자에 '바닥족' 급증으로 논란",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007289",
-"id": "3c032bddd0c4",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "호리데이)호랑이가 된 인간",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007305",
-"id": "bdddb766075d",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "올해 가장 ㅂㅅ짓 한거 너희들에게만 얘기해본다.",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007284",
-"id": "d39c34ee5438",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "업계 첫 상품이 중요한 이유",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007278",
-"id": "bf1efde7ef24",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "일본제국 시기 만주가 소재로 나와도 우익논란이 없는 만화",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007183",
-"id": "c126229bb3e3",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "주식 때문에 돈을 잃고 있다고??",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007257",
-"id": "57ee6fe99d4f",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "아니 유게에 개추 매크로가 실존 했다고??",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007231",
-"id": "8c977279ae23",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "주식) 역사에 남을 사진",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007266",
-"id": "afb3dc3b0d80",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "루리웹",
-"title": "오토바이 판매 사유",
-"url": "https://bbs.ruliweb.com/best/board/300143/read/77007258",
-"id": "07ac3c427ac7",
-"first_seen": "2026-10-13T11:41+09:00",
-"time": "2026-10-13T11:41+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "경축) 친일파 재산한수 승소",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039466",
-"id": "bd8773fac2f0",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
-},
-{
-"source": "보배드림",
-"title": "KTX 예약했는데 좌석이 없다…당한 승객만 105명 달해",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039464",
-"id": "33d5f9022c1f",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
-},
-{
-"source": "보배드림",
-"title": "결국 뉴스까지 나온 냉동고 전원 뽑고 휴대폰 충전한 여자.",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039465",
-"id": "57f6fc21dc2c",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
-},
-{
-"source": "보배드림",
-"title": "한국에서 독사 물린 미국인, 병원비 공개하자",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039452",
-"id": "dcbf994acce7",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
-},
-{
-"source": "보배드림",
-"title": "코스피 꼴아박는 이유",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039454",
-"id": "f58dd76fe52b",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
-},
-{
-"source": "보배드림",
-"title": "43세 남자가 28세 여자를 거절한 이유",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039463",
-"id": "25ed9989e9ae",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
-},
-{
-"source": "보배드림",
-"title": "택시랑사고났는데 과실비율부탁드립니다",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039456",
-"id": "323bf5fdd0c1",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
-},
-{
-"source": "보배드림",
-"title": "일본인 유투버가 설명 해주는 한국 욕 \"X발\"",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039460",
-"id": "9d7b4425dceb",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
-},
-{
-"source": "보배드림",
-"title": "(분노)공무원이 불법 매립 영상 보고도 덮어버린 실화입니다",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039461",
-"id": "2b796183efa4",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
-},
-{
-"source": "보배드림",
-"title": "현재 ㅈ된 답이 안 보이는 프랑스 상황",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039451",
-"id": "e1b39d33ab3e",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
-},
-{
-"source": "보배드림",
-"title": "음식 잘못 보내놓고 “한글 못 배웠어요?”… 손님을 조롱하는..",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039458",
-"id": "34f4248bfbd3",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
-},
-{
-"source": "보배드림",
-"title": "돌풍과 바람의 차이? 천재지변과 인재사고?",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039455",
-"id": "8093a37517e3",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
-},
-{
-"source": "보배드림",
-"title": "어제자 스마트 크루즈 추돌 사고.mp4",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039453",
-"id": "8d597ac6f999",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
-},
-{
-"source": "뽐뿌",
-"title": "무인매장 열풍의 현실",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=youtube_info&no=23066",
-"id": "d16bc29bc680",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
-},
-{
-"source": "뽐뿌",
-"title": "사실상 골든글러브도 수상자 끝났네요",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=baseball&no=699586",
-"id": "fb08979128c4",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
-},
-{
-"source": "디시인사이드",
-"title": "[새갤] 이수만할배 새 걸그룹 데뷔 반응",
-"url": "https://gall.dcinside.com/board/view/?id=dcbest&no=469911",
-"id": "eec2c7bee2a3",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
-},
-{
-"source": "디시인사이드",
-"title": "[K갤] 심재학, 김도영에게 “감사합니다 감사합니다”",
-"url": "https://gall.dcinside.com/board/view/?id=dcbest&no=469907",
-"id": "a1460c1ff52f",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
-},
-{
-"source": "82cook",
-"title": "자유게시판은....",
-"url": "https://www.82cook.com/entiz/read.php?bn=15&num=1156646",
-"id": "85cc4989d5f5",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
-},
-{
-"source": "82cook",
-"title": "실업급여받을때 재취업활동입력하는것에 대해 여쭙니다.",
-"url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248796",
-"id": "db6146ff5065",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
-},
-{
-"source": "82cook",
-"title": "오늘 하루 지마켓 도시락이랑 텀블러 타임딜 하네요 (투고 텀블러..",
-"url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248795",
-"id": "6895a063b42c",
-"first_seen": "2026-10-13T11:17+09:00",
-"time": "2026-10-13T11:17+09:00"
 },
 {
 "source": "엠엘비파크",
@@ -1569,6 +1709,174 @@
 "dropped": true
 },
 {
+"source": "뽐뿌",
+"title": "무인매장 열풍의 현실",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=youtube_info&no=23066",
+"id": "d16bc29bc680",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00"
+},
+{
+"source": "뽐뿌",
+"title": "사실상 골든글러브도 수상자 끝났네요",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=baseball&no=699586",
+"id": "fb08979128c4",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00"
+},
+{
+"source": "보배드림",
+"title": "경축) 친일파 재산한수 승소",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039466",
+"id": "bd8773fac2f0",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00"
+},
+{
+"source": "보배드림",
+"title": "KTX 예약했는데 좌석이 없다…당한 승객만 105명 달해",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039464",
+"id": "33d5f9022c1f",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00"
+},
+{
+"source": "보배드림",
+"title": "결국 뉴스까지 나온 냉동고 전원 뽑고 휴대폰 충전한 여자.",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039465",
+"id": "57f6fc21dc2c",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00"
+},
+{
+"source": "보배드림",
+"title": "한국에서 독사 물린 미국인, 병원비 공개하자",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039452",
+"id": "dcbf994acce7",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00"
+},
+{
+"source": "보배드림",
+"title": "코스피 꼴아박는 이유",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039454",
+"id": "f58dd76fe52b",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00"
+},
+{
+"source": "보배드림",
+"title": "43세 남자가 28세 여자를 거절한 이유",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039463",
+"id": "25ed9989e9ae",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00"
+},
+{
+"source": "보배드림",
+"title": "택시랑사고났는데 과실비율부탁드립니다",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039456",
+"id": "323bf5fdd0c1",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00"
+},
+{
+"source": "디시인사이드",
+"title": "[새갤] 이수만할배 새 걸그룹 데뷔 반응",
+"url": "https://gall.dcinside.com/board/view/?id=dcbest&no=469911",
+"id": "eec2c7bee2a3",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00"
+},
+{
+"source": "디시인사이드",
+"title": "[K갤] 심재학, 김도영에게 “감사합니다 감사합니다”",
+"url": "https://gall.dcinside.com/board/view/?id=dcbest&no=469907",
+"id": "a1460c1ff52f",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00"
+},
+{
+"source": "82cook",
+"title": "자유게시판은....",
+"url": "https://www.82cook.com/entiz/read.php?bn=15&num=1156646",
+"id": "85cc4989d5f5",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00"
+},
+{
+"source": "보배드림",
+"title": "일본인 유투버가 설명 해주는 한국 욕 \"X발\"",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039460",
+"id": "9d7b4425dceb",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00",
+"dropped": true
+},
+{
+"source": "보배드림",
+"title": "(분노)공무원이 불법 매립 영상 보고도 덮어버린 실화입니다",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039461",
+"id": "2b796183efa4",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00",
+"dropped": true
+},
+{
+"source": "보배드림",
+"title": "현재 ㅈ된 답이 안 보이는 프랑스 상황",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039451",
+"id": "e1b39d33ab3e",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00",
+"dropped": true
+},
+{
+"source": "보배드림",
+"title": "음식 잘못 보내놓고 “한글 못 배웠어요?”… 손님을 조롱하는..",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039458",
+"id": "34f4248bfbd3",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00",
+"dropped": true
+},
+{
+"source": "보배드림",
+"title": "돌풍과 바람의 차이? 천재지변과 인재사고?",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039455",
+"id": "8093a37517e3",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00",
+"dropped": true
+},
+{
+"source": "보배드림",
+"title": "어제자 스마트 크루즈 추돌 사고.mp4",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039453",
+"id": "8d597ac6f999",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00",
+"dropped": true
+},
+{
+"source": "82cook",
+"title": "실업급여받을때 재취업활동입력하는것에 대해 여쭙니다.",
+"url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248796",
+"id": "db6146ff5065",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00",
+"dropped": true
+},
+{
+"source": "82cook",
+"title": "오늘 하루 지마켓 도시락이랑 텀블러 타임딜 하네요 (투고 텀블러..",
+"url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248795",
+"id": "6895a063b42c",
+"first_seen": "2026-10-13T11:17+09:00",
+"time": "2026-10-13T11:17+09:00",
+"dropped": true
+},
+{
 "source": "82cook",
 "title": "남편 두번째 실직.. 우울하네요",
 "url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248794",
@@ -1767,57 +2075,6 @@
 "dropped": true
 },
 {
-"source": "보배드림",
-"title": "‘서울달리기’ 마라톤 하프코스서 쓰러진 20대 여성 숨져",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039449",
-"id": "29700779b3b8",
-"first_seen": "2026-10-13T10:40+09:00",
-"time": "2026-10-13T10:40+09:00"
-},
-{
-"source": "보배드림",
-"title": "현재 1.5억원으로 운영한 군산짬뽕축제 근황",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039444",
-"id": "0f40987c0373",
-"first_seen": "2026-10-13T10:40+09:00",
-"time": "2026-10-13T10:40+09:00"
-},
-{
-"source": "보배드림",
-"title": "90대 운전자 차량 돌진에 1명 사망… \"브레이크 먹통\"",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039445",
-"id": "7154f4136814",
-"first_seen": "2026-10-13T10:40+09:00",
-"time": "2026-10-13T10:40+09:00"
-},
-{
-"source": "보배드림",
-"title": "불교의 나라 태국의 위엄.jpg",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039448",
-"id": "ce86fd0b6eb7",
-"first_seen": "2026-10-13T10:40+09:00",
-"time": "2026-10-13T10:40+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "면접관이 '내 중학교시절 책상' 같다 발언하자 취업 거절",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039447",
-"id": "6e5c43af0595",
-"first_seen": "2026-10-13T10:40+09:00",
-"time": "2026-10-13T10:40+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "역대급 몸매좋은 성인배우",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039446",
-"id": "61436b410b01",
-"first_seen": "2026-10-13T10:40+09:00",
-"time": "2026-10-13T10:40+09:00",
-"dropped": true
-},
-{
 "source": "뽐뿌",
 "title": "80년대생들이 진짜 대단한 이유",
 "url": "https://www.ppomppu.co.kr/zboard/zboard.php?id=freeboard&no=10149940",
@@ -1834,42 +2091,10 @@
 "time": "2026-10-13T10:40+09:00"
 },
 {
-"source": "뽐뿌",
-"title": "[플레이스토어] PDF Reader & Editor (PRO) (무료/무료)",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=ppomapp&no=10982",
-"id": "486e1c3fd8d5",
-"first_seen": "2026-10-13T10:40+09:00",
-"time": "2026-10-13T10:40+09:00"
-},
-{
-"source": "뽐뿌",
-"title": "인기글에서 제외된 글입니다.",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&no=739649",
-"id": "88ba3a57c377",
-"first_seen": "2026-10-13T10:40+09:00",
-"time": "2026-10-13T10:40+09:00"
-},
-{
-"source": "뽐뿌",
-"title": "도로연수 중인 귀여운 누나",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=humor&no=786013",
-"id": "2a5e56136597",
-"first_seen": "2026-10-13T10:40+09:00",
-"time": "2026-10-13T10:40+09:00"
-},
-{
-"source": "뽐뿌",
-"title": "자동차포럼 멸칭단어 자제 합시다",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=car&no=979381",
-"id": "32e3dffe35f7",
-"first_seen": "2026-10-13T10:40+09:00",
-"time": "2026-10-13T10:40+09:00"
-},
-{
-"source": "뽐뿌",
-"title": "[카카오] 하겐다즈 파인트 4개 (28,710원/무료) 개당 7,177원 / 8개 (56,520원/무료) 개당 7,065...",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&no=739652",
-"id": "011f4ebf1aef",
+"source": "보배드림",
+"title": "‘서울달리기’ 마라톤 하프코스서 쓰러진 20대 여성 숨져",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039449",
+"id": "29700779b3b8",
 "first_seen": "2026-10-13T10:40+09:00",
 "time": "2026-10-13T10:40+09:00"
 },
@@ -1920,6 +2145,96 @@
 "id": "fd8a618746dd",
 "first_seen": "2026-10-13T10:40+09:00",
 "time": "2026-10-13T10:40+09:00"
+},
+{
+"source": "보배드림",
+"title": "현재 1.5억원으로 운영한 군산짬뽕축제 근황",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039444",
+"id": "0f40987c0373",
+"first_seen": "2026-10-13T10:40+09:00",
+"time": "2026-10-13T10:40+09:00",
+"dropped": true
+},
+{
+"source": "보배드림",
+"title": "90대 운전자 차량 돌진에 1명 사망… \"브레이크 먹통\"",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039445",
+"id": "7154f4136814",
+"first_seen": "2026-10-13T10:40+09:00",
+"time": "2026-10-13T10:40+09:00",
+"dropped": true
+},
+{
+"source": "보배드림",
+"title": "불교의 나라 태국의 위엄.jpg",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039448",
+"id": "ce86fd0b6eb7",
+"first_seen": "2026-10-13T10:40+09:00",
+"time": "2026-10-13T10:40+09:00",
+"dropped": true
+},
+{
+"source": "보배드림",
+"title": "면접관이 '내 중학교시절 책상' 같다 발언하자 취업 거절",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039447",
+"id": "6e5c43af0595",
+"first_seen": "2026-10-13T10:40+09:00",
+"time": "2026-10-13T10:40+09:00",
+"dropped": true
+},
+{
+"source": "보배드림",
+"title": "역대급 몸매좋은 성인배우",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039446",
+"id": "61436b410b01",
+"first_seen": "2026-10-13T10:40+09:00",
+"time": "2026-10-13T10:40+09:00",
+"dropped": true
+},
+{
+"source": "뽐뿌",
+"title": "[플레이스토어] PDF Reader & Editor (PRO) (무료/무료)",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=ppomapp&no=10982",
+"id": "486e1c3fd8d5",
+"first_seen": "2026-10-13T10:40+09:00",
+"time": "2026-10-13T10:40+09:00",
+"dropped": true
+},
+{
+"source": "뽐뿌",
+"title": "인기글에서 제외된 글입니다.",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&no=739649",
+"id": "88ba3a57c377",
+"first_seen": "2026-10-13T10:40+09:00",
+"time": "2026-10-13T10:40+09:00",
+"dropped": true
+},
+{
+"source": "뽐뿌",
+"title": "도로연수 중인 귀여운 누나",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=humor&no=786013",
+"id": "2a5e56136597",
+"first_seen": "2026-10-13T10:40+09:00",
+"time": "2026-10-13T10:40+09:00",
+"dropped": true
+},
+{
+"source": "뽐뿌",
+"title": "자동차포럼 멸칭단어 자제 합시다",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=car&no=979381",
+"id": "32e3dffe35f7",
+"first_seen": "2026-10-13T10:40+09:00",
+"time": "2026-10-13T10:40+09:00",
+"dropped": true
+},
+{
+"source": "뽐뿌",
+"title": "[카카오] 하겐다즈 파인트 4개 (28,710원/무료) 개당 7,177원 / 8개 (56,520원/무료) 개당 7,065...",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=ppomppu&no=739652",
+"id": "011f4ebf1aef",
+"first_seen": "2026-10-13T10:40+09:00",
+"time": "2026-10-13T10:40+09:00",
+"dropped": true
 },
 {
 "source": "82cook",
@@ -1985,108 +2300,6 @@
 "dropped": true
 },
 {
-"source": "82cook",
-"title": "생강 10kg 뭐할까요",
-"url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248764",
-"id": "b2788b91732c",
-"first_seen": "2026-10-13T10:40+09:00",
-"time": "2026-10-13T10:40+09:00",
-"dropped": true
-},
-{
-"source": "82cook",
-"title": "문세광과 정청래에게서 읽는 이념적 독선의 위험",
-"url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248763",
-"id": "16df06c413df",
-"first_seen": "2026-10-13T10:40+09:00",
-"time": "2026-10-13T10:40+09:00",
-"dropped": true
-},
-{
-"source": "82cook",
-"title": "마라톤도 돈장사죠?",
-"url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248762",
-"id": "a3676c16ae64",
-"first_seen": "2026-10-13T10:40+09:00",
-"time": "2026-10-13T10:40+09:00",
-"dropped": true
-},
-{
-"source": "82cook",
-"title": "냉부에 나오는 셰프 중에 샘킴, 김풍, 윤남노 중에 어떤 스타일..",
-"url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248761",
-"id": "0cc0f4fc552b",
-"first_seen": "2026-10-13T10:40+09:00",
-"time": "2026-10-13T10:40+09:00",
-"dropped": true
-},
-{
-"source": "82cook",
-"title": "예쁘다 한고은",
-"url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248759",
-"id": "e95645242b42",
-"first_seen": "2026-10-13T10:40+09:00",
-"time": "2026-10-13T10:40+09:00",
-"dropped": true
-},
-{
-"source": "82cook",
-"title": "개인은 폭락, 정부는 돈 주체를 못할 정도",
-"url": "https://www.82cook.com/entiz/read.php?bn=15&num=4248758",
-"id": "27b2f758687f",
-"first_seen": "2026-10-13T10:40+09:00",
-"time": "2026-10-13T10:40+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "영화 암살에서 너무 사실적이라 삭제된 장면.jyp",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039442",
-"id": "0dd832082195",
-"first_seen": "2026-10-13T10:05+09:00",
-"time": "2026-10-13T10:05+09:00"
-},
-{
-"source": "보배드림",
-"title": "육군 중사 출신 해설위원의 빡침",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039439",
-"id": "c6c0a5f977da",
-"first_seen": "2026-10-13T10:05+09:00",
-"time": "2026-10-13T10:05+09:00"
-},
-{
-"source": "보배드림",
-"title": "어느 치킨집 사장님의 눈물",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039441",
-"id": "1ef807c4ea01",
-"first_seen": "2026-10-13T10:05+09:00",
-"time": "2026-10-13T10:05+09:00"
-},
-{
-"source": "보배드림",
-"title": "ㅋㅋㅋ 만화 제대로 그렸네",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039438",
-"id": "173eedc5508f",
-"first_seen": "2026-10-13T10:05+09:00",
-"time": "2026-10-13T10:05+09:00"
-},
-{
-"source": "보배드림",
-"title": "김민석은 TF 만드는거 현수막 거는거 말고는 하는게 뭐냐",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039440",
-"id": "5e2cab589553",
-"first_seen": "2026-10-13T10:05+09:00",
-"time": "2026-10-13T10:05+09:00"
-},
-{
-"source": "보배드림",
-"title": "어느 신혼부부를 2년동안 괴롭힌 가해자의 정체.",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039437",
-"id": "e423599ddac0",
-"first_seen": "2026-10-13T10:05+09:00",
-"time": "2026-10-13T10:05+09:00"
-},
-{
 "source": "더쿠",
 "title": "미국인의 한국병원 3박4일 뱀물림 치료 비용",
 "url": "https://theqoo.net/hot/4373944779",
@@ -2133,6 +2346,60 @@
 "id": "6c51a15bcb69",
 "first_seen": "2026-10-13T10:05+09:00",
 "time": "2026-10-13T10:05+09:00"
+},
+{
+"source": "보배드림",
+"title": "영화 암살에서 너무 사실적이라 삭제된 장면.jyp",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039442",
+"id": "0dd832082195",
+"first_seen": "2026-10-13T10:05+09:00",
+"time": "2026-10-13T10:05+09:00",
+"dropped": true
+},
+{
+"source": "보배드림",
+"title": "육군 중사 출신 해설위원의 빡침",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039439",
+"id": "c6c0a5f977da",
+"first_seen": "2026-10-13T10:05+09:00",
+"time": "2026-10-13T10:05+09:00",
+"dropped": true
+},
+{
+"source": "보배드림",
+"title": "어느 치킨집 사장님의 눈물",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039441",
+"id": "1ef807c4ea01",
+"first_seen": "2026-10-13T10:05+09:00",
+"time": "2026-10-13T10:05+09:00",
+"dropped": true
+},
+{
+"source": "보배드림",
+"title": "ㅋㅋㅋ 만화 제대로 그렸네",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039438",
+"id": "173eedc5508f",
+"first_seen": "2026-10-13T10:05+09:00",
+"time": "2026-10-13T10:05+09:00",
+"dropped": true
+},
+{
+"source": "보배드림",
+"title": "김민석은 TF 만드는거 현수막 거는거 말고는 하는게 뭐냐",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039440",
+"id": "5e2cab589553",
+"first_seen": "2026-10-13T10:05+09:00",
+"time": "2026-10-13T10:05+09:00",
+"dropped": true
+},
+{
+"source": "보배드림",
+"title": "어느 신혼부부를 2년동안 괴롭힌 가해자의 정체.",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039437",
+"id": "e423599ddac0",
+"first_seen": "2026-10-13T10:05+09:00",
+"time": "2026-10-13T10:05+09:00",
+"dropped": true
 },
 {
 "source": "뽐뿌",
@@ -2198,52 +2465,10 @@
 "dropped": true
 },
 {
-"source": "보배드림",
-"title": "걸어서 미국 횡단하는 유튜버에게 생긴 일",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039436",
-"id": "5ca0b1be5987",
-"first_seen": "2026-10-13T09:33+09:00",
-"time": "2026-10-13T09:33+09:00"
-},
-{
-"source": "보배드림",
-"title": "한국인 24명, 네팔서 '선교활동\" 하다가 체포",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039428",
-"id": "0580c3236965",
-"first_seen": "2026-10-13T09:33+09:00",
-"time": "2026-10-13T09:33+09:00"
-},
-{
-"source": "보배드림",
-"title": "조국 \"내 가족 압수수색 90번…한동훈 딸 '허위 스펙' 수..",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039434",
-"id": "7c4b798a8401",
-"first_seen": "2026-10-13T09:33+09:00",
-"time": "2026-10-13T09:33+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "콩쿠르 군면제 축소",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039429",
-"id": "6c7715ae98fd",
-"first_seen": "2026-10-13T09:33+09:00",
-"time": "2026-10-13T09:33+09:00",
-"dropped": true
-},
-{
 "source": "뽐뿌",
 "title": "러닝은 제발 5km이상 뛰지마세요",
 "url": "https://www.ppomppu.co.kr/zboard/zboard.php?id=freeboard&no=10150204",
 "id": "939370dfa805",
-"first_seen": "2026-10-13T09:33+09:00",
-"time": "2026-10-13T09:33+09:00"
-},
-{
-"source": "뽐뿌",
-"title": "자연산 E컵이라는 골프선수",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=humor&no=785989",
-"id": "c58efe000576",
 "first_seen": "2026-10-13T09:33+09:00",
 "time": "2026-10-13T09:33+09:00"
 },
@@ -2288,6 +2513,51 @@
 "time": "2026-10-13T09:33+09:00"
 },
 {
+"source": "보배드림",
+"title": "걸어서 미국 횡단하는 유튜버에게 생긴 일",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039436",
+"id": "5ca0b1be5987",
+"first_seen": "2026-10-13T09:33+09:00",
+"time": "2026-10-13T09:33+09:00",
+"dropped": true
+},
+{
+"source": "보배드림",
+"title": "한국인 24명, 네팔서 '선교활동\" 하다가 체포",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039428",
+"id": "0580c3236965",
+"first_seen": "2026-10-13T09:33+09:00",
+"time": "2026-10-13T09:33+09:00",
+"dropped": true
+},
+{
+"source": "보배드림",
+"title": "조국 \"내 가족 압수수색 90번…한동훈 딸 '허위 스펙' 수..",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039434",
+"id": "7c4b798a8401",
+"first_seen": "2026-10-13T09:33+09:00",
+"time": "2026-10-13T09:33+09:00",
+"dropped": true
+},
+{
+"source": "보배드림",
+"title": "콩쿠르 군면제 축소",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039429",
+"id": "6c7715ae98fd",
+"first_seen": "2026-10-13T09:33+09:00",
+"time": "2026-10-13T09:33+09:00",
+"dropped": true
+},
+{
+"source": "뽐뿌",
+"title": "자연산 E컵이라는 골프선수",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=humor&no=785989",
+"id": "c58efe000576",
+"first_seen": "2026-10-13T09:33+09:00",
+"time": "2026-10-13T09:33+09:00",
+"dropped": true
+},
+{
 "source": "뽐뿌",
 "title": "일자목 개선효과 본 싼마이 아이템 2개",
 "url": "https://www.ppomppu.co.kr/zboard/view.php?id=china&no=14880",
@@ -2315,26 +2585,10 @@
 "dropped": true
 },
 {
-"source": "보배드림",
-"title": "\"임산부가 벼슬냐\"… 만삭 여성 앞 배려석 앉은 남성",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039426",
-"id": "3c1927981a6a",
-"first_seen": "2026-10-13T08:57+09:00",
-"time": "2026-10-13T08:57+09:00"
-},
-{
 "source": "더쿠",
 "title": "리얼 경제가 망했다고 하는 프랑스",
 "url": "https://theqoo.net/hot/4373872500",
 "id": "00497bfd6cd3",
-"first_seen": "2026-10-13T08:57+09:00",
-"time": "2026-10-13T08:57+09:00"
-},
-{
-"source": "더쿠",
-"title": "태어나서 40개월 동안 말을 하지 않았던 아들",
-"url": "https://theqoo.net/hot/4373782804",
-"id": "efccac6f311f",
 "first_seen": "2026-10-13T08:57+09:00",
 "time": "2026-10-13T08:57+09:00"
 },
@@ -2355,6 +2609,24 @@
 "time": "2026-10-13T08:57+09:00"
 },
 {
+"source": "보배드림",
+"title": "\"임산부가 벼슬냐\"… 만삭 여성 앞 배려석 앉은 남성",
+"url": "https://www.bobaedream.co.kr/view?code=best&No=1039426",
+"id": "3c1927981a6a",
+"first_seen": "2026-10-13T08:57+09:00",
+"time": "2026-10-13T08:57+09:00",
+"dropped": true
+},
+{
+"source": "더쿠",
+"title": "태어나서 40개월 동안 말을 하지 않았던 아들",
+"url": "https://theqoo.net/hot/4373782804",
+"id": "efccac6f311f",
+"first_seen": "2026-10-13T08:57+09:00",
+"time": "2026-10-13T08:57+09:00",
+"dropped": true
+},
+{
 "source": "뽐뿌",
 "title": "버거킹 요즘에는 케찹 안주나요?",
 "url": "https://www.ppomppu.co.kr/zboard/view.php?id=social&no=50501",
@@ -2362,6 +2634,30 @@
 "first_seen": "2026-10-13T08:57+09:00",
 "time": "2026-10-13T08:57+09:00",
 "dropped": true
+},
+{
+"source": "더쿠",
+"title": "고디바 찹쌀떡 오픈런 하는법",
+"url": "https://theqoo.net/hot/4373856077",
+"id": "ab8c825be076",
+"first_seen": "2026-10-13T08:39+09:00",
+"time": "2026-10-13T08:39+09:00"
+},
+{
+"source": "디시인사이드",
+"title": "[카연] 삼계탕 라면국밥 & 비빔막국수 리뷰",
+"url": "https://gall.dcinside.com/board/view/?id=dcbest&no=469882",
+"id": "bdd0da51e11f",
+"first_seen": "2026-10-13T08:39+09:00",
+"time": "2026-10-13T08:39+09:00"
+},
+{
+"source": "디시인사이드",
+"title": "[싱갤] 싱글벙글 의외의 신라왕의 진짜 태생",
+"url": "https://gall.dcinside.com/board/view/?id=dcbest&no=469881",
+"id": "034a354ef67a",
+"first_seen": "2026-10-13T08:39+09:00",
+"time": "2026-10-13T08:39+09:00"
 },
 {
 "source": "보배드림",
@@ -2425,39 +2721,6 @@
 "first_seen": "2026-10-13T08:39+09:00",
 "time": "2026-10-13T08:39+09:00",
 "dropped": true
-},
-{
-"source": "보배드림",
-"title": "무리 쌔리고 싶네요.",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039402",
-"id": "a0eb1056ceb8",
-"first_seen": "2026-10-13T08:39+09:00",
-"time": "2026-10-13T08:39+09:00",
-"dropped": true
-},
-{
-"source": "더쿠",
-"title": "고디바 찹쌀떡 오픈런 하는법",
-"url": "https://theqoo.net/hot/4373856077",
-"id": "ab8c825be076",
-"first_seen": "2026-10-13T08:39+09:00",
-"time": "2026-10-13T08:39+09:00"
-},
-{
-"source": "디시인사이드",
-"title": "[카연] 삼계탕 라면국밥 & 비빔막국수 리뷰",
-"url": "https://gall.dcinside.com/board/view/?id=dcbest&no=469882",
-"id": "bdd0da51e11f",
-"first_seen": "2026-10-13T08:39+09:00",
-"time": "2026-10-13T08:39+09:00"
-},
-{
-"source": "디시인사이드",
-"title": "[싱갤] 싱글벙글 의외의 신라왕의 진짜 태생",
-"url": "https://gall.dcinside.com/board/view/?id=dcbest&no=469881",
-"id": "034a354ef67a",
-"first_seen": "2026-10-13T08:39+09:00",
-"time": "2026-10-13T08:39+09:00"
 },
 {
 "source": "뽐뿌",
@@ -2541,123 +2804,6 @@
 "dropped": true
 },
 {
-"source": "보배드림",
-"title": "\"춤추다 뛰어내려\"… 호랑이에 물려 숨진 남성 목격담",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039373",
-"id": "d1bd2bc5fac7",
-"first_seen": "2026-10-13T08:19+09:00",
-"time": "2026-10-13T08:19+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "부실한 버스기사 급식, 반찬 2개로 줄어… 기사들 분통",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039376",
-"id": "e02345cf600a",
-"first_seen": "2026-10-13T08:19+09:00",
-"time": "2026-10-13T08:19+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "강남 여성 무차별 폭행한 20대 남성..치아 4개 부러져",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039368",
-"id": "44febe8c78f8",
-"first_seen": "2026-10-13T08:19+09:00",
-"time": "2026-10-13T08:19+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "어렵기로 소문난 인도의 운전면허 시험",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039399",
-"id": "5a3773d2b30a",
-"first_seen": "2026-10-13T08:19+09:00",
-"time": "2026-10-13T08:19+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "40대에겐 '쿠팡이라도 가라' 라는 말도 힘든 이유",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039400",
-"id": "e9fec9b7d945",
-"first_seen": "2026-10-13T08:19+09:00",
-"time": "2026-10-13T08:19+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "90대 운전자 돌진사고로 3명 사상",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039365",
-"id": "232cb27bdba2",
-"first_seen": "2026-10-13T08:19+09:00",
-"time": "2026-10-13T08:19+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "디즈니가 탐냈다는 한국 땅",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039378",
-"id": "356f8f677cc9",
-"first_seen": "2026-10-13T08:19+09:00",
-"time": "2026-10-13T08:19+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "남성 성기를 안쓰면 기능을 잃어",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039398",
-"id": "47fdeb918786",
-"first_seen": "2026-10-13T08:19+09:00",
-"time": "2026-10-13T08:19+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "전 62세 남자입니다 상대는 젊은부부입니다",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039381",
-"id": "8bd29219eca3",
-"first_seen": "2026-10-13T08:19+09:00",
-"time": "2026-10-13T08:19+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "쪽지로 제 개인정보 빼가신분 신고하겠습니다.",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039370",
-"id": "11fd9bf963ec",
-"first_seen": "2026-10-13T08:19+09:00",
-"time": "2026-10-13T08:19+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "서울 광진구서 90대 운전자 돌진에 1명 사망",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039367",
-"id": "b716994fe5a4",
-"first_seen": "2026-10-13T08:19+09:00",
-"time": "2026-10-13T08:19+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "진짜 사나이 폐지론...극딜하던 허지웅",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039394",
-"id": "4797ab7ba467",
-"first_seen": "2026-10-13T08:19+09:00",
-"time": "2026-10-13T08:19+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "돈 없어서 테슬라 탑니다",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039366",
-"id": "18eea046ffae",
-"first_seen": "2026-10-13T08:19+09:00",
-"time": "2026-10-13T08:19+09:00",
-"dropped": true
-},
-{
 "source": "더쿠",
 "title": "[🚨필독🚨] 로그인 보안 강화📢 (인증메일 안오면 스팸함확인)",
 "url": "https://theqoo.net/hot/4277558180",
@@ -2690,20 +2836,21 @@
 "time": "2026-10-13T08:19+09:00"
 },
 {
-"source": "더쿠",
-"title": "개치원에서 안 좋은 일 있었대..",
-"url": "https://theqoo.net/hot/4373765141",
-"id": "53fe696eef0b",
-"first_seen": "2026-10-13T08:19+09:00",
-"time": "2026-10-13T08:19+09:00"
-},
-{
 "source": "디시인사이드",
 "title": "[치갤] 치갤롬들에게 건강얘기하지마라",
 "url": "https://gall.dcinside.com/board/view/?id=dcbest&no=469877",
 "id": "ff2212a923d5",
 "first_seen": "2026-10-13T08:19+09:00",
 "time": "2026-10-13T08:19+09:00"
+},
+{
+"source": "더쿠",
+"title": "개치원에서 안 좋은 일 있었대..",
+"url": "https://theqoo.net/hot/4373765141",
+"id": "53fe696eef0b",
+"first_seen": "2026-10-13T08:19+09:00",
+"time": "2026-10-13T08:19+09:00",
+"dropped": true
 },
 {
 "source": "뽐뿌",
@@ -2766,42 +2913,6 @@
 "id": "fefeb4403526",
 "first_seen": "2026-10-13T08:19+09:00",
 "time": "2026-10-13T08:19+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "\"대법원장이 준 게 맞다\" ㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039356",
-"id": "1080cc3b5cec",
-"first_seen": "2026-10-13T07:56+09:00",
-"time": "2026-10-13T07:56+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "초딩때 기억은 평생 간다",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039364",
-"id": "6d0e4c28e7f9",
-"first_seen": "2026-10-13T07:56+09:00",
-"time": "2026-10-13T07:56+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "심장 전문의가 말해주는 고강도 러닝의 위험성",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039357",
-"id": "245979569671",
-"first_seen": "2026-10-13T07:56+09:00",
-"time": "2026-10-13T07:56+09:00",
-"dropped": true
-},
-{
-"source": "보배드림",
-"title": "작전세력에 당한 아파트 매수자",
-"url": "https://www.bobaedream.co.kr/view?code=best&No=1039358",
-"id": "087993104bef",
-"first_seen": "2026-10-13T07:56+09:00",
-"time": "2026-10-13T07:56+09:00",
 "dropped": true
 },
 {
@@ -2874,14 +2985,6 @@
 "dropped": true
 },
 {
-"source": "뽐뿌",
-"title": "개미 김원훈.",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=stock&no=440902",
-"id": "43f02d4f69c1",
-"first_seen": "2026-10-13T07:36+09:00",
-"time": "2026-10-13T07:36+09:00"
-},
-{
 "source": "디시인사이드",
 "title": "[잡갤] “쿠바 北외교관, 매일 외교행낭 20개에 시가 빼돌려 밀매”",
 "url": "https://gall.dcinside.com/board/view/?id=dcbest&no=469872",
@@ -2896,6 +2999,15 @@
 "id": "7968101ef433",
 "first_seen": "2026-10-13T07:36+09:00",
 "time": "2026-10-13T07:36+09:00"
+},
+{
+"source": "뽐뿌",
+"title": "개미 김원훈.",
+"url": "https://www.ppomppu.co.kr/zboard/view.php?id=stock&no=440902",
+"id": "43f02d4f69c1",
+"first_seen": "2026-10-13T07:36+09:00",
+"time": "2026-10-13T07:36+09:00",
+"dropped": true
 },
 {
 "source": "뽐뿌",
@@ -2940,91 +3052,12 @@
 "time": "2026-10-13T07:14+09:00"
 },
 {
-"source": "뽐뿌",
-"title": "요즘 마라톤 없애야 한다는 의견이 많은 이유.",
-"url": "https://www.ppomppu.co.kr/zboard/zboard.php?id=freeboard&no=10150114",
-"id": "ce4302ad3a83",
-"first_seen": "2026-10-13T07:14+09:00",
-"time": "2026-10-13T07:14+09:00",
-"dropped": true
-},
-{
-"source": "뽐뿌",
-"title": "신혼인데 아침마다 스트레스 받는 남편",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=youtube_info&no=23135",
-"id": "5d42d764624f",
-"first_seen": "2026-10-13T07:14+09:00",
-"time": "2026-10-13T07:14+09:00",
-"dropped": true
-},
-{
-"source": "뽐뿌",
-"title": "생간 처음 먹어본 일본인 반응.jpeg",
-"url": "https://www.ppomppu.co.kr/zboard/zboard.php?id=freeboard&no=10149747",
-"id": "dc930e9b8142",
-"first_seen": "2026-10-13T07:14+09:00",
-"time": "2026-10-13T07:14+09:00",
-"dropped": true
-},
-{
-"source": "뽐뿌",
-"title": "셰프초이스 동그랑땡, 2kg, 1개(15,900원/무배)",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=toss_shop&no=1112",
-"id": "cfd0ed060af0",
-"first_seen": "2026-10-13T07:14+09:00",
-"time": "2026-10-13T07:14+09:00",
-"dropped": true
-},
-{
-"source": "뽐뿌",
-"title": "안성마춤농협 고시히카리쌀, 특등급, 10kg(35,900원/무배)",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=toss_shop&no=1113",
-"id": "a727f65e4435",
-"first_seen": "2026-10-13T07:14+09:00",
-"time": "2026-10-13T07:14+09:00",
-"dropped": true
-},
-{
-"source": "뽐뿌",
-"title": "영혼을 울린영화 TOP20.jpg",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=movie&no=91841",
-"id": "b3a605046b74",
-"first_seen": "2026-10-13T07:14+09:00",
-"time": "2026-10-13T07:14+09:00",
-"dropped": true
-},
-{
-"source": "뽐뿌",
-"title": "역대급 병신 ㅋㅋ",
-"url": "https://www.ppomppu.co.kr/zboard/view.php?id=car&no=979329",
-"id": "3ea0af3bd6e1",
-"first_seen": "2026-10-13T07:14+09:00",
-"time": "2026-10-13T07:14+09:00",
-"dropped": true
-},
-{
 "source": "더쿠",
 "title": "6살 큰딸이 \"엄마가 집에서 하는게 뭐가 있어?\" 라고 했다.",
 "url": "https://theqoo.net/hot/4373856483",
 "id": "e2ec0303251a",
 "first_seen": "2026-10-13T05:57+09:00",
 "time": "2026-10-13T05:57+09:00"
-},
-{
-"source": "더쿠",
-"title": "외국인들이 좋아하는 한국 감성샷.jpg",
-"url": "https://theqoo.net/hot/4373781897",
-"id": "e8a7c3bef510",
-"first_seen": "2026-10-13T04:15+09:00",
-"time": "2026-10-13T04:15+09:00"
-},
-{
-"source": "더쿠",
-"title": "티켓 구했을 때 \"즐거워\" 콘서트 한 달 전 \"즐거워\" 일주일 전 \"다음 주네\" 3일 전 \"귀찮아지기 시작했어\" •••",
-"url": "https://theqoo.net/hot/4373810057",
-"id": "24918d855b9f",
-"first_seen": "2026-10-13T02:54+09:00",
-"time": "2026-10-13T02:54+09:00"
 },
 {
 "source": "더쿠",
@@ -3105,22 +3138,6 @@
 "id": "68e0022444b2",
 "first_seen": "2026-10-13T00:41+09:00",
 "time": "2026-10-13T00:41+09:00"
-},
-{
-"source": "디시인사이드",
-"title": "[이갤] 경찰, 한동훈 딸 의혹 부실수사 인정? 재수사 시사",
-"url": "https://gall.dcinside.com/board/view/?id=dcbest&no=469845",
-"id": "637724fdf067",
-"first_seen": "2026-10-13T00:41+09:00",
-"time": "2026-10-13T00:41+09:00"
-},
-{
-"source": "디시인사이드",
-"title": "[신갤] 일본인 유튜버가 설명해주는 x발",
-"url": "https://gall.dcinside.com/board/view/?id=dcbest&no=469843",
-"id": "4954323f36a2",
-"first_seen": "2026-10-13T00:04+09:00",
-"time": "2026-10-13T00:04+09:00"
 },
 {
 "source": "디시인사이드",
@@ -3428,15 +3445,6 @@
 "time": "2026-10-13T07:00+09:00",
 "id": "c58d4d2f43ec",
 "first_seen": "2026-10-13T07:14+09:00"
-},
-{
-"source": "연합뉴스",
-"title": "LH 매입임대, 10채 중 4채는 방 한 칸…55%가 50㎡ 이하",
-"url": "https://www.yna.co.kr/view/AKR20261012161200003",
-"summary": "(서울=연합뉴스) 오예진 기자 = 올해 한국토지주택공사(LH)가 매입해 임대한 주택 10채 중 약 4채는 방이 1개인 소형 주택으로 나타났다.",
-"time": "2026-10-13T06:31+09:00",
-"id": "897b4f49438f",
-"first_seen": "2026-10-13T06:40+09:00"
 },
 {
 "source": "한국경제",
@@ -4214,15 +4222,6 @@
 },
 {
 "source": "한국경제",
-"title": "\"삼성역 7분 만에 간다\"…'서초구 과천동' 국평 30억 초읽기 [철길옆집]",
-"url": "https://www.hankyung.com/article/2026100781246",
-"summary": "",
-"time": "2026-10-11T12:00+09:00",
-"id": "6f8c9be8ab2d",
-"first_seen": "2026-10-11T12:41+09:00"
-},
-{
-"source": "한국경제",
 "title": "\"내 돈은요\"…수천억 안 돌려준 '악성임대인' 또 보증받나",
 "url": "https://www.hankyung.com/article/2026101140717",
 "summary": "",
@@ -4252,9 +4251,27 @@
 "tech": [
 {
 "source": "Hacker News",
+"title": "NAZA: Netanyahu orders identification and prosecution of film's interviewees",
+"url": "https://www.theguardian.com/film/2026/oct/12/naza-netanyahu-orders-identification-prosecution-interviewees-documentary-film",
+"summary": "Article URL: https://www.theguardian.com/film/2026/oct/12/naza-netanyahu-orders-identification-prosecution-interviewees-documentary-film Comments URL: https://news.ycombinator.com/item?id=50065972 Poi",
+"time": "2026-10-13T11:51+09:00",
+"id": "c99914ff6087",
+"first_seen": "2026-10-13T12:42+09:00"
+},
+{
+"source": "Hacker News",
+"title": "OpenAI algorithm for the FFT is less a breakthrough and more a malicious exploit",
+"url": "https://www.argmin.net/p/faster-fourier-transforms",
+"summary": "Article URL: https://www.argmin.net/p/faster-fourier-transforms Comments URL: https://news.ycombinator.com/item?id=50065932 Points: 9 # Comments: 1",
+"time": "2026-10-13T11:46+09:00",
+"id": "411a156b713b",
+"first_seen": "2026-10-13T12:42+09:00"
+},
+{
+"source": "Hacker News",
 "title": "Leaving Tech",
 "url": "https://ryanbigg.com/2026/10/leaving-tech",
-"summary": "Article URL: https://ryanbigg.com/2026/10/leaving-tech Comments URL: https://news.ycombinator.com/item?id=50065892 Points: 71 # Comments: 45",
+"summary": "Article URL: https://ryanbigg.com/2026/10/leaving-tech Comments URL: https://news.ycombinator.com/item?id=50065892 Points: 106 # Comments: 80",
 "time": "2026-10-13T11:39+09:00",
 "id": "0d332bafbbf7",
 "first_seen": "2026-10-13T12:18+09:00"
@@ -4263,7 +4280,7 @@
 "source": "Hacker News",
 "title": "China Overtakes U.S. For First Time as Top Spender on R&D in 2024",
 "url": "https://japannews.yomiuri.co.jp/science-nature/science/20260908-347742/",
-"summary": "Article URL: https://japannews.yomiuri.co.jp/science-nature/science/20260908-347742/ Comments URL: https://news.ycombinator.com/item?id=50065805 Points: 12 # Comments: 0",
+"summary": "Article URL: https://japannews.yomiuri.co.jp/science-nature/science/20260908-347742/ Comments URL: https://news.ycombinator.com/item?id=50065805 Points: 48 # Comments: 20",
 "time": "2026-10-13T11:25+09:00",
 "id": "1683b175db53",
 "first_seen": "2026-10-13T12:18+09:00"
@@ -4290,7 +4307,7 @@
 "source": "Hacker News",
 "title": "Strengthening our defenses against distillation attacks",
 "url": "https://www.anthropic.com/research/distillation-defenses",
-"summary": "Article URL: https://www.anthropic.com/research/distillation-defenses Comments URL: https://news.ycombinator.com/item?id=50065553 Points: 10 # Comments: 14",
+"summary": "Article URL: https://www.anthropic.com/research/distillation-defenses Comments URL: https://news.ycombinator.com/item?id=50065553 Points: 20 # Comments: 31",
 "time": "2026-10-13T10:46+09:00",
 "id": "b407e87d5843",
 "first_seen": "2026-10-13T12:18+09:00"
@@ -4299,7 +4316,7 @@
 "source": "Hacker News",
 "title": "Blood cells from 80-year-old donor become stem cells with molecular age under 20",
 "url": "https://doi.org/10.1111/acel.70751",
-"summary": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13634082/ Comments URL: https://news.ycombinator.com/item?id=50064536 Points: 112 # Comments: 71",
+"summary": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13634082/ Comments URL: https://news.ycombinator.com/item?id=50064536 Points: 117 # Comments: 72",
 "time": "2026-10-13T08:34+09:00",
 "id": "9eb6e50af8e4",
 "first_seen": "2026-10-13T09:33+09:00"
@@ -4308,7 +4325,7 @@
 "source": "Hacker News",
 "title": "Show HN: An experimental pattern-first DAW that supports MCP",
 "url": "https://github.com/andrewfader/blokkily",
-"summary": "Article URL: https://github.com/andrewfader/blokkily Comments URL: https://news.ycombinator.com/item?id=50064438 Points: 23 # Comments: 12",
+"summary": "Article URL: https://github.com/andrewfader/blokkily Comments URL: https://news.ycombinator.com/item?id=50064438 Points: 26 # Comments: 13",
 "time": "2026-10-13T08:21+09:00",
 "id": "8a465f85258e",
 "first_seen": "2026-10-13T09:33+09:00"
@@ -4317,7 +4334,7 @@
 "source": "Hacker News",
 "title": "Janas: Run LLMs larger than RAM by streaming experts from SSD",
 "url": "https://github.com/prabanta-dev/janas",
-"summary": "Article URL: https://github.com/prabanta-dev/janas Comments URL: https://news.ycombinator.com/item?id=50063717 Points: 50 # Comments: 20",
+"summary": "Article URL: https://github.com/prabanta-dev/janas Comments URL: https://news.ycombinator.com/item?id=50063717 Points: 59 # Comments: 25",
 "time": "2026-10-13T07:05+09:00",
 "id": "9ca2bcd34e54",
 "first_seen": "2026-10-13T09:33+09:00"
@@ -4326,7 +4343,7 @@
 "source": "Hacker News",
 "title": "AI is a tool and using it well takes skill",
 "url": "https://yyhh.org/blog/2026/10/ai-is-a-tool/",
-"summary": "Article URL: https://yyhh.org/blog/2026/10/ai-is-a-tool/ Comments URL: https://news.ycombinator.com/item?id=50063427 Points: 251 # Comments: 218",
+"summary": "Article URL: https://yyhh.org/blog/2026/10/ai-is-a-tool/ Comments URL: https://news.ycombinator.com/item?id=50063427 Points: 262 # Comments: 226",
 "time": "2026-10-13T06:40+09:00",
 "id": "c41789c5590e",
 "first_seen": "2026-10-13T07:14+09:00"
@@ -4335,7 +4352,7 @@
 "source": "Hacker News",
 "title": "Phreak.ing – Internet Phone Switch",
 "url": "https://phreak.ing/",
-"summary": "Article URL: https://phreak.ing/ Comments URL: https://news.ycombinator.com/item?id=50063417 Points: 85 # Comments: 27",
+"summary": "Article URL: https://phreak.ing/ Comments URL: https://news.ycombinator.com/item?id=50063417 Points: 91 # Comments: 27",
 "time": "2026-10-13T06:39+09:00",
 "id": "0e42b9639860",
 "first_seen": "2026-10-13T07:14+09:00"
@@ -4344,7 +4361,7 @@
 "source": "Hacker News",
 "title": "Intel D270 GPU AI Accelerator–Up to 480 GB LPDDR5X",
 "url": "https://www.intel.com/content/www/us/en/products/details/discrete-gpus/data-center-gpu/d-series.html",
-"summary": "Article URL: https://www.intel.com/content/www/us/en/products/details/discrete-gpus/data-center-gpu/d-series.html Comments URL: https://news.ycombinator.com/item?id=50063365 Points: 92 # Comments: 36",
+"summary": "Article URL: https://www.intel.com/content/www/us/en/products/details/discrete-gpus/data-center-gpu/d-series.html Comments URL: https://news.ycombinator.com/item?id=50063365 Points: 103 # Comments: 43",
 "time": "2026-10-13T06:35+09:00",
 "id": "657a150f08e4",
 "first_seen": "2026-10-13T08:57+09:00"
@@ -4362,7 +4379,7 @@
 "source": "Hacker News",
 "title": "Who is vfmaddrnd231pd?",
 "url": "https://purplesyringa.moe/blog/who-is-vfmaddrnd231pd/",
-"summary": "Article URL: https://purplesyringa.moe/blog/who-is-vfmaddrnd231pd/ Comments URL: https://news.ycombinator.com/item?id=50063138 Points: 133 # Comments: 13",
+"summary": "Article URL: https://purplesyringa.moe/blog/who-is-vfmaddrnd231pd/ Comments URL: https://news.ycombinator.com/item?id=50063138 Points: 134 # Comments: 14",
 "time": "2026-10-13T06:12+09:00",
 "id": "09fdf196ad6e",
 "first_seen": "2026-10-13T07:36+09:00"
@@ -4371,7 +4388,7 @@
 "source": "Hacker News",
 "title": "Show HN: Brickbrag – A multiplayer brick-building world in the browser",
 "url": "https://brickbrag.com/",
-"summary": "Article URL: https://brickbrag.com/ Comments URL: https://news.ycombinator.com/item?id=50063042 Points: 38 # Comments: 11",
+"summary": "Article URL: https://brickbrag.com/ Comments URL: https://news.ycombinator.com/item?id=50063042 Points: 39 # Comments: 12",
 "time": "2026-10-13T06:03+09:00",
 "id": "7bfe3958883c",
 "first_seen": "2026-10-13T07:14+09:00"
@@ -4380,7 +4397,7 @@
 "source": "Hacker News",
 "title": "Writing a Demoscene Intro for the ZX Spectrum",
 "url": "https://www.markround.com/blog/2026/zx-spectrum-intro",
-"summary": "Article URL: https://www.markround.com/blog/2026/zx-spectrum-intro Comments URL: https://news.ycombinator.com/item?id=50061859 Points: 87 # Comments: 9",
+"summary": "Article URL: https://www.markround.com/blog/2026/zx-spectrum-intro Comments URL: https://news.ycombinator.com/item?id=50061859 Points: 91 # Comments: 10",
 "time": "2026-10-13T04:40+09:00",
 "id": "5b14c033e9f5",
 "first_seen": "2026-10-13T05:21+09:00"
@@ -4389,7 +4406,7 @@
 "source": "Hacker News",
 "title": "Making big downloads resumable in Firefox",
 "url": "https://lunarwatcher.codeberg.page/til/firefox/resumable-big-downloads.html",
-"summary": "Article URL: https://lunarwatcher.codeberg.page/til/firefox/resumable-big-downloads.html Comments URL: https://news.ycombinator.com/item?id=50061791 Points: 110 # Comments: 43",
+"summary": "Article URL: https://lunarwatcher.codeberg.page/til/firefox/resumable-big-downloads.html Comments URL: https://news.ycombinator.com/item?id=50061791 Points: 118 # Comments: 43",
 "time": "2026-10-13T04:36+09:00",
 "id": "91172d3fd9e4",
 "first_seen": "2026-10-13T07:14+09:00"
@@ -4398,7 +4415,7 @@
 "source": "Hacker News",
 "title": "Codex CLI installs a persistent, self-updating background daemon by default",
 "url": "https://github.com/openai/codex/issues/48195",
-"summary": "Article URL: https://github.com/openai/codex/issues/48195 Comments URL: https://news.ycombinator.com/item?id=50060694 Points: 484 # Comments: 245",
+"summary": "Article URL: https://github.com/openai/codex/issues/48195 Comments URL: https://news.ycombinator.com/item?id=50060694 Points: 488 # Comments: 252",
 "time": "2026-10-13T03:29+09:00",
 "id": "6001ee7ed96b",
 "first_seen": "2026-10-13T04:15+09:00"
@@ -4425,7 +4442,7 @@
 "source": "Hacker News",
 "title": "Muse Wonder",
 "url": "https://research.meta.ai/blog/muse-wonder",
-"summary": "Article URL: https://research.meta.ai/blog/muse-wonder Comments URL: https://news.ycombinator.com/item?id=50059115 Points: 546 # Comments: 302",
+"summary": "Article URL: https://research.meta.ai/blog/muse-wonder Comments URL: https://news.ycombinator.com/item?id=50059115 Points: 555 # Comments: 305",
 "time": "2026-10-13T01:48+09:00",
 "id": "31ba1e7c3abd",
 "first_seen": "2026-10-13T02:22+09:00"
@@ -4443,7 +4460,7 @@
 "source": "Hacker News",
 "title": "A Modern Web App in C",
 "url": "https://prophitt.me/writing/a-modern-web-app-in-c",
-"summary": "Article URL: https://prophitt.me/writing/a-modern-web-app-in-c Comments URL: https://news.ycombinator.com/item?id=50058528 Points: 421 # Comments: 172",
+"summary": "Article URL: https://prophitt.me/writing/a-modern-web-app-in-c Comments URL: https://news.ycombinator.com/item?id=50058528 Points: 431 # Comments: 176",
 "time": "2026-10-13T01:13+09:00",
 "id": "4aaf92f254c0",
 "first_seen": "2026-10-13T01:59+09:00"
@@ -4452,7 +4469,7 @@
 "source": "Hacker News",
 "title": "GLM-Legal",
 "url": "https://z.ai/blog/glm-legal",
-"summary": "Article URL: https://z.ai/blog/glm-legal Comments URL: https://news.ycombinator.com/item?id=50058507 Points: 460 # Comments: 259",
+"summary": "Article URL: https://z.ai/blog/glm-legal Comments URL: https://news.ycombinator.com/item?id=50058507 Points: 470 # Comments: 262",
 "time": "2026-10-13T01:11+09:00",
 "id": "b6603a0a4aa6",
 "first_seen": "2026-10-13T10:05+09:00"
@@ -4465,15 +4482,6 @@
 "time": "2026-10-13T00:43+09:00",
 "id": "2f3a6247486a",
 "first_seen": "2026-10-13T01:17+09:00"
-},
-{
-"source": "Hacker News",
-"title": "Kevin Kelly's 2016 AI Predictions, 10 Years Later",
-"url": "https://taylor.town/kk-ai-2026",
-"summary": "Article URL: https://taylor.town/kk-ai-2026 Comments URL: https://news.ycombinator.com/item?id=50057668 Points: 147 # Comments: 48",
-"time": "2026-10-13T00:16+09:00",
-"id": "f869ceb5043b",
-"first_seen": "2026-10-13T10:05+09:00"
 },
 {
 "source": "BBC",
@@ -4501,15 +4509,6 @@
 "time": "2026-10-12T23:53+09:00",
 "id": "a82ae3519965",
 "first_seen": "2026-10-13T00:04+09:00"
-},
-{
-"source": "Hacker News",
-"title": "Solar panels that plug into your wall",
-"url": "https://www.nationalgeographic.com/environment/article/balcony-plug-in-solar-panels-renewable-energy",
-"summary": "https://archive.ph/NEPz3 Comments URL: https://news.ycombinator.com/item?id=50056822 Points: 129 # Comments: 121",
-"time": "2026-10-12T23:19+09:00",
-"id": "fa3eb4d480ab",
-"first_seen": "2026-10-13T11:17+09:00"
 },
 {
 "source": "The Verge",
@@ -5217,6 +5216,15 @@
 "world": [
 {
 "source": "The Guardian",
+"title": "Threat of AI share crash puts world financial stability at risk, says IMF",
+"url": "https://www.theguardian.com/business/2026/oct/13/ai-share-crash-risk-global-imf-debt-corrowing-cyber-attacks",
+"summary": "High valuations and debt put sector in danger, while fund also warns on government borrowing and cyber-attacks The threat of an AI share price crash rippling out across global markets is putting world",
+"time": "2026-10-13T12:15+09:00",
+"id": "9e58dc30161b",
+"first_seen": "2026-10-13T12:42+09:00"
+},
+{
+"source": "The Guardian",
 "title": "Argentina temporarily closes Iguazu Falls after El Niño-fuelled surge in water levels",
 "url": "https://www.theguardian.com/world/2026/oct/13/argentina-iguazu-falls-temporarily-closed-el-nino-water-levels",
 "summary": "National park officials took the precautionary measure to limit tourist access after heavy rain caused the Iguazu River to flow at six times the normal rate Heavy rainfall fuelled by a supersized El N",
@@ -5534,7 +5542,7 @@
 "source": "The Guardian",
 "title": "Selma Blair charged with assault of police officer and nurse after allegedly attacking flight attendants",
 "url": "https://www.theguardian.com/film/2026/oct/12/selma-blair-arrested-jfk-plane-incident",
-"summary": "Actor, who allegedly punched one Delta attendant, bit another and tried to open plane door, has been charged for two separate assaults after the plane landed The actor Selma Blair was arrested on Sund",
+"summary": "Actor, who allegedly punched one Delta attendant, bit another and tried to open plane door, was charged for two separate assaults after the plane landed The actor Selma Blair was arrested on Sunday at",
 "time": "2026-10-13T05:03+09:00",
 "id": "d094080b83b3",
 "first_seen": "2026-10-13T05:21+09:00"
@@ -5621,15 +5629,6 @@
 "first_seen": "2026-10-13T00:41+09:00"
 },
 {
-"source": "Al Jazeera",
-"title": "Egypt’s press union chief rejects pressure over detained journalists",
-"url": "https://www.aljazeera.com/news/2026/10/12/egypts-press-union-chief-rejects-pressure-over-detained-journalists?traffic_source=rss",
-"summary": "Six journalists from independent platform Matsadaash allege torture in detention, which Egypt denies.",
-"time": "2026-10-13T03:21+09:00",
-"id": "d856a9bef31c",
-"first_seen": "2026-10-13T03:45+09:00"
-},
-{
 "source": "The Guardian",
 "title": "Mahmood orders urgent security review after killing of Ann Widdecombe",
 "url": "https://www.theguardian.com/uk-news/2026/oct/12/security-high-profile-public-figures-reviewed-ann-widdecombe",
@@ -5673,15 +5672,6 @@
 "time": "2026-10-13T02:19+09:00",
 "id": "8b6649deb915",
 "first_seen": "2026-10-13T03:45+09:00"
-},
-{
-"source": "The Guardian",
-"title": "Iran’s Revolutionary Guards ‘almost certainly’ behind RAF Fairford threats, says Burnham",
-"url": "https://www.theguardian.com/uk-news/2026/oct/12/iran-revolutionary-guards-irgc-raf-fairford-threats",
-"summary": "UK to bring further sanctions against Tehran and IRGC after assessment Iran was likely to have coordinated incident Andy Burnham said Iran’s Islamic Revolutionary Guard Corps were “almost certainly” b",
-"time": "2026-10-13T02:08+09:00",
-"id": "f8a7e7e8dd81",
-"first_seen": "2026-10-13T01:17+09:00"
 },
 {
 "source": "BBC",
@@ -6321,6 +6311,15 @@
 "time": "2026-10-09T13:00+09:00",
 "id": "44f5d8d121a7",
 "first_seen": "2026-10-11T13:56+09:00"
+},
+{
+"source": "The Guardian",
+"title": "India’s ‘Cockroach’ party accuses government of mass detention of members ahead of weekend protest",
+"url": "https://www.theguardian.com/world/2026/oct/09/india-dehli-cockroach-party-weekend-demonstration-mass-detention",
+"summary": "Thousands expected to march in Delhi on Saturday, as anger mounts over controversial changes to voter lists in world’s largest democracy India’s Cockroach Janta Party (CJP), which began as a satirical",
+"time": "2026-10-09T10:55+09:00",
+"id": "63357afb905e",
+"first_seen": "2026-10-13T12:42+09:00"
 },
 {
 "source": "The Guardian",
